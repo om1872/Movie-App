@@ -1,0 +1,158 @@
+/* tags css */
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #739072;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+section{
+    text-align: center;
+}
+
+footer{
+    text-align: center;
+    background: #4F6F52;
+    color:#ECE3CE;
+    padding-top: 3rem;
+}
+
+
+/* Navbar */
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    background: #3A4D39;
+    padding: 1rem;
+    border-bottom: rgba(0, 0, 0, 0.8);
+    flex-wrap: wrap;
+}
+
+.navbar-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.item {
+    margin: auto 0.6rem;
+    color: #ECE3CE;
+}
+
+
+
+/* .btn {
+    background-color: #ECE3CE;
+    border-radius: 0.7rem;
+    padding: 0.4rem;
+    border: #3A4D39;
+    cursor: pointer;
+    color: #3A4D39;
+}
+
+.btn:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    background-color: #D6C7AE;
+} */
+
+
+.hamburger {
+    cursor: pointer;
+    display: none;
+}
+
+.hamburger-active {
+    outline: #ECE3CE solid 3px;
+    outline-offset: 4px;
+    border-radius: 2px;
+}
+
+
+/* Search form css */
+
+
+.search-container {
+    flex: 1;
+}
+
+.search_form {
+    background-color: white;
+    border-radius: 2px;
+    box-shadow: 0 0 3px 0 #f1dfb6;
+    border-color: #ecd08d;
+}
+
+/* Search box and button */
+
+input[type="search"] {
+    border-radius: 2px;
+    border: none;
+    margin: 0;
+    padding: 7px 8px;
+    font-size: 14px;
+    color: inherit;
+    border: 1px solid transparent;
+    border-radius: inherit;
+    color: black;
+}
+
+input[type="search"]::placeholder {
+    color: rgba(0, 0, 0, 0.8);
+}
+
+button[type="submit"] {
+    text-indent: -999px;
+    overflow: hidden;
+    width: 40px;
+    padding: 0;
+    margin: 0;
+    border: 1px solid transparent;
+    border-radius: inherit;
+    background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat center;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+button[type="submit"]:hover {
+    opacity: 1;
+}
+
+button[type="submit"]:focus,
+input[type="search"]:focus {
+
+    outline: none;
+}
+
+
+/* Footer classes */
+
+.social-links .link{
+    padding: 0.4rem;
+}
+
+
+/* @media only screen and (max-width:600px) {
+    .navbar-item.hamburger-on {
+        display: flex;
+        flex-direction: column;
+        margin-right: 60%;
+    }
+
+    .navbar-item .item {
+        margin-top: 4px;
+    }
+
+    .search-area.hamburger-on {
+        display: flex;
+        flex-direction: row;
+
+    }
+
+    .hamburger {
+        display: block;
+    }
+} */

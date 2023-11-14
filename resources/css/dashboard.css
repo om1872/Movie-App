@@ -1,0 +1,12 @@
+.title {
+    text-decoration: none;
+    color: #ECE3CE;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.info{
+    color:white;
+    text-wrap: wrap;
+    line-height: 1.5;
+    
+}
