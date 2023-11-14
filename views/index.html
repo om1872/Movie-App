@@ -17,7 +17,7 @@
 
     <!-- Custom stylesheet -->
     <link rel="stylesheet" href="../resources/css/style.css">
-    <link rel="stylesheet" href="../resources/css/dashboard.css">
+    <link rel="stylesheet" href="../resources/css/welcome.css">
 </head>
 
 <body>
@@ -26,24 +26,46 @@
         <a class="hamburger item hamburger-active"><i class="fa-solid fa-bars fa-lg"></i></a>
         <a class="title hamburger" href="#">title</a>
         <div class="navbar-item hamburger-on">
-            <div class="item">Home</div>
-            <div class="item">Genre</div>
-            <div class="item">TV Shows</div>
-            <div class="item">Anime</div>
-            <div class="item search_container">
-                <form class="search_form">
-                    <input type="search" placeholder="Search...">
-                    <button type="submit" class="">Search</button>
-                </form>
-            </div>
+            <a href="../views/index.html" class="item link">Home</a>
+            <a class="item link">Genre</a>
+            <a class="item link">TV Shows</a>
+            <a class="item link">Anime</a>
         </div>
     </nav>
 
+    <!-- Welcome page main section -->
     <section>
-        <h1><a class="title" href="#">title</a></h1>
-        <div class="info">Welcome to movies, here you can explore all latest movies, animes, tv shows and can watch it which are actually free on internet. No pirated content here!!!...</div>
+        <div class="wrapper">
+            <div class="poster-row">
+                <img class="poster" src="../resources/img/movies/aladin.jpeg" alt="">
+                <img src="../resources/img/movies/ant-man.jpg" alt="" class="poster">
+                <img src="../resources/img/movies/avengers.jpeg" alt="" class="poster">
+                <img src="../resources/img/movies/inception.jpg" alt="" class="poster">
+                <img src="../resources/img/movies/iron-man3.jpg" alt="" class="poster">
+                <img src="../resources/img/movies/joker.jpg" alt="" class="poster">
+                <img src="../resources/img/movies/lagan.jpg" alt="" class="poster">
+                <img src="../resources/img/movies/openhimer.jpg" alt="" class="poster">
+                <img src="../resources/img/movies/pathan.jpg" alt="" class="poster">
+                <img src="../resources/img/movies/star-wars-the-force-awakens.jpg" alt="" class="poster">
+                <img src="../resources/img/movies/san-andreas.jpg" alt="" class="poster">
+                <img src="../resources/img/movies/endgame.jpg" alt="" class="poster">
+                <img src="../resources/img/movies/titanic.jpg" alt="" class="poster">
+                <img src="../resources/img/movies/matrix.webp" alt="" class="poster">
+                <img src="../resources/img/movies/gold.webp" alt="" class="poster">
+                <img src="../resources/img/movies/john-wick.jpg" alt="" class="poster">
+            </div>
+            <div class="header">
+                <a href="../views/dashboard.html"><img class="logo-img" src="../resources/img/brand-logo.png" alt=""></a>
+                <form action="" class="search-form">
+                    <input type="text" name="" id="" placeholder="Search here..."><button class="btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                <div class="info">Welcome to Home Cinema, here you can explore all latest movies, animes, tv shows and can watch it which are actually free on internet. No pirated content here!!!...</div>
+            </div>
+
+        </div>
     </section>
 
+    <!-- Footer -->
     <footer>
         <div class="social-links">
             <a class="link"><i class="fa-regular fa-envelope fa-lg"></i></a>

@@ -1,12 +1,41 @@
-.title {
-    text-decoration: none;
-    color: #ECE3CE;
-    font-family: 'Quicksand', sans-serif;
+h1{
+    color:#ECE3CE;
+    text-shadow: 0 0 10px rgba(0,0,0,0.9);
 }
-
-.info{
-    color:white;
-    text-wrap: wrap;
-    line-height: 1.5;
-    
+main{
+    margin:2% 4%;
+}
+.row{
+    display: flex;
+    padding: auto 1rem;
+    flex-wrap: wrap;
+}
+.movie{
+    margin: 0.6rem;
+    display: flex;
+    flex-direction: column;
+    color:#ECE3CE;
+    border: 3px solid #3A4D39;
+    border-radius: 0.2rem;
+    background: #4F6F52;
+    box-shadow:inset 0 0 10px rgba(0,0,0,0.9);
+    transition: all 0.5s;
+}
+.movie:hover{
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(0,0,0,0.9) ;
+}
+.movie img{
+    width:160px;
+    height: 200px;
+}
+.movie .movie-title{
+    width: 160px;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 1rem;
+    color:#ECE3CE;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
