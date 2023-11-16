@@ -20,7 +20,7 @@ section{
 }
 
 .poster-row{
-    width:75%;
+    width:101%;
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
@@ -47,7 +47,7 @@ section{
 }
 
 .header{
-    z-index: 100;
+    /* z-index: 100; */
     position: relative;
 }
 
