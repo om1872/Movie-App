@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+    <!-- Font-Awesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a class="hamburger item hamburger-active"><i class="fa-solid fa-bars fa-lg"></i></a>
+        <a class="title" href="/api/dashboard"><img src="/img/brand-logo.png" alt=""></a>
+        <div class="navbar-item">
+            <a class="item link" href="/">Home</a>
+            <a class="item link">Genre</a>
+            <a class="item link">Trending</a>
+            <a class="item link">TV Shows</a>
+            <a class="item link">Anime</a>
+        </div>
+        <div class="navbar-item">
+            <form class="search" action="/search">
+                <input class="search-item" type="text" name="query" id="" placeholder="Search Here..."><input
+                    class="search-item fa-solid" type="submit" value="&#xf002">
+            </form>
+        </div>
+    </nav>
+
+    <!-- dashboard -->
+    <main>
+        <div>
+            <h1>Popular</h1>
+            <div class="row">
+                <% popular.forEach(movie=> { %>
+                    <div class="movie">
+                        <a href="movie/<%= movie.id %>" id="<%= movie.id %>"><img src="<%= movie.src %>" alt="<%= movie.title %>"></a>
+                        <a href="movie/<%= movie.id %>" class="movie-title"><%= movie.title %></a>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+
+        <div>
+            <h1>Movie to Watch</h1>
+            <div class="row">
+                <% topRated.forEach(movie=> { %>
+                    <div class="movie">
+                        <a href="movie/<%= movie.id %>" id="<%= movie.id %>"><img src="<%= movie.src %>" alt="<%= movie.title %>"></a>
+                        <a href="movie/<%= movie.id %>" id="<%= movie.id %>" class="movie-title"><%= movie.title %></a>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+
+        <div>
+            <h1>TV Shows</h1>
+            <div class="row">
+                <% tvShows.forEach(movie=> { %>
+                    <div class="movie">
+                        <a href="tv/<%= movie.id %>" id="<%= movie.id %>"><img src="<%= movie.src %>" alt="<%= movie.title %>"></a>
+                        <a href="tv/<%= movie.id %>" id="<%= movie.id %>" class="movie-title"><%= movie.title %></a>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a class="link"><i class="fa-regular fa-envelope fa-lg"></i></a>
+            <a class="link"><i class="fa-brands fa-instagram fa-lg"></i></a>
+            <a class="link"><i class="fa-brands fa-twitter fa-lg"></i></a>
+            <a class="link"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+        </div>
+        <p>©XYZ Company | All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>
