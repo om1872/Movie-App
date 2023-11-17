@@ -32,7 +32,7 @@
             <a class="item link">Anime</a>
         </div>
         <div class="navbar-item">
-            <form class="search" action="/search">
+            <form class="search" action="/api/search">
                 <input class="search-item" type="text" name="query" id="" placeholder="Search Here..."><input
                     class="search-item fa-solid" type="submit" value="&#xf002">
             </form>
@@ -41,27 +41,99 @@
 
     <!-- movie -->
     <main>
-        <h1>Search Result</h1>
-        <table>
-            <thead>
-                <tr>
-                    <td>S No.</td>
-                    <td>Title</td>
-                </tr>
-            </thead>
-            <tbody>
-                <% results.results.forEach((result,index)=> { %>
-                    <tr>
-                        <td>
-                            <%= index+1 %>
-                        </td>
-                        <td>
-                            <%= result.title%>
-                        </td>
-                    </tr>
-                    <% }) %>
-            </tbody>
-        </table>
+        <div class="search-row-header">
+            <h1>Search Result <span class="search-result"> for <%= query %>...</span></h1>
+            <form action="#" class="search-result filter">
+                <label for="genre">Category</label>
+                <select name="category" id="category" class="btn">
+                    <option value="">Select</option>
+                    <option value="movie">Movie</option>
+                    <option value="tv">TV</option>
+                </select>
+                <label for="genre">Genre</label>
+                <select name="genre" id="genre" class="btn">
+                    <option value="">Select</option>
+                </select>
+                <label for="sort">Sort By</label>
+                <select name="sort" id="" class="btn">
+                    <option value="popularity.desc">Most Popular</option>
+                    <option value="primary_release_date.desc">Latest</option>
+                    <option value="vote_average.desc">Rating</option>
+                </select>
+                <label for="language">Language</label>
+                <select name="language" id="" class="btn">
+                    <option value="xx">Any</option>
+                     <option value="en">English</option>
+                     <option value="hi">Hindi</option>
+                     <option value="fr">French</option>
+                     <option value="ja">Japanese</option>
+                     <option value="ar">Arabic</option>
+                     <option value="it">Italian</option>
+                     <option value="nl">Dutch</option>
+                     <option value="ru">Russian</option>
+                </select>
+                <label for="adult">Adult</label>
+                <select name="adult" id="" class="btn">
+                    <option value="true">Include</option>
+                    <option value="false">Exclude</option>
+                </select>
+                <button type="submit" class="btn">Filter</button>
+            </form>
+        </div>
+        <div class="search-row">
+            <% if (results) { %>
+            <% results.results.forEach((movie,index)=> { %>
+                <% if ((movie.media_type==='movie' || movie.media_type==='tv') && movie.poster_path) { %>
+                <div class="movie">
+                    <% if (movie.media_type=== 'movie') { %>
+                        <a href="movie/<%= movie.id %>" id="<%= movie.id %>">
+                            <% if (movie.poster_path) { %><img src="http://image.tmdb.org/t/p/w300<%= movie.poster_path %>"
+                                    alt="<%= movie.title %>" />
+                                <% } else { %><img src="/img/pos_thumbnail.png" alt="<%= movie.title %>" />
+                                    <% } %>
+                        </a>
+                        <a href="movie/<%= movie.id %>" id="<%= movie.id %>" class="movie-title"><% if (movie.title) { %>
+                            <%= movie.title %><% } else { %>
+                                <%= movie.name %>
+                        <% } %>
+                        </a>
+                    <% } else if (movie.media_type=== 'tv') { %>
+                        <a href="tv/<%= movie.id %>" id="<%= movie.id %>">
+                            <% if (movie.poster_path) { %><img src="http://image.tmdb.org/t/p/w300<%= movie.poster_path %>"
+                                    alt="<%= movie.name %>" />
+                                <% } else { %><img src="/img/pos_thumbnail.png" alt="<%= movie.name %>" />
+                                    <% } %>
+                        </a>
+                        <a href="tv/<%= movie.id %>" id="<%= movie.id %>" class="movie-title"><% if (movie.name) { %>
+                            <%= movie.name %><% } else { %>
+                                <%= movie.name %>
+                        <% } %>
+                        </a>
+                    <% } %>
+                </div>
+                <% } %>
+            <% }) %>
+                <% } else  { %>
+                 <div class="movie-title">
+                    <h4>Nothing found...</h4>
+                 </div>
+            <% } %>
+        </div>
+
+        <!-- pagination -->
+        <div class="pages">
+                <% if (results.page === 1) { %>
+                    <button class="fa-solid fa-arrow-left btn disabled" disabled id="prev"> Prev</button>
+                    <% } else { %>
+                        <button class="fa-solid fa-arrow-left btn" id="prev"> Prev</button>
+                <% } %>
+                <a class="page-info"><%= results.page %> / <%= results.total_pages %></a>
+                <% if (results.page === results.total_pages) { %>
+                    <button class="fa-solid fa-arrow-right btn disabled" disabled id="next"> Next</button>
+                    <% } else { %>
+                        <button class="fa-solid fa-arrow-right btn" id="next"> Next</button>
+                <% } %>
+        </div>
     </main>
 
     <!-- Footer -->
@@ -74,6 +146,26 @@
         </div>
         <p>©XYZ Company | All Rights Reserved.</p>
     </footer>
-</body>
 
+    <!-- exporting ejs model values for external js files -->
+
+    <!-- search query -->
+    <span id="query" hidden><%= JSON.stringify(query) %></span>
+
+    <!-- genres -->
+    <% if (tvGenre) { %>
+        <span id="tv-genre" hidden><%= JSON.stringify(tvGenre) %></span>
+    <% } %>
+    <% if (movieGenre) { %>
+        <span id="movie-genre" hidden><%= JSON.stringify(movieGenre) %></span>
+    <% } %>
+
+    <!-- pages -->
+    <span id="page-num" hidden><%= JSON.stringify(results.page) %></span>
+    <span id="lastpage" hidden><%= JSON.stringify(results.total_pages) %></span>
+
+    <!-- external js files -->
+    <script src="/js/search.js"></script>
+    <script src="/js/pagination.js"></script>
+</body>
 </html>
