@@ -42,20 +42,20 @@
     <!-- movie -->
     <main>
         <div class="movie">
-            <div class="poster-div"><% if (movie.poster_path) { %>
-                <img src="http://image.tmdb.org/t/p/w300<%= movie.poster_path %>" alt="<%= movie.title %>" class="poster"/>
+            <div class="poster-div"><% if (tv.poster_path) { %>
+                <img src="http://image.tmdb.org/t/p/w300<%= tv.poster_path %>" alt="<%= tv.name %>" class="poster"/>
                 <% } else { %>
-                    <img src="/img/pos_thumbnail.png" alt="<%= movie.title %>" class="poster" />
+                    <img src="/img/pos_thumbnail.png" alt="<%= tv.name %>" class="poster" />
                 <% } %>
             </div>
             <div class="col">
-                <h2 class="movie-title"><%= movie.title %></h2>
-                <% if (movie.tagline) { %>
-                <p><em>"<%= movie.tagline %>"</em></p>
+                <h2 class="movie-title"><%= tv.name %></h2>
+                <% if (tv.tagline) { %>
+                <p><em>"<%= tv.tagline %>"</em></p>
                 <% } %>
                 <span><strong>Genre: </strong>
-                <% movie.genres.forEach((genre,index) => { %>
-                    <% if (index!=movie.genres.length-1) { %>
+                <% tv.genres.forEach((genre,index) => { %>
+                    <% if (index!=tv.genres.length-1) { %>
                         <a id="<%=genre.id%>"><%= genre.name %>,</a>
                     <% } else { %>
                         <a id="<%=genre.id%>"><%= genre.name %></a>
@@ -64,17 +64,17 @@
                 
                  
                 </span>
-                <span><strong>Released On: </strong><%= movie.release_date%></span>
-                <span><strong>Duration: </strong><%= movie.runtime %>mins</span>
-                <span><strong>Languages: </strong><% movie.spoken_languages.forEach((language,index) => { %>
-                    <% if (index!=movie.spoken_languages.length-1) { %>
+                <span><strong>Released On: </strong><%= tv.release_date%></span>
+                <span><strong>Duration: </strong><%= tv.runtime %>mins</span>
+                <span><strong>Languages: </strong><% tv.spoken_languages.forEach((language,index) => { %>
+                    <% if (index!=tv.spoken_languages.length-1) { %>
                     <em><%= language.english_name %>,</em>
                     <% } else { %>
                         <em><%= language.english_name %></em>
                     <% } %>
                 <% }) %>
                 </span>
-                <p><strong>Summary:  </strong><%= movie.overview %></p>
+                <p><strong>Summary:  </strong><%= tv.overview %></p>
             </div>
         </div>
     </main>

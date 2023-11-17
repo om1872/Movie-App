@@ -41,18 +41,7 @@ route.get('/', async (req, res) => {
     });
 });
 
-route.get('/search', async (req, res) => {
-    const { query } = req.query;
 
-    const url = `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=${API_KEY}`;
-    const result=await fetch(url).then(res => res.json())
-        .then(json => {
-            return json;
-        });
-    res.render('search',{
-        results:result
-    })
-})
 
 
 module.exports = route;
