@@ -32,7 +32,7 @@
             <a class="item link">Anime</a>
         </div>
         <div class="navbar-item">
-            <form class="search" action="/search">
+            <form class="search" action="/api/search">
                 <input class="search-item" type="text" name="query" id="" placeholder="Search Here..."><input
                     class="search-item fa-solid" type="submit" value="&#xf002">
             </form>
@@ -46,10 +46,17 @@
             <div class="row">
                 <% popular.forEach(movie=> { %>
                     <div class="movie">
-                        <a href="movie/<%= movie.id %>" id="<%= movie.id %>"><img src="<%= movie.src %>" alt="<%= movie.title %>"></a>
-                        <a href="movie/<%= movie.id %>" class="movie-title"><%= movie.title %></a>
+                        <a href="movie/<%= movie.id %>" id="<%= movie.id %>"><% if (movie.src) { %>
+                            <img src="<%= movie.src %>" alt="<%= movie.title %>" />
+                            <% } else { %>
+                                <img src="/img/pos_thumbnail.png" alt="<%= movie.title %>" />
+                            <% } %>
+                        </a>
+                        <a href="movie/<%= movie.id %>" class="movie-title">
+                            <%= movie.title %>
+                        </a>
                     </div>
-                <% }) %>
+                    <% }) %>
             </div>
         </div>
 
@@ -58,22 +65,33 @@
             <div class="row">
                 <% topRated.forEach(movie=> { %>
                     <div class="movie">
-                        <a href="movie/<%= movie.id %>" id="<%= movie.id %>"><img src="<%= movie.src %>" alt="<%= movie.title %>"></a>
+                        <a href="movie/<%= movie.id %>" id="<%= movie.id %>"><% if (movie.src) { %>
+                            <img src="<%= movie.src %>" alt="<%= movie.title %>" />
+                            <% } else { %>
+                                <img src="/img/pos_thumbnail.png" alt="<%= movie.title %>" />
+                            <% } %>
+                        </a>
                         <a href="movie/<%= movie.id %>" id="<%= movie.id %>" class="movie-title"><%= movie.title %></a>
                     </div>
-                <% }) %>
+                    <% }) %>
             </div>
         </div>
-
         <div>
             <h1>TV Shows</h1>
             <div class="row">
                 <% tvShows.forEach(movie=> { %>
                     <div class="movie">
-                        <a href="tv/<%= movie.id %>" id="<%= movie.id %>"><img src="<%= movie.src %>" alt="<%= movie.title %>"></a>
-                        <a href="tv/<%= movie.id %>" id="<%= movie.id %>" class="movie-title"><%= movie.title %></a>
+                        <a href="tv/<%= movie.id %>" id="<%= movie.id %>"><% if (movie.src) { %>
+                            <img src="<%= movie.src %>" alt="<%= movie.title %>" />
+                            <% } else { %>
+                                <img src="/img/pos_thumbnail.png" alt="<%= movie.title %>" />
+                            <% } %>
+                        </a>
+                        <a href="tv/<%= movie.id %>" id="<%= movie.id %>" class="movie-title">
+                            <%= movie.title %>
+                        </a>
                     </div>
-                <% }) %>
+                    <% }) %>
             </div>
         </div>
     </main>

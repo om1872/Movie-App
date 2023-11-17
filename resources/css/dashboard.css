@@ -11,6 +11,29 @@ main{
     overflow: hidden;
     overflow-x: scroll;
 }
+
+/* search.ejs  */
+.search-row{
+    display: flex;
+    flex-wrap: wrap;
+    background: #3A4D39;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.9);
+    justify-content: space-between;
+    padding:1%;
+}
+.search-row-header{
+    display: flex;
+    padding: auto 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+.search-result{
+    font-size: 1.3rem;
+    color: #D6C7AE;
+}
+
+/* movie poster and title styling */
 .movie{
     margin: 0.6rem;
     display: flex;
