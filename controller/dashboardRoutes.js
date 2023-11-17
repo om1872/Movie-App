@@ -43,7 +43,7 @@ route.get('/dashboard',async (req,res)=>{
         json.results.forEach(result=>{
             tv.push({
                 id:`${result.id}`,
-                title:`${result.original_name}`,
+                title:`${result.name}`,
                 src:`http://image.tmdb.org/t/p/w500${result.poster_path}`
             });
         })
@@ -67,7 +67,7 @@ route.get('/movie/:id',async (req,res)=>{
     }).catch(err=>{
         console.log('Error: '+err);
     });
-    console.log(movie.videos.results);
+    console.log(movie);
     res.render('movie',{
         movie:movie
     });
@@ -76,15 +76,15 @@ route.get('/movie/:id',async (req,res)=>{
 route.get('/tv/:id',async (req,res)=>{
     const {id}= req.params;
     let url=`https://api.themoviedb.org/3/tv/${id}?language=en-US&api_key=${API_KEY}`;
-    const movie=await fetch(url).then(res=>res.json())
+    const tv=await fetch(url).then(res=>res.json())
     .then(json=>{
-        return {title:json.name,tagline:json.tagline};
+        return json;
     }).catch(err=>{
         console.log('Error: '+err);
     });
-    console.log(movie);
-    res.render('movie',{
-        movie:movie
+    console.log(tv);
+    res.render('tv',{
+        tv:tv
     });
 });
 
