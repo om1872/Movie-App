@@ -1,5 +1,5 @@
 const { Router } = require('express');
-
+const genre=require('../utils/genre');
 const route = Router();
 
 const API_KEY = "REDACTED_TMDB_KEY";
@@ -36,8 +36,11 @@ route.get('/', async (req, res) => {
             });
         })
         .catch(err => console.error('error:' + err));
+        
+    const {tvGenre,movieGenre}=await genre();
     res.render('index', {
         images: data,
+        tvGenre,movieGenre
     });
 });
 

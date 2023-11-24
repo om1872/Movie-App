@@ -27,7 +27,26 @@
         <a class="title hamburger" href="#">title</a>
         <div class="navbar-item hamburger-on">
             <a href="/" class="item link">Home</a>
-            <a class="item link">Genre</a>
+            <ul class="item genre-link">
+                <li>
+                    <a href="#" class="item">Genre</a>
+                    <div class="dropdown" style="z-index: 999;">
+                        <div class="arrow"></div>
+                        <ul class="genre-item">
+                            <li><p class="h1" style="margin: auto 0.6rem; font-size:1.2rem;">Movie</p></li>
+                        <% movieGenre.genres.forEach(gen => { %>
+                            <li><a href="/api/genre/movie/<%= gen.id %>?name=<%= gen.name %>" class="item"><%= gen.name %></a></li>
+                        <% }) %>
+                        </ul>
+                        <ul class="genre-item">
+                            <li><p class="h1" style="margin: auto 0.6rem; font-size: 1.2rem;">TV</p></li>
+                        <% tvGenre.genres.forEach(gen => { %>
+                            <li><a href="/api/genre/tv/<%= gen.id %>?name=<%= gen.name %>" class="item"><%= gen.name %></a></li>
+                        <% }) %>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
             <a class="item link">TV Shows</a>
             <a class="item link">Anime</a>
         </div>
@@ -62,6 +81,7 @@
         </div>
         <p>©XYZ Company | All Rights Reserved.</p>
     </footer>
+    <script src="/js/navbar.js"></script>
 </body>
 
 </html>
