@@ -17,6 +17,7 @@
     <!-- Custom stylesheet -->
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/responsive.css">
 </head>
 
 <body>
@@ -45,7 +46,7 @@
                         </ul>
                     </div>
                 </li>
-            </ul>   
+            </ul>
             <a class="item link">Trending</a>
             <a class="item link">TV Shows</a>
             <a class="item link">Anime</a>
@@ -58,60 +59,54 @@
         </div>
     </nav>
 
-    <!-- dashboard -->
+    <!-- movie -->
     <main>
-        <div>
-            <h1>Popular</h1>
-            <div class="row hidden-scrollbar">
-                <% popular.forEach(movie=> { %>
-                    <div class="movie">
-                        <a href="movie/<%= movie.id %>" id="<%= movie.id %>"><% if (movie.src) { %>
-                            <img src="<%= movie.src %>" alt="<%= movie.title %>" />
-                            <% } else { %>
-                                <img src="/img/pos_thumbnail.png" alt="<%= movie.title %>" />
+        <div class="search-row-header">
+            <div>
+                <h1 style="margin-top: 0;">TV Shows</h1>
+                <h1 class="search-result"> for genre: <%= genre.name %>...</h1>
+            </div>
+        </div>
+        <div class="search-row">
+            <% if (results.results.length) { %>
+                <% results.results.forEach((tv,index)=> { %>
+                    <% if ( tv.poster_path) { %>
+                        <div class="movie">
+                        <a href="/api/tv/<%= tv.id %>" id="<%= tv.id %>">
+                            <% if (tv.poster_path) { %><img
+                                    src="http://image.tmdb.org/t/p/w300<%= tv.poster_path %>"
+                                    alt="<%= tv.title %>" />
+                            <% } else { %><img src="/img/pos_thumbnail.png" alt="<%= tv.title %>" />
                             <% } %>
                         </a>
-                        <a href="movie/<%= movie.id %>" class="movie-title">
-                            <%= movie.title %>
+                        <a href="/api/tv/<%= tv.id %>" id="<%= tv.id %>" class="movie-title">
+                            <% if (tv.title) { %>
+                                <%= tv.title %>
+                            <% } else { %>
+                                 <%= tv.name %>
+                            <% } %>
                         </a>
-                    </div>
+                        <% } %>
+                        </div>
                     <% }) %>
-            </div>
+                <% }  else { %>
+                        <div class="movie-title"><h4>Nothing found...</h4></div>
+                <% } %>
         </div>
 
-        <div>
-            <h1>Movie to Watch</h1>
-            <div class="row hidden-scrollbar">
-                <% topRated.forEach(movie=> { %>
-                    <div class="movie">
-                        <a href="movie/<%= movie.id %>" id="<%= movie.id %>"><% if (movie.src) { %>
-                            <img src="<%= movie.src %>" alt="<%= movie.title %>" />
-                            <% } else { %>
-                                <img src="/img/pos_thumbnail.png" alt="<%= movie.title %>" />
-                            <% } %>
-                        </a>
-                        <a href="movie/<%= movie.id %>" id="<%= movie.id %>" class="movie-title"><%= movie.title %></a>
-                    </div>
-                    <% }) %>
-            </div>
-        </div>
-        <div>
-            <h1>TV Shows</h1>
-            <div class="row hidden-scrollbar">
-                <% tvShows.forEach(movie=> { %>
-                    <div class="movie">
-                        <a href="tv/<%= movie.id %>" id="<%= movie.id %>"><% if (movie.src) { %>
-                            <img src="<%= movie.src %>" alt="<%= movie.title %>" />
-                            <% } else { %>
-                                <img src="/img/pos_thumbnail.png" alt="<%= movie.title %>" />
-                            <% } %>
-                        </a>
-                        <a href="tv/<%= movie.id %>" id="<%= movie.id %>" class="movie-title">
-                            <%= movie.title %>
-                        </a>
-                    </div>
-                    <% }) %>
-            </div>
+        <!-- pagination -->
+        <div class="pages">
+            <% if (results.page===1) { %>
+                <button class="btn disabled" disabled id="prev"><i class="fa-solid fa-arrow-left"></i> Prev</button>
+            <% } else { %>
+                <button class="btn" id="prev"><i class="fa-solid fa-arrow-left"></i> Prev</button>
+            <% } %>
+            <a class="page-info"><%= results.page %> / <%= results.total_pages %></a>
+            <% if (results.page===results.total_pages) { %>
+                <button class="btn disabled" disabled id="next"><i class="fa-solid fa-arrow-right"></i> Next</button>
+            <% } else { %>
+                <button class="btn" id="next"><i class="fa-solid fa-arrow-right"></i> Next</button>
+            <% } %>
         </div>
     </main>
 
@@ -125,6 +120,33 @@
         </div>
         <p>©XYZ Company | All Rights Reserved.</p>
     </footer>
+
+    <!-- exporting ejs model values for external js files -->
+
+    <!-- search query -->
+    <span id="genre" hidden>
+        <%= JSON.stringify(genre) %>
+    </span>
+
+    <!-- genres -->
+    <% if (tvGenre) { %>
+    <span id="tv-genre" hidden>
+        <%= JSON.stringify(tvGenre) %>
+    </span>
+    <% } %>
+    <% if (movieGenre) { %>
+        <span id="movie-genre" hidden><%= JSON.stringify(movieGenre) %></span>
+    <% } %>
+    <!-- pages -->
+    <span id="page-num" hidden>
+        <%= JSON.stringify(results.page) %>
+    </span>
+    <span id="lastpage" hidden>
+        <%= JSON.stringify(results.total_pages) %>
+    </span>
+
+    <!-- external js files
+    <script src="/js/pagination.js"></script> -->
     <script src="/js/navbar.js"></script>
 </body>
 

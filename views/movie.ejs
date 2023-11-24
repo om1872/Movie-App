@@ -17,6 +17,7 @@
     <!-- Custom stylesheet -->
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/movie.css">
+
 </head>
 
 <body>
@@ -26,7 +27,26 @@
         <a class="title" href="/api/dashboard"><img src="/img/brand-logo.png" alt=""></a>
         <div class="navbar-item">
             <a class="item link" href="/">Home</a>
-            <a class="item link">Genre</a>
+            <ul class="item genre-link">
+                <li>
+                    <a href="#" class="item">Genre</a>
+                    <div class="dropdown" style="z-index: 999;">
+                        <div class="arrow"></div>
+                        <ul class="genre-item">
+                            <li><p class="h1" style="margin: auto 0.6rem; font-size:1.2rem;">Movie</p></li>
+                        <% movieGenre.genres.forEach(gen => { %>
+                            <li><a href="/api/genre/movie/<%= gen.id %>?name=<%= gen.name %>" class="item"><%= gen.name %></a></li>
+                        <% }) %>
+                        </ul>
+                        <ul class="genre-item">
+                            <li><p class="h1" style="margin: auto 0.6rem; font-size: 1.2rem;">TV</p></li>
+                        <% tvGenre.genres.forEach(gen => { %>
+                            <li><a href="/api/genre/tv/<%= gen.id %>?name=<%= gen.name %>" class="item"><%= gen.name %></a></li>
+                        <% }) %>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
             <a class="item link">Trending</a>
             <a class="item link">TV Shows</a>
             <a class="item link">Anime</a>
@@ -41,40 +61,92 @@
 
     <!-- movie -->
     <main>
+        <div class="movie" style="justify-content: space-around; height: 550px;">
+            <div class="object col-3">
+            <iframe src="https://vidsrc.to/embed/movie/<%= movie.id %>" style="width:100%; height:100%;" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>
+            </div>
+            <div class="side-video">
+                <div class="extras">
+                    <div class="extras-head">Movie</div>
+                    <div class="youtube-ul">
+                        <div class="youtube-li selected" data-site="vidsrc" data-url="https://vidsrc.to/embed/movie/<%= movie.id %>">1. VidSrc</div>
+                    </div>
+                </div>
+                <div class="extras ">
+                    <div class="extras-head">More Videos</div>
+                    <div class="youtube-ul video-list scrollbar">
+                        <% var vds = []; %>
+                        <% for (var i=0, len=videos.results.length; i<len; i++) { %>
+                            <% vds.push( videos.results[i] )%>
+                        <% } %>
+                        <% if (vds) { %>
+                            <% vds.forEach((video,index) => { %>
+                                <% if (video.site === 'YouTube') { %>
+                                <div class="youtube-li" style="display: flex;" data-site="youtube" data-url="https://www.youtube.com/embed/<%= video.key %>?enablejsapi=1">
+                                    <div><%= index+1 %>.</div><div style="padding-left: 1.5%;"> <%= video.name %> <i class="fa-brands fa-youtube" style="color: #d00b29;"></i></div>
+                                </div> 
+                                <% } %>
+                                <% if (video.site === 'Vimeo') { %>
+                                    <div class="youtube-li" data-site="vimeo" data-url="https://player.vimeo.com/video/<%= video.key %>"><%= video.name %> <i class="fa-brands fa-vimeo" style="color: #195dd2;"></i></div> 
+                                    <% } %>
+                            <% }) %>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
         <div class="movie">
-            <div class="poster-div"><% if (movie.poster_path) { %>
-                <img src="http://image.tmdb.org/t/p/w300<%= movie.poster_path %>" alt="<%= movie.title %>" class="poster"/>
-                <% } else { %>
-                    <img src="/img/pos_thumbnail.png" alt="<%= movie.title %>" class="poster" />
-                <% } %>
+            <div class="poster-div">
+                <% if (movie.poster_path) { %>
+                    <img src="http://image.tmdb.org/t/p/w300<%= movie.poster_path %>" alt="<%= movie.title %>"
+                        class="poster" />
+                    <% } else { %>
+                        <img src="/img/pos_thumbnail.png" alt="<%= movie.title %>" class="poster" />
+                        <% } %>
             </div>
             <div class="col">
-                <h2 class="movie-title"><%= movie.title %></h2>
+                <h2 class="movie-title">
+                    <%= movie.title %>
+                </h2>
                 <% if (movie.tagline) { %>
-                <p><em>"<%= movie.tagline %>"</em></p>
-                <% } %>
-                <span><strong>Genre: </strong>
-                <% movie.genres.forEach((genre,index) => { %>
-                    <% if (index!=movie.genres.length-1) { %>
-                        <a id="<%=genre.id%>"><%= genre.name %>,</a>
-                    <% } else { %>
-                        <a id="<%=genre.id%>"><%= genre.name %></a>
+                    <p><em>"<%= movie.tagline %>"</em></p>
                     <% } %>
-                <% });%>
-                
-                 
-                </span>
-                <span><strong>Released On: </strong><%= movie.release_date%></span>
-                <span><strong>Duration: </strong><%= movie.runtime %>mins</span>
-                <span><strong>Languages: </strong><% movie.spoken_languages.forEach((language,index) => { %>
-                    <% if (index!=movie.spoken_languages.length-1) { %>
-                    <em><%= language.english_name %>,</em>
-                    <% } else { %>
-                        <em><%= language.english_name %></em>
-                    <% } %>
-                <% }) %>
-                </span>
-                <p><strong>Summary:  </strong><%= movie.overview %></p>
+                        <span><strong>Genre: </strong>
+                            <% movie.genres.forEach((genre,index)=> { %>
+                                <% if (index!=movie.genres.length-1) { %>
+                                    <a id="<%=genre.id%>">
+                                        <%= genre.name %>,
+                                    </a>
+                                    <% } else { %>
+                                        <a id="<%=genre.id%>">
+                                            <%= genre.name %>
+                                        </a>
+                                    <% } %>
+                            <% });%>
+                        </span>
+                        <span><strong>Released On: </strong>
+                            <%= movie.release_date%>
+                        </span>
+                        <span><strong>Duration: </strong>
+                            <%= movie.runtime %>mins
+                        </span>
+                        <span><strong>Languages: </strong>
+                            <% movie.spoken_languages.forEach((language,index)=> { %>
+                                <% if (index!=movie.spoken_languages.length-1) { %>
+                                    <em>
+                                        <%= language.english_name %>,
+                                    </em>
+                                    <% } else { %>
+                                        <em>
+                                            <%= language.english_name %>
+                                        </em>
+                                        <% } %>
+                                            <% }) %>
+                        </span>
+                        <p><strong>Summary: </strong>
+                            <%= movie.overview %>
+                        </p>
             </div>
         </div>
     </main>
@@ -89,6 +161,8 @@
         </div>
         <p>©XYZ Company | All Rights Reserved.</p>
     </footer>
+    <script src="/js/video-swap.js"></script>
+    <script src="/js/navbar.js"></script>
 </body>
 
 </html>

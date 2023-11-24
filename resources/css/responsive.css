@@ -1,0 +1,160 @@
+/* large screens (2006px-1741px) , (1741px-1488px) */
+
+@media only screen and (max-width:2006px) and (min-width:1741px){
+    .search-row{
+        justify-content: space-evenly;
+    }
+    .search-row .movie img{
+        width:140px;
+        height: 220px;
+    }
+    .search-row .movie .movie-title{
+        width: 140px;
+    }
+}
+
+@media only screen and (max-width:1741px) and (min-width:1488px){
+    .search-row{
+        justify-content: space-evenly;
+    }
+    .search-row .movie img{
+        width:160px;
+        height: 240px;
+    }
+    .search-row .movie .movie-title{
+        width: 160px;
+    }
+}
+
+
+/* laptop screen */
+/* currently used in search.ejs */
+@media only screen and (max-width:1488px) and (min-width:1245px){
+    .search-row{
+        justify-content: space-evenly;
+    }
+    .search-row .movie img{
+        width:180px;
+        height: 260px;
+    }
+    .search-row .movie .movie-title{
+        width: 180px;
+    }
+}
+
+/* tab screen configuration less than 1245px ,(1245px-1079px), (1079px-937px), (937px-786px)  */
+/* currently used in search.ejs */
+@media only screen and (max-width:1245px) and (min-width:1079px){
+    .search-row{
+        justify-content: space-evenly;
+    }
+    .search-row .movie img{
+        width:230px;
+        height: 310px;
+    }
+    .search-row .movie .movie-title{
+        width: 220px;
+    }
+}
+@media only screen and (max-width:1079px) and (min-width:937px) {
+    .search-row{
+        justify-content: space-evenly;
+    }
+    .search-row .movie img{
+        width:240px;
+        height: 320px;
+    }
+    .search-row .movie .movie-title{
+        width: 240px;
+    }
+}
+
+@media only screen and (max-width:937px) and (min-width:786px){
+    .search-row{
+        justify-content: space-evenly;
+    }
+    .search-row .movie img{
+        width:190px;
+        height: 280px;
+    }
+    .search-row .movie .movie-title{
+        width: 190px;
+    }
+}
+
+
+/* mobile screen configuration less than 786px , (786px-677px), (677px-594px), (593px-475px), (475px-390px) */
+/* currently used in search.ejs */
+
+@media only screen and (max-width:786px) and (min-width:677px){
+    .search-row{
+        justify-content: space-evenly;
+    }
+    .search-row .movie{
+        margin: 0;
+    }
+    .search-row .movie img{
+        width:200px;
+        height: 280px;
+    }
+    .search-row .movie .movie-title{
+        width: 200px;
+    }
+}
+
+@media only screen and (max-width:677px) and (min-width:594px){
+    .search-row{
+        justify-content: space-evenly;
+    }
+    .search-row .movie{
+        margin: 1%;
+    }
+    .search-row .movie img{
+        width:250px;
+        height: 400px;
+    }
+    .search-row .movie .movie-title{
+        width: 250px;
+    }
+}
+
+@media only screen and (max-width:593px) and (min-width:475px){
+    .search-row{
+        justify-content: space-evenly;
+    }
+    .search-row .movie{
+        margin: 1%;
+    }
+    .search-row .movie img{
+        width:200px;
+        height: 350px;
+    }
+    .search-row .movie .movie-title{
+        width: 200px;
+    }
+}
+
+@media only screen and (max-width:475px) and (min-width:390px){
+    .search-row{
+        justify-content: space-evenly;
+    }
+    .search-row .movie{
+        margin: 1%;
+    }
+}
+
+@media only screen and (max-width:390px){
+    .search-row{
+        justify-content: center;
+    }
+    .search-row .movie{
+        margin: 1%;
+    }
+    .search-row .movie img{
+        width:280px;
+        height: 350px;
+    }
+    .search-row .movie .movie-title{
+        width: 280px;
+    }
+}

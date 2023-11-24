@@ -63,71 +63,15 @@
     <main>
         <div class="search-row-header">
             <div>
-                <h1 style="margin-top: 0;">Search Result </h1>
-                <h1 class="search-result"> for <%= query %>...</h1>
+                <h1 style="margin-top: 0;">Movies </h1>
+                <h1 class="search-result"> for genre: <%= genre.name %>...</h1>
             </div>
-            <form action="/api/search/filter" class="search-result filter h1">
-                <label for="genre">Type</label>
-                <select name="type" id="type" class="btn">
-                    <option value="">Select</option>
-                    <% if (filter && filter.type==='movie') { %>
-                    <option value="movie" selected>Movie</option><% } else { %>
-                    <option value="movie" >Movie</option>
-                    <% } %>
-                    <% if (filter && filter.type==='tv') { %>
-                        <option value="tv" selected>TV</option><% } else { %>
-                        <option value="tv">TV</option>
-                        <% } %>
-                </select>
-                <label for="sort">Sort By <i class="fa-solid fa-sort fa-2xs"></i></label>
-                <select name="sort" id="" class="btn">
-                    <% if (filter && filter.sort==='popularity.desc') { %>
-                    <option value="popularity.desc">Most Popular</option><% } else { %>
-                    <option value="popularity.desc">Most Popular</option>
-                    <% } %>
-                    <% if (filter && filter.sort==='primary_release_date.desc') { %>
-                    <option value="primary_release_date.desc" selected>Latest</option><% } else { %>
-                    <option value="primary_release_date.desc">Latest</option>
-                    <% } %>
-                    <% if (filter && filter.sort==='vote_average.desc') { %>
-                    <option value="vote_average.desc" selected>Rating</option><% } else { %> 
-                    <option value="vote_average.desc">Rating</option>
-                    <% } %>
-                </select>
-                <label for="language">Language</label>
-                <select name="language" id="" class="btn">
-                    <option value="xx">Any</option>
-                    <option value="en">English</option>
-                    <option value="hi">Hindi</option>
-                    <option value="fr">French</option>
-                    <option value="ja">Japanese</option>
-                    <option value="ar">Arabic</option>
-                    <option value="it">Italian</option>
-                    <option value="nl">Dutch</option>
-                    <option value="ru">Russian</option>
-                </select>
-                <label for="adult">Adult</label>
-                <select name="adult" id="" class="btn">
-                    <% if (filter && filter.adult==='true') { %>
-                    <option value="true" selected>Include</option><% } else { %> 
-                    <option value="true">Include</option>
-                    <% } %>
-                    <% if (filter && filter.adult==='false') { %>
-                    <option value="false" selected>Exclude</option><% } else { %> 
-                    <option value="false">Exclude</option>
-                    <% } %>
-                </select>
-                <input name="query" value="<%= query %>" hidden></input>
-                <button type="submit" class="btn"><i class="fa-solid fa-filter"></i> Filter</button>
-                <button type="reset" class="btn"><i class="fa-solid fa-arrows-rotate"></i> Reset</button>
-            </form>
         </div>
         <div class="search-row">
             <% if (results.results.length) { %>
                 <% results.results.forEach((movie,index)=> { %>
-                    <% if ((movie.media_type==='movie' || movie.media_type==='tv' ) && movie.poster_path) { %>
+                    <% if ( movie.poster_path) { %>
                         <div class="movie">
-                    <% if (movie.media_type==='movie' ) { %>
                         <a href="/api/movie/<%= movie.id %>" id="<%= movie.id %>">
                             <% if (movie.poster_path) { %><img
                                     src="http://image.tmdb.org/t/p/w300<%= movie.poster_path %>"
@@ -142,26 +86,11 @@
                                  <%= movie.name %>
                             <% } %>
                         </a>
-                        <% } else if (movie.media_type==='tv' ) { %>
-                            <a href="/api/tv/<%= movie.id %>" id="<%= movie.id %>">
-                                <% if (movie.poster_path) { %><img
-                                        src="http://image.tmdb.org/t/p/w300<%= movie.poster_path %>"
-                                        alt="<%= movie.name %>" />
-                                <% } else { %><img src="/img/pos_thumbnail.png" alt="<%= movie.name %>" />
-                                <% } %>
-                            </a>
-                            <a href="/api/tv/<%= movie.id %>" id="<%= movie.id %>" class="movie-title">
-                                <% if (movie.name) { %>
-                                    <%= movie.name %>
-                                <% } else { %>
-                                    <%= movie.name %>
-                                <% } %>
-                            </a>
+                       
                         <% } %>
                         </div>
-                    <% } %>
-                <% }) %>
-                <% } else { %>
+                    <% }) %>
+                <% }  else { %>
                         <div class="movie-title"><h4>Nothing found...</h4></div>
                 <% } %>
         </div>
@@ -196,12 +125,9 @@
     <!-- exporting ejs model values for external js files -->
 
     <!-- search query -->
-    <span id="query" hidden>
-        <%= JSON.stringify(query) %>
+    <span id="genre" hidden>
+        <%= JSON.stringify(genre) %>
     </span>
-
-    <span id="search-type" hidden> <%= JSON.stringify(search_type) %></span>
-    <span id="filter" hidden><%= JSON.stringify(filter) %></span>
 
     <!-- genres -->
     <% if (tvGenre) { %>
@@ -220,9 +146,8 @@
         <%= JSON.stringify(results.total_pages) %>
     </span>
 
-    <!-- external js files -->
-    <script src="/js/search.js"></script>
-    <script src="/js/pagination.js"></script>
+    <!-- external js files
+    <script src="/js/pagination.js"></script> -->
     <script src="/js/navbar.js"></script>
 </body>
 
