@@ -1,6 +1,4 @@
 const mongoose=require('mongoose');
-const multer =require('multer');
-const GridFSstorage=require('multer-gridfs-storage');
 const mongoURI='mongodb://0.0.0.0:27017/movieApp';
 
 module.exports=mongoose.connect(mongoURI).then(()=>{
