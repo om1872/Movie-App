@@ -5,6 +5,8 @@ const lastpage = JSON.parse(document.querySelector('#lastpage').textContent);
 const query = JSON.parse(document.querySelector('#query').textContent);
 const row = document.querySelector('.search-row');
 const pageInfo=document.querySelector('.page-info');
+const search_type=JSON.parse(document.querySelector('#search-type').textContent);
+const filter=JSON.parse(document.querySelector('#filter').textContent);
 
 function genHTML(result) {
     result = result.results.map(res => {
@@ -16,8 +18,8 @@ function genHTML(result) {
         if (res === undefined)
             return;
         return `<div class="movie">
-        <a href="movie/${res.id}" id="${res.id}"><img src="http://image.tmdb.org/t/p/w300${res.poster_path}" alt="<%= movie.title %>"/></a>
-        <a href="movie/${res.id}" id="${res.id}" class="movie-title">${res.media_type==='tv' ? res.name : res.title}</a>
+        <a href="/api/${search_type==='multi'?res.media_type:search_type}/${res.id}" id="${res.id}"><img src="http://image.tmdb.org/t/p/w300${res.poster_path}" alt="<%= movie.title %>"/></a>
+        <a href="/api/${search_type==='multi'?res.media_type:search_type}/${res.id}" id="${res.id}" class="movie-title">${res.search_type==='multi'?res.media_type==='tv' ? res.name : res.title:search_type==='tv' ? res.name : res.title}</a>
         </div>`;
     }).join('');
 }
@@ -26,11 +28,15 @@ async function getNext() {
     if (page === lastpage) {
         return;
     }
+    this.disabled=true;
+    this.classList.add('disabled');
 
     const url = '/api/search/page';
     const data = {
         query: query,
-        page: page + 1
+        page: page + 1,
+        filter:filter,
+        search_type:search_type
     }
     let result = await fetch(url, {
         method: 'POST',
@@ -45,6 +51,10 @@ async function getNext() {
 
     document.querySelector('#page-num').textContent = parseInt(page) + 1;
     page = parseInt(page) + 1;
+    
+    row.innerHTML = genHTML(result);
+    this.disabled=false;
+    this.classList.remove('disabled');
     pageInfo.innerHTML = `${page} / ${lastpage}`;
     if(page===parseInt(lastpage)){
         next.classList.add('disabled');
@@ -56,18 +66,20 @@ async function getNext() {
             prev.classList.remove('disabled');
         }
     }
-    row.innerHTML = genHTML(result);
 }
 
 async function getPrev() {
     if (page === 1) {
         return;
     }
-
+    this.disabled=true;
+    this.classList.add('disabled');
     const url = '/api/search/page';
     const data = {
         query: query,
-        page: page - 1
+        page: page - 1,
+        filter:filter,
+        search_type:search_type
     }
     let result = await fetch(url, {
         method: 'POST',
@@ -81,6 +93,9 @@ async function getPrev() {
         }).catch(err => console.log('Error: ' + err));
     document.querySelector('#page-num').textContent = parseInt(page) - 1;
     page = parseInt(page) - 1;
+    row.innerHTML = genHTML(result);
+    this.disabled=false;
+    this.classList.remove('disabled');
     pageInfo.innerHTML = `${page} / ${lastpage}`;
     if(page===1){
         prev.classList.add('disabled');
@@ -92,7 +107,6 @@ async function getPrev() {
             next.classList.remove('disabled');
         }
     }
-    row.innerHTML = genHTML(result);
 }
 
 if (next != undefined)

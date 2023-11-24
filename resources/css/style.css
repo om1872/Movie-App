@@ -1,5 +1,5 @@
 /* tags css */
-*{
+* {
     box-sizing: border-box;
 }
 
@@ -13,14 +13,17 @@ body {
     justify-content: space-between;
 }
 
-section{
+section {
     text-align: center;
 }
-
-footer{
+a{
+    text-decoration: none;
+    cursor: pointer;
+}
+footer {
     text-align: center;
     background: #4F6F52;
-    color:#ECE3CE;
+    color: #ECE3CE;
     padding-top: 3rem;
 }
 
@@ -41,7 +44,7 @@ footer{
     justify-content: space-between;
 }
 
-.navbar-item .link{
+.navbar-item .link {
     text-decoration: none;
 }
 
@@ -49,26 +52,82 @@ footer{
     margin: auto 0.6rem;
     color: #ECE3CE;
     cursor: pointer;
+    text-decoration: none;
 }
-.item:hover{
-    color:#D6C7AE;
+
+.item:hover {
+    color: #D6C7AE;
+}
+ul.item{
+    padding: 0;
+}
+
+.item li{
+    list-style: none;
+}
+/* navbar item dropdown  */
+.genre-link{
+    position: relative;
+    padding: 5%;
+}
+.genre-link ul{
+    padding: 0;;
+}
+.dropdown {
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    padding: 5%;
+    transition: all 0.5s;
+    will-change: opacity;
+    background: #4F6F52;
+    display: none;
+    border-radius: 1rem;
+    transform: translateX(-40%);
+}
+
+.trigger-enter .dropdown {
+    display: flex;
+    opacity: 1;
+}
+.genre-item{
+    flex:1;
+    z-index: 1;
+}
+.genre-item li{
+    margin: 5% auto;
+}
+.genre-item span{
+    border-bottom: 1px solid #D6C7AE;
+}
+.arrow {
+    position: absolute;
+    /* z-index: -1; */
+    width: 20px;
+    height: 20px;
+    display: block;
+    background: white;
+    left:50%;
+    top:-5%;
+    transform: rotate(45deg);
 }
 
 /* logo */
 
-.title img{
-    width:50px;
+.title img {
+    width: 50px;
     transform: translateX(2.2rem) scale(3.2) translateY(2px);
 }
 
 /* Search form */
-.search{
+.search {
     background: #ECE3CE;
     border-radius: 0.2rem;
-    margin:1rem auto;
+    margin: 1rem auto;
 }
-.search input[type=submit]{
-    font-family:"Font Awesome 5 Free";
+
+.search input[type=submit] {
+    font-family: "Font Awesome 5 Free";
     border: none;
     font-size: 1.2rem;
     padding-right: 0.8rem;
@@ -76,14 +135,16 @@ footer{
     cursor: pointer;
     background: transparent;
 }
-.search input[type=text]{
+
+.search input[type=text] {
     border: none;
-    color:#3A4D39;
+    color: #3A4D39;
     padding: 0.8rem;
-    background:transparent;
+    background: transparent;
 }
-.search input[type=text]::placeholder{
-    border:none;
+
+.search input[type=text]::placeholder {
+    border: none;
 }
 
 /* Website themed button css */
@@ -100,27 +161,29 @@ footer{
 .btn:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
     background-color: #D6C7AE;
-} 
-.btn.disabled{
+}
+
+.btn.disabled {
     cursor: not-allowed;
     opacity: 0.7;
 }
-.btn.disabled:hover{
+
+.btn.disabled:hover {
     background-color: #ECE3CE;
     box-shadow: none;
 }
 
 /* pagination section */
 
-.pages{
+.pages {
     display: flex;
     justify-content: center;
     padding: 1rem;
     font-size: 1.2rem;
 }
 
-.pages .page-info{
-    color:#ECE3CE;
+.pages .page-info {
+    color: #ECE3CE;
     padding: 5px;
 }
 
@@ -139,14 +202,50 @@ footer{
 }
 
 
+/* //custom scrollbar */
+.scrollbar::-webkit-scrollbar{
+    
+    width: 10px;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+.scrollbar::-webkit-scrollbar-track{
+    cursor: pointer;
+}
+.scrollbar::-webkit-scrollbar-thumb{
+    border-radius: 1rem;
+    cursor:pointer;
+    background: #B0A695;
+}
+.scrollbar::-webkit-scrollbar-thumb:active{
+    background: #776B5D;
+}
+.scrollbar::-webkit-scrollbar-thumb:hover{
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+/* //scrollbar hide */
+.hidden-scrollbar::-webkit-scrollbar{
+    display: none;
+}
+.hidden-scrollbar::-webkit-scrollbar-track{
+   display: none;
+}
+.hidden-scrollbar::-webkit-scrollbar-thumb{
+   display: none;
+}
+
+
+
 /* Footer classes */
 
-.social-links .link{
+.social-links .link {
     padding: 0.4rem;
     cursor: pointer;
 }
-.social-links .link:hover{
-    color:#D6C7AE;
+
+.social-links .link:hover {
+    color: #D6C7AE;
 }
 
 /* @media only screen and (max-width:600px) {

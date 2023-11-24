@@ -1,5 +1,5 @@
 const { Router } = require('express');
-
+const genre=require('../utils/genre');
 const route = Router();
 
 const API_KEY = "2c295a3ddb6df8ba0220d8ff90ea21ab";
@@ -36,8 +36,11 @@ route.get('/', async (req, res) => {
             });
         })
         .catch(err => console.error('error:' + err));
+        
+    const {tvGenre,movieGenre}=await genre();
     res.render('index', {
         images: data,
+        tvGenre,movieGenre
     });
 });
 
