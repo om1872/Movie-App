@@ -7,6 +7,7 @@ h2{
     color:#3A4D39;
     padding: 2rem;
     display: flex;
+    flex:1;
 }
 
 
@@ -38,6 +39,9 @@ h2{
 
 /* video player section */
 
+.object{
+    height: 500px;
+}
 .side-video{
     width:25%;
     margin-left:1.5rem;
@@ -97,5 +101,39 @@ h2{
     box-shadow: 0 0 10px rgba(0,0,0,0.4);
 }
 
-
+@media only screen and (max-width:600px){
+    .object iframe{
+        height: auto;
+        width: 100%;
+    }
+    .movie{
+        flex-direction: column;
+        align-items: center;
+    }
+    .movie .col-3{
+        width: 100%;
+    }
+    .mobile-movie{
+        height: auto;
+        align-items: center;
+        width: 100%;
+    }
+    .poster-div{
+        width: fit-content;
+        height: fit-content;
+    }
+    .poster-div img{
+        flex:1;
+    }
+    .side-video{
+        width: 80%;
+        padding: 0;
+        padding-top: 1rem;
+        margin: 0;
+    
+    }
+    .movie .col{
+        margin-top: 5%;
+    }
+}
 

@@ -23,14 +23,14 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar">
-        <a class="hamburger item hamburger-active"><i class="fa-solid fa-bars fa-lg"></i></a>
-        <a class="title hamburger" href="#">title</a>
-        <div class="navbar-item hamburger-on">
+        <a class="hamburger item"><i class="fa-solid fa-bars fa-lg"></i></a>
+        <div class="navbar-item" id="ham">
             <a href="/" class="item link">Home</a>
             <ul class="item genre-link">
                 <li>
-                    <a href="#" class="item">Genre</a>
-                    <div class="dropdown" style="z-index: 999;">
+                    <span hidden id="gen-mobile"></span>
+                    <a href="#" class="item" style="margin: 0;">Genre <i class="fa-solid fa-xs fa-caret-down"></i></a>
+                    <div class="dropdown-genre" style="z-index: 999;">
                         <div class="arrow"></div>
                         <ul class="genre-item">
                             <li><p class="h1" style="margin: auto 0.6rem; font-size:1.2rem;">Movie</p></li>
@@ -47,9 +47,11 @@
                     </div>
                 </li>
             </ul>
-            <a class="item link">TV Shows</a>
-            <a class="item link">Anime</a>
+            <a class="item link" href="/api/trending">Trending</a>
+            <a class="item link" href="/api/tvshows">TV Shows</a>
+            <a class="item link" href="/api/anime">Anime</a>
         </div>
+        <button class="navbar-last btn">Log In</button>
     </nav>
 
     <!-- Welcome page main section -->
