@@ -7,7 +7,10 @@ const database = require('./database/connect');
 const homeRoute=require('./controller/homeRoute'); 
 const dashboardRoutes=require('./controller/dashboardRoutes');
 const searchController=require('./controller/searchController');
-const movieUploadController=require('./controller/movieUploadController');
+const uploadController=require('./controller/uploadController');
+const trendingController=require('./controller/trendingController');
+const tvshowsController=require('./controller/tvshowsController');
+const animeController=require('./controller/animeController');
 
 
 const app = express();
@@ -33,7 +36,10 @@ app.use((req,res,next)=>{
 app.use('/',homeRoute);
 app.use('/api',dashboardRoutes);
 app.use('/api/search',searchController);
-app.use('/api/movie',movieUploadController);
+app.use('/api/upload',uploadController);
+app.use('/api/tvshows',tvshowsController);
+app.use('/api/anime',animeController);
+app.use('/api/trending',trendingController);
 
 app.listen(PORT, () => {
     console.log(`Server Started at PORT: ${PORT}`);
