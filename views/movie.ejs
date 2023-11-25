@@ -136,7 +136,7 @@
             </div>
             
         </div>
-        <div class="movie">
+        <div class="movie desktop">
             <div class="poster-div">
                 <% if (movie.poster_path) { %>
                     <img src="http://image.tmdb.org/t/p/w300<%= movie.poster_path %>" alt="<%= movie.title %>"
@@ -184,6 +184,64 @@
                                         <% } %>
                                             <% }) %>
                         </span>
+                        <p><strong>Summary: </strong>
+                            <%= movie.overview %>
+                        </p>
+            </div>
+        </div>
+        <div class="movie-mobile">
+            <div class="row">
+                <div class="poster-div">
+                    <% if (movie.poster_path) { %>
+                        <img src="http://image.tmdb.org/t/p/w300<%= movie.poster_path %>" alt="<%= movie.title %>"
+                            class="poster" />
+                        <% } else { %>
+                            <img src="/img/pos_thumbnail.png" alt="<%= movie.title %>" class="poster" />
+                            <% } %>
+                </div>
+                <div style="margin-left: 8%;">
+                    <h2 class="movie-title">
+                        <%= movie.title %>
+                    </h2>
+                    <% if (movie.tagline) { %>
+                        <p><em>"<%= movie.tagline %>"</em></p>
+                        <% } %>
+                            <span><strong>Genre: </strong>
+                                <% movie.genres.forEach((genre,index)=> { %>
+                                    <% if (index!=movie.genres.length-1) { %>
+                                        <a id="<%=genre.id%>">
+                                            <%= genre.name %>,
+                                        </a>
+                                        <% } else { %>
+                                            <a id="<%=genre.id%>">
+                                                <%= genre.name %>
+                                            </a>
+                                        <% } %>
+                                <% });%>
+                            </span>
+                            <span><strong>Released On: </strong>
+                                <%= movie.release_date%>
+                            </span>
+                            <span><strong>Duration: </strong>
+                                <%= movie.runtime %>mins
+                            </span>
+                            <span><strong>Languages: </strong>
+                                <% movie.spoken_languages.forEach((language,index)=> { %>
+                                    <% if (index!=movie.spoken_languages.length-1) { %>
+                                        <em>
+                                            <%= language.english_name %>,
+                                        </em>
+                                        <% } else { %>
+                                            <em>
+                                                <%= language.english_name %>
+                                            </em>
+                                            <% } %>
+                                                <% }) %>
+                            </span>
+                </div>
+            </div>
+            
+            <div class="col">
                         <p><strong>Summary: </strong>
                             <%= movie.overview %>
                         </p>
