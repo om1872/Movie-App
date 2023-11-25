@@ -11,6 +11,7 @@ main{
     padding: auto 1rem;
     overflow: hidden;
     overflow-x: scroll;
+    position: relative;
 }
 
 /* search.ejs  */
@@ -75,3 +76,5 @@ main{
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+
