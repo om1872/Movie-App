@@ -5,6 +5,7 @@ section{
 }
 .navbar{
     justify-content: center;
+    position: relative;
 }
 .logo-img{
     max-width: 30rem;
@@ -100,11 +101,25 @@ section{
     padding: 1.2rem;
 }
 
+.navbar-last{
+    position: absolute;
+    right: 10px;
+    top:12px;
+}
 
 /* for mobile screen */
 
 @media only screen and (max-width:600px){
     .poster-row{
         width:200%;
+    }
+    .navbar{
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    .navbar-item{
+        display: none;
+        flex-direction: column;
+        line-height: 2;
     }
 }
