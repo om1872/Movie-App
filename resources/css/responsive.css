@@ -141,7 +141,7 @@
     
 }
 
-@media only screen and (max-width:390px){
+@media only screen and (max-width:390px) and (min-width:358px){
     .search-row{
         justify-content: space-evenly;
     }
@@ -152,5 +152,19 @@
     }
     .search-row .movie .movie-title{
         width: 150px;
+    }
+}
+
+@media only screen and (max-width:358px) {
+    .search-row{
+        justify-content: space-evenly;
+    }
+    
+    .search-row .movie img{
+        width:140px;
+        height: 200px;
+    }
+    .search-row .movie .movie-title{
+        width: 140px;
     }
 }

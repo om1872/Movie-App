@@ -102,8 +102,8 @@
     <!-- movie -->
     <main>
         <div class="movie mobile-movie">
-            <div class="object col-3">
-            <iframe src="https://vidsrc.to/embed/movie/<%= movie.id %>" style="width:100%; height:100%;" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>
+            <div class="object col-3" style="flex:1;">
+            <iframe src="https://vidsrc.to/embed/movie/<%= movie.id %>"  allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>
             </div>
             <div class="side-video">
                 <div class="extras">
@@ -190,23 +190,23 @@
             </div>
         </div>
         <div class="movie-mobile">
-            <div class="row" style="padding-left: 5px;">
+            <div class="row" style="padding-left: 5px;" style="height: 160px;">
                 <div class="poster-div" >
                     <% if (movie.poster_path) { %>
                         <img src="http://image.tmdb.org/t/p/w300<%= movie.poster_path %>" alt="<%= movie.title %>"
                             class="poster" />
                         <% } else { %>
-                            <img src="/img/pos_thumbnail.png" alt="<%= movie.title %>" class="poster" />
+                            <img src="/img/pos_thumbnail.png" alt="<%= movie.title %>" class="poster"  />
                             <% } %>
                 </div>
-                <div style="padding-left:10px;">
+                <div style="padding-left:10px; padding-right: 10px; font-size: 0.8rem; line-height: 1.5;">
                     <h2 class="movie-title">
                         <%= movie.title %>
                     </h2>
                     <% if (movie.tagline) { %>
                         <p><em>"<%= movie.tagline %>"</em></p>
                         <% } %>
-                            <span><strong>Genre: </strong>
+                            <span style="display: block;"><strong>Genre: </strong>
                                 <% movie.genres.forEach((genre,index)=> { %>
                                     <% if (index!=movie.genres.length-1) { %>
                                         <a id="<%=genre.id%>">
@@ -219,13 +219,13 @@
                                         <% } %>
                                 <% });%>
                             </span>
-                            <span><strong>Released On: </strong>
+                            <span style="display: block;"><strong>Released On: </strong>
                                 <%= movie.release_date%>
                             </span>
-                            <span><strong>Duration: </strong>
+                            <span style="display: block;"><strong>Duration: </strong>
                                 <%= movie.runtime %>mins
                             </span>
-                            <span><strong>Languages: </strong>
+                            <span style="display: block;"><strong>Languages: </strong>
                                 <% movie.spoken_languages.forEach((language,index)=> { %>
                                     <% if (index!=movie.spoken_languages.length-1) { %>
                                         <em>
