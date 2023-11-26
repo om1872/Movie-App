@@ -77,11 +77,13 @@ route.get('/movie/:id',async (req,res)=>{
 
 route.get('/tv/:id',async (req,res)=>{
     const {id}= req.params;
-    let url=`https://api.themoviedb.org/3/tv/${id}?language=en-US&api_key=${API_KEY}`;
+    let url=`https://api.themoviedb.org/3/tv/${id}?language=en-US&api_key=${API_KEY}&append_to_response=videos`;
     const tv=await fetchData(url);
     const {tvGenre,movieGenre}=await genre();
+    const videos=tv.videos;
+    const seasons=tv.seasons;
     res.render('tv',{
-        tv, tvGenre, movieGenre
+        tv, tvGenre, movieGenre,videos,seasons
     });
 });
 
