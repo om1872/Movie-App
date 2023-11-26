@@ -1,10 +1,11 @@
 const next = document.querySelector('#next');
 const prev = document.querySelector('#prev');
+const row = document.querySelector('.search-row');
+const pageInfo=document.querySelector('.page-info');
+
 let page = JSON.parse(document.querySelector('#page-num').textContent);
 const lastpage = JSON.parse(document.querySelector('#lastpage').textContent);
 const query = JSON.parse(document.querySelector('#query').textContent);
-const row = document.querySelector('.search-row');
-const pageInfo=document.querySelector('.page-info');
 const search_type=JSON.parse(document.querySelector('#search-type').textContent);
 const filter=JSON.parse(document.querySelector('#filter').textContent);
 
@@ -66,6 +67,7 @@ async function getNext() {
             prev.classList.remove('disabled');
         }
     }
+    document.body.scrollTop=0;
 }
 
 async function getPrev() {
@@ -107,6 +109,8 @@ async function getPrev() {
             next.classList.remove('disabled');
         }
     }
+    
+    document.body.scrollTop=0
 }
 
 if (next != undefined)
