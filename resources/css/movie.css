@@ -37,7 +37,7 @@ h2{
     display: none;
     background: #ECE3CE;
     color:#3A4D39;
-    padding: 2rem;
+    padding: 2rem 0;
     flex:1;
 }
 .movie-mobile .row{
@@ -159,5 +159,6 @@ h2{
         display: flex;
         flex-direction: column;
     }
+    
 }
 
