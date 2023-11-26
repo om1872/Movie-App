@@ -9,8 +9,16 @@ function loadvideo(){
     this.classList.add('selected');
     selected=this;
     const url=this.dataset.url;
+    const html=`<iframe src="${url}" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>`;
+    movie.innerHTML=html;
+}
 
-    const html=`<iframe src="${url}" style="width:100%; height:100%;" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>`;
+function loadvideoP(param){
+    selected.classList.remove('selected');
+    param.classList.add('selected');
+    selected=param;
+    const url=param.dataset.url;
+    const html=`<iframe src="${url}" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>`;
     movie.innerHTML=html;
 }
 

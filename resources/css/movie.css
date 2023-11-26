@@ -10,7 +10,10 @@ h2{
     flex:1;
 }
 
-
+.movie .object iframe{
+    height: 100%;
+    width: 100%;
+}
 .movie .poster{
     width: 200px;
 }
@@ -121,7 +124,7 @@ h2{
 
 @media only screen and (max-width:600px){
     .object iframe{
-        height: auto;
+        height: 200px !important;
         width: 100%;
     }
     .movie{
@@ -135,6 +138,7 @@ h2{
         height: auto;
         align-items: center;
         width: 100%;
+        padding: 0;
     }
     .poster-div{
         width: fit-content;
