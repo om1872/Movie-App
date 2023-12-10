@@ -1,0 +1,60 @@
+.shadow{
+    background-color: rgb(0, 0, 0,0.7);
+    height: 100vh;
+    width: 100vw;
+    position:fixed;
+    opacity: 0;
+    z-index:-999999;
+}
+.shadow.show{
+    opacity: 1;
+    z-index: 9999;
+}
+.login-form,.signup-form{
+    position: absolute;
+    top:25vh;
+    left:40%;
+    right:40%;
+    z-index: -999;
+    opacity: 0;
+    transform: all 0.7s;
+    display: flex;
+    background: #ECE3CE;
+    border-radius: 2rem;
+    border: 5px solid #739072;
+    color:#3A4D39;
+    box-shadow: 0 0 10px rgb(255, 255, 255,0.4);
+    padding: 1rem;
+}
+.login-form .login-main{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.login-form .login-main-head{
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+.login-main .login-main-form{
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form.show{
+    z-index: 99999;
+    opacity: 1;
+}
+.signup-form.show{
+    z-index: 99999;
+    opacity: 1;
+}
+.err{
+    color:#DC8686;
+}
+
+#close,#close-signup{
+    position: absolute;
+    top:5%;
+    right: 5%;
+}

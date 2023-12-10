@@ -102,6 +102,57 @@ ul.item{
     list-style: none;
 }
 
+/* navbar user dropdown */
+.dropdown{
+    position: relative;
+}
+.dropdown .dropdown-content{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right:0;
+    width: max-content;
+    background: #ECE3CE;
+    z-index: -1;
+    opacity:0;
+    transition: all 0.7s;
+    border-radius: 1rem;
+}
+.dropdown-content a{
+    padding: 0.5rem;
+    width: 100%;
+    flex:1;
+    text-decoration: none;
+    color:#4F6F52;
+    text-align: right;
+}
+.dropdown-content a:first-child{
+    border-top-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+}
+.dropdown-content a:last-child{
+    border-bottom-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+.dropdown-content a:hover{
+    background: #D6C7AE;
+    color: #3A4D39;
+}
+
+.dropdown-content.active{
+    z-index: 1;
+    opacity: 1;
+}
+.dropdown .btn{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.icon{
+    width: 1.5rem;
+    background: transparent;
+}
+
 
 /* navbar item dropdown  */
 .genre-link{
@@ -175,6 +226,7 @@ ul.item{
 }
 
 .search input[type=text] {
+    outline:none;
     border: none;
     color: #3A4D39;
     padding: 0.8rem;
@@ -195,19 +247,38 @@ ul.item{
     cursor: pointer;
     color: #3A4D39;
 }
+.btn-rev{
+    background-color: #739072;
+    border-radius: 0.4rem;
+    padding: 0.4rem;
+    border: #3A4D39;
+    cursor: pointer;
+    color: #ECE3CE;
+}
 
 .btn:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
     background-color: #D6C7AE;
+}
+.btn-rev:hover{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    background-color: #4F6F52;
 }
 
 .btn.disabled {
     cursor: not-allowed;
     opacity: 0.7;
 }
-
+.btn-rev.disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
 .btn.disabled:hover {
     background-color: #ECE3CE;
+    box-shadow: none;
+}
+.btn-rev.disabled:hover {
+    background-color: #739072;
     box-shadow: none;
 }
 
@@ -268,6 +339,13 @@ ul.item{
    display: none;
 }
 
+/* 
+.link:hover{
+    text-decoration: underline;
+}
+.link:active{
+    text-decoration: underline;
+} */
 
 
 /* Footer classes */
@@ -281,6 +359,8 @@ ul.item{
     color: #D6C7AE;
 }
 
+
+/* mobile css */
 .mobile-ham{
     display: none;
 }
@@ -308,6 +388,7 @@ ul.item{
         line-height: 2;
     }
     #mobile-search{
+        outline:none;
         display: none;
         position:absolute;
         top:100%;

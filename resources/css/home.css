@@ -54,6 +54,7 @@ section{
 .header{
     /* z-index: 100; */
     position: relative;
+    top:6%;
     flex:1;
 }
 
@@ -107,7 +108,7 @@ section{
 .navbar-last{
     position: absolute;
     right: 10px;
-    top:12px;
+    top:10px;
 }
 
 /* for mobile screen */

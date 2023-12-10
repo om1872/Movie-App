@@ -1,10 +1,12 @@
 const { Router } = require('express');
 const genre=require('../utils/genre');
 const { fetchData } = require('../utils/helper');
+const {bucket} =require('../database/connect');
 
 const route = Router();
 
-const API_KEY = "2c295a3ddb6df8ba0220d8ff90ea21ab";
+// const API_KEY = "2c295a3ddb6df8ba0220d8ff90ea21ab";
+const API_KEY=process.env.API_KEY;
 const discoverMovie=`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`;
 const poster=`http://image.tmdb.org/t/p/w500`;
 const discoverTv=`https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}`;
@@ -68,10 +70,18 @@ route.get('/movie/:id',async (req,res)=>{
     const {id}= req.params;
     let url=`https://api.themoviedb.org/3/movie/${id}?language=en-US&api_key=${API_KEY}&append_to_response=videos`;
     const movie=await fetchData(url);
+
+    const cursor=await bucket.find({"_id":id}).toArray();
+    let localURL="";
+    if(cursor.length===1){
+        localURL=`/api/render/video/${id}`;
+    }
+    
+
     const {tvGenre,movieGenre}=await genre();
     const videos=movie.videos;
     res.render('movie',{
-        movie, tvGenre, movieGenre,videos
+        movie, tvGenre, movieGenre,videos,localURL
     });
 });
 

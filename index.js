@@ -1,9 +1,14 @@
 const express = require('express');
-const fetch = require('node-fetch');
+const cookieParser=require('cookie-parser');
 var path = require('path');
-const bodyParser=require('body-parser');
+//db
 const database = require('./database/connect');
 
+//middlewares
+const {requiredAuth,checkUser}=require('./middleware/authMiddleware');
+
+//controllers
+const loginRoute=require('./controller/loginController')
 const homeRoute=require('./controller/homeRoute'); 
 const dashboardRoutes=require('./controller/dashboardRoutes');
 const searchController=require('./controller/searchController');
@@ -11,6 +16,7 @@ const uploadController=require('./controller/uploadController');
 const trendingController=require('./controller/trendingController');
 const tvshowsController=require('./controller/tvshowsController');
 const animeController=require('./controller/animeController');
+const videoRenderController=require('./controller/videorenderController');
 
 
 const app = express();
@@ -23,23 +29,30 @@ app.set('view engine','ejs');
 app.set('views',path.resolve('./views'));
 app.use(express.static(__dirname + '/resources'));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+app.use(cookieParser());
 
 app.use((req,res,next)=>{
-    console.clear();
+    // console.clear();
     console.log(`${req.method}: ${req.url}`);
     next();
 })
 
+//current user
+app.get('*',checkUser);
 
+//all routes
 app.use('/',homeRoute);
 app.use('/api',dashboardRoutes);
+app.use('/api/auth',loginRoute);
 app.use('/api/search',searchController);
-app.use('/api/upload',uploadController);
+app.use('/api/upload',requiredAuth,uploadController);
 app.use('/api/tvshows',tvshowsController);
 app.use('/api/anime',animeController);
 app.use('/api/trending',trendingController);
+app.use('/api/render',videoRenderController);
+
 
 app.listen(PORT, () => {
     console.log(`Server Started at PORT: ${PORT}`);

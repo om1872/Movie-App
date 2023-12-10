@@ -18,6 +18,7 @@
     <!-- Custom stylesheet -->
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/login.css">
 </head>
 
 <body>
@@ -33,16 +34,24 @@
                     <div class="dropdown-genre" style="z-index: 999;">
                         <div class="arrow"></div>
                         <ul class="genre-item">
-                            <li><p class="h1" style="margin: auto 0.6rem; font-size:1.2rem;">Movie</p></li>
-                        <% movieGenre.genres.forEach(gen => { %>
-                            <li><a href="/api/genre/movie/<%= gen.id %>?name=<%= gen.name %>" class="item"><%= gen.name %></a></li>
-                        <% }) %>
+                            <li>
+                                <p class="h1" style="margin: auto 0.6rem; font-size:1.2rem;">Movie</p>
+                            </li>
+                            <% movieGenre.genres.forEach(gen=> { %>
+                                <li><a href="/api/genre/movie/<%= gen.id %>?name=<%= gen.name %>" class="item">
+                                        <%= gen.name %>
+                                    </a></li>
+                                <% }) %>
                         </ul>
                         <ul class="genre-item">
-                            <li><p class="h1" style="margin: auto 0.6rem; font-size: 1.2rem;">TV</p></li>
-                        <% tvGenre.genres.forEach(gen => { %>
-                            <li><a href="/api/genre/tv/<%= gen.id %>?name=<%= gen.name %>" class="item"><%= gen.name %></a></li>
-                        <% }) %>
+                            <li>
+                                <p class="h1" style="margin: auto 0.6rem; font-size: 1.2rem;">TV</p>
+                            </li>
+                            <% tvGenre.genres.forEach(gen=> { %>
+                                <li><a href="/api/genre/tv/<%= gen.id %>?name=<%= gen.name %>" class="item">
+                                        <%= gen.name %>
+                                    </a></li>
+                                <% }) %>
                         </ul>
                     </div>
                 </li>
@@ -51,28 +60,97 @@
             <a class="item link" href="/api/tvshows">TV Shows</a>
             <a class="item link" href="/api/anime">Anime</a>
         </div>
-        <button class="navbar-last btn">Log In</button>
+        <% if (user) { %>
+            <div class="navbar-last item">
+                <div class="dropdown">
+                    <button class="btn"><img src="/img/icons/ghost.png" class="icon" />
+                        <%= user.name %>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="">My Bucket</a>
+                        <% if (user.admin) { %>
+                            <a href="#" class="link">Statistics</a>
+                            <a href="/api/upload/movieUpload" class="link">Movie Management</a>
+                            <a href="#" class="link">Stream Management</a>
+                        <% } %>
+                        <a href="/api/auth/logout">Log Out</a>
+                    </div>
+                </div>
+            </div>
+            <% } else { %>
+                <div class="navbar-last"> 
+                    <a class="item link"  id="login">Log In</a>
+                    <button class="btn" id="signup">Sign Up</button>
+                </div>
+            <% } %>
+
     </nav>
 
     <!-- Welcome page main section -->
     <section>
         <div class="wrapper">
             <div class="poster-row">
-                <% images.forEach(image => { %>
-                 <img class="poster" src="<%= image.src %>" alt="<%= image.title %>"></img>
-                <% }) %>
+                <% images.forEach(image=> { %>
+                    <img class="poster" src="<%= image.src %>" alt="<%= image.title %>"></img>
+                    <% }) %>
             </div>
             <div class="header">
                 <a href="/api/dashboard"><img class="logo-img" src="/img/brand-logo.png" alt=""></a>
                 <form method="GET" action="/api/search" class="search-form">
-                    <input type="text" name="query" id="" placeholder="Search here..."><button class="btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <input type="text" name="query" id="" placeholder="Search here..."><button class="btn"
+                        type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
-                <div class="info">Welcome to Home Cinema, here you can explore all latest movies, animes, tv shows and can watch it which are actually free on internet. No pirated content here!!!...</div>
+                <div class="info">Welcome to Home Cinema, here you can explore all latest movies, animes, tv shows and
+                    can watch it which are actually free on internet. No pirated content here!!!...</div>
             </div>
 
         </div>
     </section>
-
+    <div class="login-form" id="" style="width:fit-content;">
+        <div class="login-main">
+            <div class="login-main-head">
+                <h1>Login</h1>
+                <a id="close"><i class="fa-solid fa-xmark"></i></a>
+            </div>
+            <form class="login-main-form" name="login-main-form">
+                <label for="email">Email:</label></th>
+                <input type="email" name="email">
+                <div class="err email-err"></div>
+                <label for="password">Password:</label>
+                <input type="password" name="password">
+                <div class="err pass-err"></div>
+                </td>
+                <div style="text-align: center; margin:5% 0 0">
+                    <button class="btn-rev" type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="signup-form" id="" style="width:fit-content;">
+        <div class="signup-main">
+            <div class="signup-main-head">
+                <h1>Register Here</h1>
+                <a id="close-signup"><i class="fa-solid fa-xmark"></i></a>
+            </div>
+            <form class="signup-main-form" name="signup-main-form">
+                <label for="">First Name</label>
+                <input type="text" name="first">
+                <label for="">Last Name</label>
+                <input type="text" name="last">
+                <label for="email">Email:</label></th>
+                <input type="email" name="email">
+                <div class="err email-err"></div>
+                <label for="password">Password:</label>
+                <input type="password" name="password">
+                <div class="err pass-err"></div>
+                </td>
+                <div style="text-align: center; margin:5% 0 0">
+                    <button class="btn-rev" type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="shadow"></div>
     <!-- Footer -->
     <footer>
         <div class="social-links">
@@ -84,6 +162,7 @@
         <p>©XYZ Company | All Rights Reserved.</p>
     </footer>
     <script src="/js/navbar.js"></script>
+    <script src="/js/auth.js"></script>
 </body>
 
 </html>
