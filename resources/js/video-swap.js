@@ -9,7 +9,12 @@ function loadvideo(){
     this.classList.add('selected');
     selected=this;
     const url=this.dataset.url;
-    const html=`<iframe src="${url}" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>`;
+    const site=this.dataset.site;
+    let html;
+    if(site==='local'){
+        html=`<video src="${url}" style="width:100% !important; height:inherit;background:black" controls autoplay muted preload="metadata"></video>`
+    }else
+        html=`<iframe src="${url}" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>`;
     movie.innerHTML=html;
 }
 

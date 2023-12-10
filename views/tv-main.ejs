@@ -67,6 +67,29 @@
                 <input class="search-item" type="text" name="query" id="" placeholder="Search Here..."><input
                     class="search-item fa-solid" type="submit" value="&#xf002">
             </form>
+            <% if (user) { %>
+                <div class="item">
+                    <div class="dropdown">
+                        <button class="btn"><img src="/img/icons/ghost.png" class="icon" />
+                            <%= user.name %>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="">My Bucket</a>
+                            <% if (user.admin) { %>
+                                <a href="#" class="link">Statistics</a>
+                                <a href="/api/upload/movieUpload" class="link">Movie Management</a>
+                                <a href="#" class="link">Stream Management</a>
+                            <% } %>
+                            <a href="/api/auth/logout">Log Out</a>
+                        </div>
+                    </div>
+                </div>
+                <% } else { %>
+                    <div class="navbar-last"> 
+                        <a class="item link"  id="login">Log In</a>
+                        <button class="btn" id="signup">Sign Up</button>
+                    </div>
+                <% } %>
         </div>
         <div class="navbar-item-mobile" id="ham">
             <div class="navbar-item-m">

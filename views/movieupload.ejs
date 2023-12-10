@@ -1,25 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+    <!-- Font-Awesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/upload.css">
+
+    <!-- data-table css -->
+    <link rel="stylesheet" href="/css/jquery.datatable.min.css">
 </head>
+
 <body>
+    <!-- Navbar -->
     <nav class="navbar">
         <div class="item mobile-ham">
-        <a class="hamburger"><i class="fa-solid fa-bars fa-lg"></i></a>
-        <button style="margin-left: 15%;" class="btn"><i class="fa-solid fa-key"></i></button>
-        <div class="item" id="mobile-search-icon"><i class="fa-solid fa-magnifying-glass fa-flip-horizontal"></i></div> 
-        <div class="navbar-item-m" id="mobile-search">
-            <form class="search" action="/api/search">
-                <input class="search-item" type="text" name="query" id="" placeholder="Search Here..."><input
-                    class="search-item fa-solid" type="submit" value="&#xf002">
-            </form>
-        </div>
+            <a class="hamburger"><i class="fa-solid fa-bars fa-lg"></i></a>
+            <button style="margin-left: 15%;" class="btn"><i class="fa-solid fa-key"></i></button>
+            <div class="item" id="mobile-search-icon"><i class="fa-solid fa-magnifying-glass fa-flip-horizontal"></i>
+            </div>
+            <div class="navbar-item-m" id="mobile-search">
+                <form class="search" action="/api/search">
+                    <input class="search-item" type="text" name="query" id="" placeholder="Search Here..."><input
+                        class="search-item fa-solid" type="submit" value="&#xf002">
+                </form>
+            </div>
         </div>
         <a class="title" href="/api/dashboard"><img src="/img/brand-logo.png" alt=""></a>
-        
+
         <div class="navbar-item">
             <a class="item link" href="/">Home</a>
             <ul class="item genre-link">
@@ -28,20 +47,28 @@
                     <div class="dropdown-genre">
                         <div class="arrow"></div>
                         <ul class="genre-item">
-                            <li><p class="h1" style="margin: auto 0.6rem; font-size:1.2rem;">Movie</p></li>
-                        <% movieGenre.genres.forEach(gen => { %>
-                            <li><a href="/api/genre/movie/<%= gen.id %>?name=<%= gen.name %>" class="item"><%= gen.name %></a></li>
-                        <% }) %>
+                            <li>
+                                <p class="h1" style="margin: auto 0.6rem; font-size:1.2rem;">Movie</p>
+                            </li>
+                            <% movieGenre.genres.forEach(gen=> { %>
+                                <li><a href="/api/genre/movie/<%= gen.id %>?name=<%= gen.name %>" class="item">
+                                        <%= gen.name %>
+                                    </a></li>
+                                <% }) %>
                         </ul>
                         <ul class="genre-item">
-                            <li><p class="h1" style="margin: auto 0.6rem; font-size: 1.2rem;">TV</p></li>
-                        <% tvGenre.genres.forEach(gen => { %>
-                            <li><a href="/api/genre/tv/<%= gen.id %>?name=<%= gen.name %>" class="item"><%= gen.name %></a></li>
-                        <% }) %>
+                            <li>
+                                <p class="h1" style="margin: auto 0.6rem; font-size: 1.2rem;">TV</p>
+                            </li>
+                            <% tvGenre.genres.forEach(gen=> { %>
+                                <li><a href="/api/genre/tv/<%= gen.id %>?name=<%= gen.name %>" class="item">
+                                        <%= gen.name %>
+                                    </a></li>
+                                <% }) %>
                         </ul>
                     </div>
                 </li>
-            </ul>   
+            </ul>
             <a class="item link">Trending</a>
             <a class="item link">TV Shows</a>
             <a class="item link">Anime</a>
@@ -51,30 +78,62 @@
                 <input class="search-item" type="text" name="query" id="" placeholder="Search Here..."><input
                     class="search-item fa-solid" type="submit" value="&#xf002">
             </form>
+            <% if (user) { %>
+                <div class="item">
+                    <div class="dropdown">
+                        <button class="btn"><img src="/img/icons/ghost.png" class="icon" />
+                            <%= user.name %>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="">My Bucket</a>
+                            <% if (user.admin) { %>
+                                <a href="#" class="link">Statistics</a>
+                                <a href="/api/upload/movieUpload" class="link">Movie Management</a>
+                                <a href="#" class="link">Stream Management</a>
+                            <% } %>
+                            <a href="/api/auth/logout">Log Out</a>
+                        </div>
+                    </div>
+                </div>
+                <% } else { %>
+                    <div class="navbar-last"> 
+                        <a class="item link"  id="login">Log In</a>
+                        <button class="btn" id="signup">Sign Up</button>
+                    </div>
+                <% } %>
         </div>
         <div class="navbar-item-mobile" id="ham">
             <div class="navbar-item-m">
                 <a class="item link" href="/">Home</a>
                 <ul class="item genre-link">
                     <li>
-                        <a href="#" class="item" style="margin: 0;">Genre <i class="fa-solid fa-xs fa-caret-down" id="gen-mobile"></i></a>
+                        <a href="#" class="item" style="margin: 0;">Genre <i class="fa-solid fa-xs fa-caret-down"
+                                id="gen-mobile"></i></a>
                         <div class="dropdown-genre">
                             <div class="arrow"></div>
                             <ul class="genre-item">
-                                <li><p class="h1" style="margin: auto 0.6rem; font-size:1.2rem;">Movie</p></li>
-                            <% movieGenre.genres.forEach(gen => { %>
-                                <li><a href="/api/genre/movie/<%= gen.id %>?name=<%= gen.name %>" class="item"><%= gen.name %></a></li>
-                            <% }) %>
+                                <li>
+                                    <p class="h1" style="margin: auto 0.6rem; font-size:1.2rem;">Movie</p>
+                                </li>
+                                <% movieGenre.genres.forEach(gen=> { %>
+                                    <li><a href="/api/genre/movie/<%= gen.id %>?name=<%= gen.name %>" class="item">
+                                            <%= gen.name %>
+                                        </a></li>
+                                    <% }) %>
                             </ul>
                             <ul class="genre-item">
-                                <li><p class="h1" style="margin: auto 0.6rem; font-size: 1.2rem;">TV</p></li>
-                            <% tvGenre.genres.forEach(gen => { %>
-                                <li><a href="/api/genre/tv/<%= gen.id %>?name=<%= gen.name %>" class="item"><%= gen.name %></a></li>
-                            <% }) %>
+                                <li>
+                                    <p class="h1" style="margin: auto 0.6rem; font-size: 1.2rem;">TV</p>
+                                </li>
+                                <% tvGenre.genres.forEach(gen=> { %>
+                                    <li><a href="/api/genre/tv/<%= gen.id %>?name=<%= gen.name %>" class="item">
+                                            <%= gen.name %>
+                                        </a></li>
+                                    <% }) %>
                             </ul>
                         </div>
                     </li>
-                </ul>   
+                </ul>
                 <a class="item link">Trending</a>
                 <a class="item link">TV Shows</a>
                 <a class="item link">Anime</a>
@@ -82,9 +141,37 @@
         </div>
     </nav>
 
-    <form action="/api/moveiUpload" method="post" enctype="multipart/form-data">
-        <input type="file" name="avatar" />
-    </form>
+    <main>
+        <h1 style="padding:0 10% 0">Manage Movie</h1>
+        <div class="upload-section">
+            <div class="col-8">
+                <div class="col-child">
+                    <h1>Search based on tmdb id or movie name :</h1>
+                    <form class="search-upload" action="#" name="search-form">
+                        <input class="search-upload-input" type="text" name="query" placeholder="Search Here...">
+                        <input class="btn fa-solid" type="submit" value="&#xf002">
+                    </form>
+                    <div class="search-row">
+                        Search to get results...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a class="link"><i class="fa-regular fa-envelope fa-lg"></i></a>
+            <a class="link"><i class="fa-brands fa-instagram fa-lg"></i></a>
+            <a class="link"><i class="fa-brands fa-twitter fa-lg"></i></a>
+            <a class="link"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+        </div>
+        <p>©XYZ Company | All Rights Reserved.</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="/js/movie-upload.js"></script>
     <script src="/js/navbar.js"></script>
+    <script src="/js/jquery.datatable.min.js"></script>
 </body>
+
 </html>

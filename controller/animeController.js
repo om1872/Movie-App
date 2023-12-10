@@ -4,7 +4,7 @@ const { fetchData } = require('../utils/helper');
 
 const route = Router();
 
-const API_KEY = "REDACTED_TMDB_KEY";
+const API_KEY=process.env.API_KEY;
 
 
 module.exports=route;
