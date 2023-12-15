@@ -1,0 +1,157 @@
+body {
+    position: relative;
+}
+
+.shadow {
+    background-color: rgb(0, 0, 0, 0.7);
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    opacity: 0;
+    z-index: -999999;
+}
+
+.shadow.show {
+    opacity: 1;
+    z-index: 9999;
+}
+
+.login-form,
+.signup-form,.bucket-list {
+    position: fixed;
+    top: 25vh;
+    left:0;
+    right:0;
+    margin-left: auto;
+    margin-right:auto;
+    z-index: -999;
+    opacity: 0;
+    transform: all 0.7s;
+    display: flex;
+    background: #ECE3CE;
+    border-radius: 2rem;
+    border: 5px solid #739072;
+    color: #3A4D39;
+    box-shadow: 0 0 10px rgb(255, 255, 255, 0.4);
+    padding: 1rem;
+}
+
+/* .login-form .login-main{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.login-form .login-main-head{
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+.login-main .login-main-form{
+    display: flex;
+    flex-direction: column;
+} */
+
+.login-form.show {
+    z-index: 99999;
+    opacity: 1;
+}
+
+.signup-form.show {
+    z-index: 99999;
+    opacity: 1;
+}
+
+.bucket-list.show{
+    z-index: 99999;
+    opacity: 1;
+}
+
+.err {
+    color: #DC8686;
+}
+input[type="text"]#bucketName{
+    outline: none;
+    padding:0;
+    font-size: 1rem;
+    border: none;
+    border-bottom: 1px solid #3A4D39;
+    color:#3A4D39;
+    background: none;;
+
+}
+.bucket-head{
+    /* text-decoration: underline; */
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 0.6rem;
+}
+.list-body{
+    overflow: hidden;
+    overflow-y: scroll;
+    height: 40vh;;
+}
+
+.list-body-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid #3A4D39;
+    margin:5% auto;
+    background: rgb(0, 0, 0, 0.1);
+}
+.list-body-item div{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#close,
+#close-signup,#close-list {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+}
+
+
+/* //inside form */
+.row-form {
+    display: flex;
+    margin: 2% 0;
+}
+
+.col-25 {
+    float: left;
+    width: 35%;
+    margin-top: 6px;
+    /* overflow: hidden; */
+}
+
+/* Floating column for inputs: 75% width */
+.col-75 {
+    float: left;
+    width: 65%;
+    margin-top: 6px;
+    /* overflow: hidden; */
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .row-form {
+        flex-direction: column;
+    }
+    
+    .col-25,
+    .col-75,
+    input[type=submit] {
+        width: 100%;
+        margin-top: 0;
+    }
+}

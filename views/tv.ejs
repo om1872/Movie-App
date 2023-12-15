@@ -17,6 +17,7 @@
     <!-- Custom stylesheet -->
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/movie.css">
+    <link rel="stylesheet" href="/css/login.css">
 </head>
 
 <body>
@@ -70,11 +71,34 @@
             <a class="item link">TV Shows</a>
             <a class="item link">Anime</a>
         </div>
-        <div class="navbar-search-item">
+        <div class="navbar-item navbar-search-item">
             <form class="search" action="/api/search">
                 <input class="search-item" type="text" name="query" id="" placeholder="Search Here..."><input
                     class="search-item fa-solid" type="submit" value="&#xf002">
             </form>
+            <% if (user) { %>
+                <div class="item">
+                    <div class="dropdown">
+                        <button class="btn"><img src="/img/icons/ghost.png" class="icon" />
+                            <%= user.name %>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="">My Bucket</a>
+                            <% if (user.admin) { %>
+                                <a href="#" class="link">Statistics</a>
+                                <a href="/api/upload/movieUpload" class="link">Movie Management</a>
+                                <a href="#" class="link">Stream Management</a>
+                            <% } %>
+                            <a href="/api/auth/logout">Log Out</a>
+                        </div>
+                    </div>
+                </div>
+                <% } else { %>
+                    <div class="item"> 
+                        <a class="item link"  id="login">Log In</a>
+                        <button class="btn" id="signup">Sign Up</button>
+                    </div>
+                <% } %>
         </div>
         <div class="navbar-item-mobile" id="ham">
             <div class="navbar-item-m">
@@ -308,7 +332,99 @@
             </div>
         </div>
     </main>
-
+    <div class="login-form" id="" style="width:fit-content;">
+        <div class="login-main">
+            <div class="login-main-head">
+                <h1 style="color:#3A4D39;text-shadow: none;text-align: center;">Login</h1>
+                <a id="close"><i class="fa-solid fa-xmark"></i></a>
+            </div>
+            <form class="login-main-form" name="login-main-form">
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="email">Email:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="email" name="email">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err email-err"></div>
+                </div>
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="password">Password:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="password" name="password">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err pass-err"></div>
+                </div>
+                <div style="text-align: center; margin:5% 0 0">
+                    <button class="btn-rev" type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="signup-form" id="" style="width:fit-content;">
+        <div class="signup-main">
+            <div class="signup-main-head">
+                <h1 style="color:#3A4D39;text-shadow: none; text-align: center;">Register Here</h1>
+                <a id="close-signup"><i class="fa-solid fa-xmark"></i></a>
+            </div>
+            <form class="signup-main-form" name="signup-main-form">
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="">First Name</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" name="first">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err username-err"></div>
+                </div>
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="">Last Name</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" name="last">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err username-err"></div>
+                </div>
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="email">Email:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="email" name="email">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err email-err"></div>
+                </div>
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="password">Password:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="password" name="password">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err pass-err"></div>
+                </div>
+                <div style="text-align: center; margin:5% 0 0">
+                    <button class="btn-rev" type="submit">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="shadow"></div>
     <!-- Footer -->
     <footer>
         <div class="social-links">
@@ -330,6 +446,7 @@
     <script src="/js/navbar.js"></script>
     <script src="/js/video-swap.js"></script>
     <script src="/js/tv.js"></script>
+    <script src="/js/auth.js"></script>
 </body>
 
 </html>

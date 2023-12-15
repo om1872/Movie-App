@@ -1,20 +1,16 @@
 const mongoose=require('mongoose');
-const mongoURI='mongodb://0.0.0.0:27017/movieApp';
+const mongodb=require('mongodb');
 
-module.exports=mongoose.connect(mongoURI).then(()=>{
+// const dbName='movieDatabase';
+// const password='Win8prof%40';  // @ --> %40
+const mongoURI=`mongodb://0.0.0.0:27017/movieDB`;
+
+const conn=mongoose.connect(mongoURI).then(()=>{
     console.log('Connected to DB');
 }).catch((e)=>{
     console.log(e);
 });
 
-// let gfs;
-// conn.once("open",()=>{
-//     //init stream
-//     gfs = new mongoose.mongo.GridFSBucket(conn.db,{
-//         bucketName: "videos"
-//     })
-// });
+const bucket = new mongodb.GridFSBucket(mongoose.connection, { bucketName: 'videos' });
 
-// const storage = new GridFsStorage({
-//     url:mongoURI
-// });
+module.exports={conn,bucket};

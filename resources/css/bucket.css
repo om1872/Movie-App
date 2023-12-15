@@ -1,0 +1,23 @@
+main{
+    padding-top: 100px;
+    margin:0 5%;
+}
+h1{
+    color:#ECE3CE;
+    text-shadow: 0 0 10px rgba(0,0,0,0.9);
+}
+
+.bucket{
+    display: flex;
+    flex-direction: column;
+}
+.bucket-head{
+    display: flex;
+    align-items: center;
+}
+
+.flex-horizontal-between{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

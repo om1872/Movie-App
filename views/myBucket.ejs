@@ -16,27 +16,27 @@
 
     <!-- Custom stylesheet -->
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/dashboard.css">
-    <link rel="stylesheet" href="/css/responsive.css">
     <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/bucket.css">
 </head>
 
 <body>
     <!-- Navbar -->
     <nav class="navbar">
         <div class="item mobile-ham">
-        <a class="hamburger"><i class="fa-solid fa-bars fa-lg"></i></a>
-        <button style="margin-left: 15%;" class="btn"><i class="fa-solid fa-key"></i></button>
-        <div class="item" id="mobile-search-icon"><i class="fa-solid fa-magnifying-glass fa-flip-horizontal"></i></div> 
-        <div class="navbar-item-m" id="mobile-search">
-            <form class="search" action="/api/search">
-                <input class="search-item" type="text" name="query" id="" placeholder="Search Here..."><input
-                    class="search-item fa-solid" type="submit" value="&#xf002">
-            </form>
-        </div>
+            <a class="hamburger"><i class="fa-solid fa-bars fa-lg"></i></a>
+            <button style="margin-left: 15%;" class="btn"><i class="fa-solid fa-key"></i></button>
+            <div class="item" id="mobile-search-icon"><i class="fa-solid fa-magnifying-glass fa-flip-horizontal"></i>
+            </div>
+            <div class="navbar-item-m" id="mobile-search">
+                <form class="search" action="/api/search">
+                    <input class="search-item" type="text" name="query" id="" placeholder="Search Here..."><input
+                        class="search-item fa-solid" type="submit" value="&#xf002">
+                </form>
+            </div>
         </div>
         <a class="title" href="/api/dashboard"><img src="/img/brand-logo.png" alt=""></a>
-        
+
         <div class="navbar-item">
             <a class="item link" href="/">Home</a>
             <ul class="item genre-link">
@@ -45,22 +45,30 @@
                     <div class="dropdown-genre">
                         <div class="arrow"></div>
                         <ul class="genre-item">
-                            <li><p class="h1" style="margin: auto 0.6rem; font-size:1.2rem;">Movie</p></li>
-                        <% movieGenre.genres.forEach(gen => { %>
-                            <li><a href="/api/genre/movie/<%= gen.id %>?name=<%= gen.name %>" class="item"><%= gen.name %></a></li>
-                        <% }) %>
+                            <li>
+                                <p class="h1" style="margin: auto 0.6rem; font-size:1.2rem;">Movie</p>
+                            </li>
+                            <% movieGenre.genres.forEach(gen=> { %>
+                                <li><a href="/api/genre/movie/<%= gen.id %>?name=<%= gen.name %>" class="item">
+                                        <%= gen.name %>
+                                    </a></li>
+                                <% }) %>
                         </ul>
                         <ul class="genre-item">
-                            <li><p class="h1" style="margin: auto 0.6rem; font-size: 1.2rem;">TV</p></li>
-                        <% tvGenre.genres.forEach(gen => { %>
-                            <li><a href="/api/genre/tv/<%= gen.id %>?name=<%= gen.name %>" class="item"><%= gen.name %></a></li>
-                        <% }) %>
+                            <li>
+                                <p class="h1" style="margin: auto 0.6rem; font-size: 1.2rem;">TV</p>
+                            </li>
+                            <% tvGenre.genres.forEach(gen=> { %>
+                                <li><a href="/api/genre/tv/<%= gen.id %>?name=<%= gen.name %>" class="item">
+                                        <%= gen.name %>
+                                    </a></li>
+                                <% }) %>
                         </ul>
                     </div>
                 </li>
-            </ul>   
+            </ul>
             <a class="item link" href="/api/trending">Trending</a>
-            <a class="item link" href="/api/tvShows">TV Shows</a>
+            <a class="item link" href="/api/tvshows">TV Shows</a>
         </div>
         <div class="navbar-item navbar-search-item">
             <form class="search" action="/api/search">
@@ -74,105 +82,91 @@
                             <%= user.name %>
                         </button>
                         <div class="dropdown-content">
-                            <a href="">My Bucket</a>
+                            <a href="/api/bucket/myBucket">My Bucket</a>
                             <% if (user.admin) { %>
                                 <a href="#" class="link">Statistics</a>
                                 <a href="/api/upload/movieUpload" class="link">Movie Management</a>
                                 <a href="#" class="link">Stream Management</a>
-                            <% } %>
-                            <a href="/api/auth/logout">Log Out</a>
+                                <% } %>
+                                    <a href="/api/auth/logout">Log Out</a>
                         </div>
                     </div>
                 </div>
                 <% } else { %>
-                    <div class="item"> 
-                        <a class="item link"  id="login">Log In</a>
+                    <div class="item">
+                        <a class="item link" id="login">Log In</a>
                         <button class="btn" id="signup">Sign Up</button>
                     </div>
-                <% } %>
+                    <% } %>
         </div>
         <div class="navbar-item-mobile" id="ham">
             <div class="navbar-item-m">
                 <a class="item link" href="/">Home</a>
                 <ul class="item genre-link">
                     <li>
-                        <a href="#" class="item" style="margin: 0;">Genre <i class="fa-solid fa-xs fa-caret-down" id="gen-mobile"></i></a>
+                        <a href="#" class="item" style="margin: 0;">Genre <i class="fa-solid fa-xs fa-caret-down"
+                                id="gen-mobile"></i></a>
                         <div class="dropdown-genre">
                             <div class="arrow"></div>
                             <ul class="genre-item">
-                                <li><p class="h1" style="margin: auto 0.6rem; font-size:1.2rem;">Movie</p></li>
-                            <% movieGenre.genres.forEach(gen => { %>
-                                <li><a href="/api/genre/movie/<%= gen.id %>?name=<%= gen.name %>" class="item"><%= gen.name %></a></li>
-                            <% }) %>
+                                <li>
+                                    <p class="h1" style="margin: auto 0.6rem; font-size:1.2rem;">Movie</p>
+                                </li>
+                                <% movieGenre.genres.forEach(gen=> { %>
+                                    <li><a href="/api/genre/movie/<%= gen.id %>?name=<%= gen.name %>" class="item">
+                                            <%= gen.name %>
+                                        </a></li>
+                                    <% }) %>
                             </ul>
                             <ul class="genre-item">
-                                <li><p class="h1" style="margin: auto 0.6rem; font-size: 1.2rem;">TV</p></li>
-                            <% tvGenre.genres.forEach(gen => { %>
-                                <li><a href="/api/genre/tv/<%= gen.id %>?name=<%= gen.name %>" class="item"><%= gen.name %></a></li>
-                            <% }) %>
+                                <li>
+                                    <p class="h1" style="margin: auto 0.6rem; font-size: 1.2rem;">TV</p>
+                                </li>
+                                <% tvGenre.genres.forEach(gen=> { %>
+                                    <li><a href="/api/genre/tv/<%= gen.id %>?name=<%= gen.name %>" class="item">
+                                            <%= gen.name %>
+                                        </a></li>
+                                    <% }) %>
                             </ul>
                         </div>
                     </li>
-                </ul>   
+                </ul>
                 <a class="item link" href="/api/trending">Trending</a>
-                <a class="item link" href="/api/tvShows">TV Shows</a>
+                <a class="item link">TV Shows</a>
             </div>
         </div>
     </nav>
 
-
-    <!-- movie -->
+    <!-- Bucket -->
     <main>
-        <div class="search-row-header">
-            <div>
-                <h1 style="margin-top: 0;">Movies </h1>
-                <h1 class="search-result"> for genre: <%= genre.name %>...</h1>
-            </div>
+        <div class="flex-horizontal-between">
+            <h1>Add Bucket</h1>
+            <form method="POST" action="/api/bucket/createBucket">
+                <input type="text" name="bucketName" placeholder="Bucket Name...">
+                <button type="submit" class="btn"><i class="fa-solid fa-plus"></i> New Bucket</button>
+            </form>
         </div>
-        <div class="search-row">
-            <% if (results.results.length) { %>
-                <% results.results.forEach((movie,index)=> { %>
-                    <% if ( movie.poster_path) { %>
-                        <div class="movie">
-                        <a href="/api/movie/<%= movie.id %>" id="<%= movie.id %>">
-                            <% if (movie.poster_path) { %><img
-                                    src="http://image.tmdb.org/t/p/w300<%= movie.poster_path %>"
-                                    alt="<%= movie.title %>" />
-                            <% } else { %><img src="/img/pos_thumbnail.png" alt="<%= movie.title %>" />
-                            <% } %>
-                        </a>
-                        <a href="/api/movie/<%= movie.id %>" id="<%= movie.id %>" class="movie-title">
-                            <% if (movie.title) { %>
-                                <%= movie.title %>
-                            <% } else { %>
-                                 <%= movie.name %>
-                            <% } %>
-                        </a>
-                       
-                        <% } %>
-                        </div>
-                    <% }) %>
-                <% }  else { %>
-                        <div class="movie-title"><h4>Nothing found...</h4></div>
-                <% } %>
+        <h1>My Buckets</h1>
+        <div class="mybucket">
+            <% bucket.forEach(bucket=> { %>
+                <div class="lazy-loading" id="<%= bucket._id %>" class="bucket">
+                    <div class="bucket-head">
+                        <h2>
+                            <%= bucket.bucketName %>
+                        </h2>
+                        <span>
+                            <%= bucket.itemCount %>
+                        </span>
+                    </div>
+                    <div class="bucket-body"></div>
+                </div>
+                <% }) %>
         </div>
 
-        <!-- pagination -->
-        <div class="pages">
-            <% if (results.page===1) { %>
-                <a class="btn disabled" disabled id="prev"><i class="fa-solid fa-arrow-left"></i> Prev</a>
-            <% } else { %>
-                <a class="btn" id="prev" href="/api/genre/movie/<%= genre.id  %>/<%= results.page - 1 %>?name=<%= genre.name %>"><i class="fa-solid fa-arrow-left"></i> Prev</a>
-            <% } %>
-            <a class="page-info"><%= results.page %> / <%= results.total_pages %></a>
-            <% if (results.page===results.total_pages) { %>
-                <a class="btn disabled" disabled id="next"><i class="fa-solid fa-arrow-right"></i> Next</a>
-            <% } else { %>
-                <a class="btn" id="next" href="/api/genre/movie/<%= genre.id  %>/<%= results.page + 1 %>?name=<%= genre.name %>"><i class="fa-solid fa-arrow-right"></i> Next</a>
-            <% } %>
-        </div>
     </main>
-    <div class="login-form" style="width:fit-content;">
+
+    <!-- login form -->
+    <div class="login-form" id="" style="width:fit-content;">
         <div class="login-main">
             <div class="login-main-head">
                 <h1 style="color:#3A4D39;text-shadow: none;text-align: center;">Login</h1>
@@ -207,7 +201,8 @@
             </form>
         </div>
     </div>
-    <div class="signup-form"  style="width:fit-content;">
+    <!-- signup form -->
+    <div class="signup-form" id="" style="width:fit-content;">
         <div class="signup-main">
             <div class="signup-main-head">
                 <h1 style="color:#3A4D39;text-shadow: none; text-align: center;">Register Here</h1>
@@ -265,6 +260,7 @@
         </div>
     </div>
     <div class="shadow"></div>
+
     <!-- Footer -->
     <footer>
         <div class="social-links">
@@ -276,7 +272,6 @@
         <p>©XYZ Company | All Rights Reserved.</p>
     </footer>
 
-    <!-- external js files -->
     <script src="/js/navbar.js"></script>
     <script src="/js/auth.js"></script>
 </body>
