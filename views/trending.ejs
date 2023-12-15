@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/dashboard.css">
     <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="/css/login.css">
 </head>
 
 <body>
@@ -58,15 +59,37 @@
                     </div>
                 </li>
             </ul>   
-            <a class="item link">Trending</a>
-            <a class="item link">TV Shows</a>
-            <a class="item link">Anime</a>
+            <a class="item link" href="/api/trending">Trending</a>
+            <a class="item link" href="/api/tvShows">TV Shows</a>
         </div>
-        <div class="navbar-search-item">
+        <div class="navbar-item navbar-search-item">
             <form class="search" action="/api/search">
                 <input class="search-item" type="text" name="query" id="" placeholder="Search Here..."><input
                     class="search-item fa-solid" type="submit" value="&#xf002">
             </form>
+            <% if (user) { %>
+                <div class="item">
+                    <div class="dropdown">
+                        <button class="btn"><img src="/img/icons/ghost.png" class="icon" />
+                            <%= user.name %>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="">My Bucket</a>
+                            <% if (user.admin) { %>
+                                <a href="#" class="link">Statistics</a>
+                                <a href="/api/upload/movieUpload" class="link">Movie Management</a>
+                                <a href="#" class="link">Stream Management</a>
+                            <% } %>
+                            <a href="/api/auth/logout">Log Out</a>
+                        </div>
+                    </div>
+                </div>
+                <% } else { %>
+                    <div class="item"> 
+                        <a class="item link"  id="login">Log In</a>
+                        <button class="btn" id="signup">Sign Up</button>
+                    </div>
+                <% } %>
         </div>
         <div class="navbar-item-mobile" id="ham">
             <div class="navbar-item-m">
@@ -91,83 +114,50 @@
                         </div>
                     </li>
                 </ul>   
-                <a class="item link">Trending</a>
-                <a class="item link">TV Shows</a>
-                <a class="item link">Anime</a>
+                <a class="item link" href="/api/trending">Trending</a>
+                <a class="item link" href="/api/tvShows">TV Shows</a>
             </div>
         </div>
     </nav>
 
+    <div class="side-nav">
+        <div class="side-item open-side">
+            <div class="right" style="width: 100%;">
+                <i class="fa-solid fa-angles-right"></i>
+            </div>
+            <div class="left" style="width: 100%;">
+                <i class="fa-solid fa-angles-left"></i>
+            </div>
+        </div>
+        <div class="side-item option selected" data-key="movie"> 
+            <div class="side-icon">
+                <i class="fa-solid fa-clapperboard"></i>
+            </div>
+            <div class="side-full">
+                Movie
+            </div>
+        </div>
+        <div class="side-item option" data-key="tv">
+            <div class="side-icon">
+                <i class="fa-solid fa-tv"></i>
+            </div>
+            <div class="side-full">
+                TV
+            </div>
+        </div>
+    </div>
 
     <!-- movie -->
-    <main>
+    <main class="trending" id="trending-movie">
         <div class="search-row-header">
             <div>
-                <h1 style="margin-top: 0;">Search Result </h1>
-                <h1 class="search-result"> for <%= query %>...</h1>
+                <h1 style="margin-top: 0;">Trending Movies</h1>
             </div>
-            <form action="/api/search/filter" class="search-result filter h1">
-                <label for="genre">Type</label>
-                <select name="type" id="type" class="btn">
-                    <option value="">Select</option>
-                    <% if (filter && filter.type==='movie') { %>
-                    <option value="movie" selected>Movie</option><% } else { %>
-                    <option value="movie" >Movie</option>
-                    <% } %>
-                    <% if (filter && filter.type==='tv') { %>
-                        <option value="tv" selected>TV</option><% } else { %>
-                        <option value="tv">TV</option>
-                        <% } %>
-                </select>
-                <label for="sort">Sort By <i class="fa-solid fa-sort fa-2xs"></i></label>
-                <select name="sort" id="" class="btn">
-                    <% if (filter && filter.sort==='popularity.desc') { %>
-                    <option value="popularity.desc">Most Popular</option><% } else { %>
-                    <option value="popularity.desc">Most Popular</option>
-                    <% } %>
-                    <% if (filter && filter.sort==='primary_release_date.desc') { %>
-                    <option value="primary_release_date.desc" selected>Latest</option><% } else { %>
-                    <option value="primary_release_date.desc">Latest</option>
-                    <% } %>
-                    <% if (filter && filter.sort==='vote_average.desc') { %>
-                    <option value="vote_average.desc" selected>Rating</option><% } else { %> 
-                    <option value="vote_average.desc">Rating</option>
-                    <% } %>
-                </select>
-                <label for="language">Language</label>
-                <select name="language" id="" class="btn">
-                    <option value="xx">Any</option>
-                    <option value="en">English</option>
-                    <option value="hi">Hindi</option>
-                    <option value="fr">French</option>
-                    <option value="ja">Japanese</option>
-                    <option value="ar">Arabic</option>
-                    <option value="it">Italian</option>
-                    <option value="nl">Dutch</option>
-                    <option value="ru">Russian</option>
-                </select>
-                <label for="adult">Adult</label>
-                <select name="adult" id="" class="btn">
-                    <% if (filter && filter.adult==='true') { %>
-                    <option value="true" selected>Include</option><% } else { %> 
-                    <option value="true">Include</option>
-                    <% } %>
-                    <% if (filter && filter.adult==='false') { %>
-                    <option value="false" selected>Exclude</option><% } else { %> 
-                    <option value="false">Exclude</option>
-                    <% } %>
-                </select>
-                <input name="query" value="<%= query %>" hidden></input>
-                <button type="submit" class="btn"><i class="fa-solid fa-filter"></i> Filter</button>
-                <button type="reset" class="btn"><i class="fa-solid fa-arrows-rotate"></i> Reset</button>
-            </form>
         </div>
         <div class="search-row">
-            <% if (results.results.length) { %>
-                <% results.results.forEach((movie,index)=> { %>
-                    <% if ((movie.media_type==='movie' || movie.media_type==='tv' ) && movie.poster_path) { %>
+            <% if (movie.results.length) { %>
+                <% movie.results.forEach((movie,index)=> { %>
                         <div class="movie">
-                    <% if (movie.media_type==='movie' ) { %>
                         <a href="/api/movie/<%= movie.id %>" id="<%= movie.id %>">
                             <% if (movie.poster_path) { %><img
                                     src="http://image.tmdb.org/t/p/w300<%= movie.poster_path %>"
@@ -182,46 +172,166 @@
                                  <%= movie.name %>
                             <% } %>
                         </a>
-                        <% } else if (movie.media_type==='tv' ) { %>
-                            <a href="/api/tv/<%= movie.id %>" id="<%= movie.id %>">
-                                <% if (movie.poster_path) { %><img
-                                        src="http://image.tmdb.org/t/p/w300<%= movie.poster_path %>"
-                                        alt="<%= movie.name %>" />
-                                <% } else { %><img src="/img/pos_thumbnail.png" alt="<%= movie.name %>" />
-                                <% } %>
-                            </a>
-                            <a href="/api/tv/<%= movie.id %>" id="<%= movie.id %>" class="movie-title">
-                                <% if (movie.name) { %>
-                                    <%= movie.name %>
-                                <% } else { %>
-                                    <%= movie.name %>
-                                <% } %>
-                            </a>
-                        <% } %>
                         </div>
-                    <% } %>
                 <% }) %>
-                <% } else { %>
-                        <div class="movie-title"><h4>Nothing found...</h4></div>
-                <% } %>
+            <% } else { %>
+                <div class="movie-title"><h4>Nothing found...</h4></div>
+            <% } %>
         </div>
 
         <!-- pagination -->
         <div class="pages">
-            <% if (results.page===1) { %>
+            <% if (movie.page===1) { %>
                 <button class="btn disabled" disabled id="prev"><i class="fa-solid fa-arrow-left"></i> Prev</button>
             <% } else { %>
                 <button class="btn" id="prev"><i class="fa-solid fa-arrow-left"></i> Prev</button>
             <% } %>
-            <a class="page-info"><%= results.page %> / <%= results.total_pages %></a>
-            <% if (results.page===results.total_pages) { %>
+            <a class="page-info"><%= movie.page %> / <%= movie.total_pages %></a>
+            <% if (movie.page===movie.total_pages) { %>
                 <button class="btn disabled" disabled id="next"><i class="fa-solid fa-arrow-right"></i> Next</button>
             <% } else { %>
                 <button class="btn" id="next"><i class="fa-solid fa-arrow-right"></i> Next</button>
             <% } %>
         </div>
     </main>
+    
+    <!-- tv -->
+    <main class="trending hidden" id="trending-tv">
+        <div class="search-row-header">
+            <div>
+                <h1 style="margin-top: 0;">Trending TV Shows</h1>
+            </div>
+        </div>
+        <div class="search-row" id="trending-tv">
+            <% if (tv.results.length) { %>
+                <% tv.results.forEach((tv,index)=> { %>
+                        <div class="movie hidden">
+                        <a href="/api/tv/<%= tv.id %>" id="<%= tv.id %>">
+                            <% if (tv.poster_path) { %><img
+                                    src="http://image.tmdb.org/t/p/w300<%= tv.poster_path %>"
+                                    alt="<%= movie.title %>" />
+                            <% } else { %><img src="/img/pos_thumbnail.png" alt="<%= tv.name %>" />
+                            <% } %>
+                        </a>
+                        <a href="/api/tv/<%= tv.id %>" id="<%= tv.id %>" class="movie-title"><%= tv.name %></a>
+                        </div>
+                <% }) %>
+            <% } else { %>
+                <div class="movie-title"><h4>Nothing found...</h4></div>
+            <% } %>
+        </div>
 
+        <!-- pagination -->
+        <div class="pages">
+            <% if (tv.page===1) { %>
+                <button class="btn disabled" disabled id="prev"><i class="fa-solid fa-arrow-left"></i> Prev</button>
+            <% } else { %>
+                <button class="btn" id="prev"><i class="fa-solid fa-arrow-left"></i> Prev</button>
+            <% } %>
+            <a class="page-info"><%= tv.page %> / <%= tv.total_pages %></a>
+            <% if (tv.page===tv.total_pages) { %>
+                <button class="btn disabled" disabled id="next"><i class="fa-solid fa-arrow-right"></i> Next</button>
+            <% } else { %>
+                <button class="btn" id="next"><i class="fa-solid fa-arrow-right"></i> Next</button>
+            <% } %>
+        </div>
+    </main>
+    
+
+    
+    <div class="login-form" id="" style="width:fit-content;">
+        <div class="login-main">
+            <div class="login-main-head">
+                <h1 style="color:#3A4D39;text-shadow: none;text-align: center;">Login</h1>
+                <a id="close"><i class="fa-solid fa-xmark"></i></a>
+            </div>
+            <form class="login-main-form" name="login-main-form">
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="email">Email:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="email" name="email">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err email-err"></div>
+                </div>
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="password">Password:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="password" name="password">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err pass-err"></div>
+                </div>
+                <div style="text-align: center; margin:5% 0 0">
+                    <button class="btn-rev" type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="signup-form" id="" style="width:fit-content;">
+        <div class="signup-main">
+            <div class="signup-main-head">
+                <h1 style="color:#3A4D39;text-shadow: none; text-align: center;">Register Here</h1>
+                <a id="close-signup"><i class="fa-solid fa-xmark"></i></a>
+            </div>
+            <form class="signup-main-form" name="signup-main-form">
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="">First Name</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" name="first">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err username-err"></div>
+                </div>
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="">Last Name</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" name="last">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err username-err"></div>
+                </div>
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="email">Email:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="email" name="email">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err email-err"></div>
+                </div>
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="password">Password:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="password" name="password">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err pass-err"></div>
+                </div>
+                <div style="text-align: center; margin:5% 0 0">
+                    <button class="btn-rev" type="submit">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="shadow"></div>
     <!-- Footer -->
     <footer>
         <div class="social-links">
@@ -235,35 +345,19 @@
 
     <!-- exporting ejs model values for external js files -->
 
-    <!-- search query -->
-    <span id="query" hidden>
-        <%= JSON.stringify(query) %>
-    </span>
-
-    <span id="search-type" hidden> <%= JSON.stringify(search_type) %></span>
-    <span id="filter" hidden><%= JSON.stringify(filter) %></span>
-
-    <!-- genres -->
-    <% if (tvGenre) { %>
-    <span id="tv-genre" hidden>
-        <%= JSON.stringify(tvGenre) %>
-    </span>
-    <% } %>
-    <% if (movieGenre) { %>
-        <span id="movie-genre" hidden><%= JSON.stringify(movieGenre) %></span>
-    <% } %>
     <!-- pages -->
     <span id="page-num" hidden>
-        <%= JSON.stringify(results.page) %>
+        <%= JSON.stringify(movie.page) %>
     </span>
     <span id="lastpage" hidden>
-        <%= JSON.stringify(results.total_pages) %>
+        <%= JSON.stringify(movie.total_pages) %>
     </span>
 
     <!-- external js files -->
-    <script src="/js/search.js"></script>
-    <script src="/js/pagination.js"></script>
+    <!-- <script src="/js/pagination.js"></script> -->
+    <script src="/js/side-navbar.js"></script>
     <script src="/js/navbar.js"></script>
+    <script src="/js/auth.js"></script>
 </body>
 
 </html>
