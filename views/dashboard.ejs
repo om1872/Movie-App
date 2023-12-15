@@ -17,24 +17,26 @@
     <!-- Custom stylesheet -->
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/login.css">
 </head>
 
 <body>
     <!-- Navbar -->
     <nav class="navbar">
         <div class="item mobile-ham">
-        <a class="hamburger"><i class="fa-solid fa-bars fa-lg"></i></a>
-        <button style="margin-left: 15%;" class="btn"><i class="fa-solid fa-key"></i></button>
-        <div class="item" id="mobile-search-icon"><i class="fa-solid fa-magnifying-glass fa-flip-horizontal"></i></div> 
-        <div class="navbar-item-m" id="mobile-search">
-            <form class="search" action="/api/search">
-                <input class="search-item" type="text" name="query" id="" placeholder="Search Here..."><input
-                    class="search-item fa-solid" type="submit" value="&#xf002">
-            </form>
-        </div>
+            <a class="hamburger"><i class="fa-solid fa-bars fa-lg"></i></a>
+            <button style="margin-left: 15%;" class="btn"><i class="fa-solid fa-key"></i></button>
+            <div class="item" id="mobile-search-icon"><i class="fa-solid fa-magnifying-glass fa-flip-horizontal"></i>
+            </div>
+            <div class="navbar-item-m" id="mobile-search">
+                <form class="search" action="/api/search">
+                    <input class="search-item" type="text" name="query" placeholder="Search Here..."><input
+                        class="search-item fa-solid" type="submit" value="&#xf002">
+                </form>
+            </div>
         </div>
         <a class="title" href="/api/dashboard"><img src="/img/brand-logo.png" alt=""></a>
-        
+
         <div class="navbar-item">
             <a class="item link" href="/">Home</a>
             <ul class="item genre-link">
@@ -43,27 +45,34 @@
                     <div class="dropdown-genre">
                         <div class="arrow"></div>
                         <ul class="genre-item">
-                            <li><p class="h1" style="margin: auto 0.6rem; font-size:1.2rem;">Movie</p></li>
-                        <% movieGenre.genres.forEach(gen => { %>
-                            <li><a href="/api/genre/movie/<%= gen.id %>?name=<%= gen.name %>" class="item"><%= gen.name %></a></li>
-                        <% }) %>
+                            <li>
+                                <p class="h1" style="margin: auto 0.6rem; font-size:1.2rem;">Movie</p>
+                            </li>
+                            <% movieGenre.genres.forEach(gen=> { %>
+                                <li><a href="/api/genre/movie/<%= gen.id %>?name=<%= gen.name %>" class="item">
+                                        <%= gen.name %>
+                                    </a></li>
+                                <% }) %>
                         </ul>
                         <ul class="genre-item">
-                            <li><p class="h1" style="margin: auto 0.6rem; font-size: 1.2rem;">TV</p></li>
-                        <% tvGenre.genres.forEach(gen => { %>
-                            <li><a href="/api/genre/tv/<%= gen.id %>?name=<%= gen.name %>" class="item"><%= gen.name %></a></li>
-                        <% }) %>
+                            <li>
+                                <p class="h1" style="margin: auto 0.6rem; font-size: 1.2rem;">TV</p>
+                            </li>
+                            <% tvGenre.genres.forEach(gen=> { %>
+                                <li><a href="/api/genre/tv/<%= gen.id %>?name=<%= gen.name %>" class="item">
+                                        <%= gen.name %>
+                                    </a></li>
+                                <% }) %>
                         </ul>
                     </div>
                 </li>
-            </ul>   
-            <a class="item link">Trending</a>
-            <a class="item link">TV Shows</a>
-            <a class="item link">Anime</a>
+            </ul>
+            <a class="item link" href="/api/trending">Trending</a>
+            <a class="item link" href="/api/tvshows">TV Shows</a>
         </div>
         <div class="navbar-item navbar-search-item">
             <form class="search" action="/api/search">
-                <input class="search-item" type="text" name="query" id="" placeholder="Search Here..."><input
+                <input class="search-item" type="text" name="query" placeholder="Search Here..."><input
                     class="search-item fa-solid" type="submit" value="&#xf002">
             </form>
             <% if (user) { %>
@@ -73,49 +82,57 @@
                             <%= user.name %>
                         </button>
                         <div class="dropdown-content">
-                            <a href="">My Bucket</a>
+                            <a href="/api/bucket/myBucket">My Bucket</a>
                             <% if (user.admin) { %>
                                 <a href="#" class="link">Statistics</a>
                                 <a href="/api/upload/movieUpload" class="link">Movie Management</a>
                                 <a href="#" class="link">Stream Management</a>
-                            <% } %>
-                            <a href="/api/auth/logout">Log Out</a>
+                                <% } %>
+                                    <a href="/api/auth/logout">Log Out</a>
                         </div>
                     </div>
                 </div>
                 <% } else { %>
-                    <div class="navbar-last"> 
-                        <a class="item link"  id="login">Log In</a>
+                    <div class="item">
+                        <a class="item link" id="login">Log In</a>
                         <button class="btn" id="signup">Sign Up</button>
                     </div>
-                <% } %>    
+                    <% } %>
         </div>
         <div class="navbar-item-mobile" id="ham">
             <div class="navbar-item-m">
                 <a class="item link" href="/">Home</a>
                 <ul class="item genre-link">
                     <li>
-                        <a href="#" class="item" style="margin: 0;">Genre <i class="fa-solid fa-xs fa-caret-down" id="gen-mobile"></i></a>
+                        <a href="#" class="item" style="margin: 0;">Genre <i class="fa-solid fa-xs fa-caret-down"
+                                id="gen-mobile"></i></a>
                         <div class="dropdown-genre">
                             <div class="arrow"></div>
                             <ul class="genre-item">
-                                <li><p class="h1" style="margin: auto 0.6rem; font-size:1.2rem;">Movie</p></li>
-                            <% movieGenre.genres.forEach(gen => { %>
-                                <li><a href="/api/genre/movie/<%= gen.id %>?name=<%= gen.name %>" class="item"><%= gen.name %></a></li>
-                            <% }) %>
+                                <li>
+                                    <p class="h1" style="margin: auto 0.6rem; font-size:1.2rem;">Movie</p>
+                                </li>
+                                <% movieGenre.genres.forEach(gen=> { %>
+                                    <li><a href="/api/genre/movie/<%= gen.id %>?name=<%= gen.name %>" class="item">
+                                            <%= gen.name %>
+                                        </a></li>
+                                    <% }) %>
                             </ul>
                             <ul class="genre-item">
-                                <li><p class="h1" style="margin: auto 0.6rem; font-size: 1.2rem;">TV</p></li>
-                            <% tvGenre.genres.forEach(gen => { %>
-                                <li><a href="/api/genre/tv/<%= gen.id %>?name=<%= gen.name %>" class="item"><%= gen.name %></a></li>
-                            <% }) %>
+                                <li>
+                                    <p class="h1" style="margin: auto 0.6rem; font-size: 1.2rem;">TV</p>
+                                </li>
+                                <% tvGenre.genres.forEach(gen=> { %>
+                                    <li><a href="/api/genre/tv/<%= gen.id %>?name=<%= gen.name %>" class="item">
+                                            <%= gen.name %>
+                                        </a></li>
+                                    <% }) %>
                             </ul>
                         </div>
                     </li>
-                </ul>   
-                <a class="item link">Trending</a>
+                </ul>
+                <a class="item link" href="/api/trending">Trending</a>
                 <a class="item link">TV Shows</a>
-                <a class="item link">Anime</a>
             </div>
         </div>
     </nav>
@@ -127,17 +144,19 @@
             <div class="row hidden-scrollbar">
                 <% popular.forEach(movie=> { %>
                     <div class="movie">
-                        <a href="movie/<%= movie.id %>" id="<%= movie.id %>"><% if (movie.src) { %>
-                            <img src="<%= movie.src %>" alt="<%= movie.title %>" />
-                            <% } else { %>
-                                <img src="/img/pos_thumbnail.png" alt="<%= movie.title %>" />
-                            <% } %>
+                        <a href="movie/<%= movie.id %>" id="<%= movie.id %>">
+                            <% if (movie.src) { %>
+                                <img src="<%= movie.src %>" alt="<%= movie.title %>" />
+                                <% } else { %>
+                                    <img src="/img/pos_thumbnail.png" alt="<%= movie.title %>" />
+                                    <% } %>
                         </a>
                         <a href="movie/<%= movie.id %>" class="movie-title">
                             <%= movie.title %>
                         </a>
+                        <a class="bucket-add" id="<%= movie.id %>"> <i class="fa-solid fa-circle-plus"></i></a>
                     </div>
-                    <% }) %>  
+                    <% }) %>
             </div>
         </div>
 
@@ -146,13 +165,17 @@
             <div class="row hidden-scrollbar">
                 <% topRated.forEach(movie=> { %>
                     <div class="movie">
-                        <a href="movie/<%= movie.id %>" id="<%= movie.id %>"><% if (movie.src) { %>
-                            <img src="<%= movie.src %>" alt="<%= movie.title %>" />
-                            <% } else { %>
-                                <img src="/img/pos_thumbnail.png" alt="<%= movie.title %>" />
-                            <% } %>
+                        <a href="movie/<%= movie.id %>" id="<%= movie.id %>">
+                            <% if (movie.src) { %>
+                                <img src="<%= movie.src %>" alt="<%= movie.title %>" />
+                                <% } else { %>
+                                    <img src="/img/pos_thumbnail.png" alt="<%= movie.title %>" />
+                                    <% } %>
                         </a>
-                        <a href="movie/<%= movie.id %>" id="<%= movie.id %>" class="movie-title"><%= movie.title %></a>
+                        <a href="movie/<%= movie.id %>" id="<%= movie.id %>" class="movie-title">
+                            <%= movie.title %>
+                        </a>
+                        <a class="bucket-add" id="<%= movie.id %>"><i class="fa-solid fa-circle-plus"></i></a>
                     </div>
                     <% }) %>
             </div>
@@ -162,20 +185,139 @@
             <div class="row hidden-scrollbar">
                 <% tvShows.forEach(movie=> { %>
                     <div class="movie">
-                        <a href="tv/<%= movie.id %>" id="<%= movie.id %>"><% if (movie.src) { %>
-                            <img src="<%= movie.src %>" alt="<%= movie.title %>" />
-                            <% } else { %>
-                                <img src="/img/pos_thumbnail.png" alt="<%= movie.title %>" />
-                            <% } %>
+                        <a href="tv/<%= movie.id %>" id="<%= movie.id %>">
+                            <% if (movie.src) { %>
+                                <img src="<%= movie.src %>" alt="<%= movie.title %>" />
+                                <% } else { %>
+                                    <img src="/img/pos_thumbnail.png" alt="<%= movie.title %>" />
+                                    <% } %>
                         </a>
                         <a href="tv/<%= movie.id %>" id="<%= movie.id %>" class="movie-title">
                             <%= movie.title %>
                         </a>
+                        <a class="bucket-add" id="<%= movie.id %>" t><i class="fa-solid fa-circle-plus"></i></a>
                     </div>
                     <% }) %>
             </div>
         </div>
     </main>
+    <div class="login-form" style="width:fit-content;">
+        <div class="login-main">
+            <div class="login-main-head">
+                <h1 style="color:#3A4D39;text-shadow: none;text-align: center;">Login</h1>
+                <a id="close"><i class="fa-solid fa-xmark"></i></a>
+            </div>
+            <form class="login-main-form" name="login-main-form">
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="email">Email:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="email" name="email">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err email-err"></div>
+                </div>
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="password">Password:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="password" name="password">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err pass-err"></div>
+                </div>
+                <div style="text-align: center; margin:5% 0 0">
+                    <button class="btn-rev" type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="signup-form" style="width:fit-content;">
+        <div class="signup-main">
+            <div class="signup-main-head">
+                <h1 style="color:#3A4D39;text-shadow: none; text-align: center;">Register Here</h1>
+                <a id="close-signup"><i class="fa-solid fa-xmark"></i></a>
+            </div>
+            <form class="signup-main-form" name="signup-main-form">
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="">First Name</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" name="first">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err username-err"></div>
+                </div>
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="">Last Name</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" name="last">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err username-err"></div>
+                </div>
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="email">Email:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="email" name="email">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err email-err"></div>
+                </div>
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="password">Password:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="password" name="password">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err pass-err"></div>
+                </div>
+                <div style="text-align: center; margin:5% 0 0">
+                    <button class="btn-rev" type="submit">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="bucket-list" style="width:fit-content;">
+        <div class="login-main">
+            <div class="login-head">
+                <!-- <h1 style="color:#3A4D39;text-shadow: none; text-align: center;">Bucket List</h1> -->
+                <a id="close-list"><i class="fa-solid fa-xmark"></i></a>
+            </div>
+            
+            <% if (user) { %>
+                <div class="list-footer">
+                    <div class="flex-horizontal-between">
+                        <div class="bucket-head">Add Bucket</div>
+                        <form method="POST" action="#" name="createBucket">
+                            <input type="text" name="bucketName" id="bucketName" placeholder="Bucket Name...">
+                            <button type="submit" class="btn-rev"><i class="fa-solid fa-plus"></i> New Bucket</button>
+                        </form>
+                    </div>
+                </div>
+                <hr class="three-dots">
+            <% } %>
+            <div class="list-body">
+               
+            </div>
+        </div>
+    </div>
+    <div class="shadow"></div>
 
     <!-- Footer -->
     <footer>
@@ -187,7 +329,11 @@
         </div>
         <p>©XYZ Company | All Rights Reserved.</p>
     </footer>
+    <!-- //userid -->
+    <span id="userId" hidden><%= JSON.stringify(user) %></span>
     <script src="/js/navbar.js"></script>
+    <script src="/js/bucket.js"></script>
+    <script src="/js/auth.js"></script>
 </body>
 
 </html>

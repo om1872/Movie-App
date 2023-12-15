@@ -10,7 +10,6 @@ const handleErrors = (err) => {
         errors.email = 'Email already registered';
         return errors;
     }
-    console.log(err.message)
     // bad email or password during login
     if (err.message === 'Incorrect Email') {
         errors.email = 'Email not registered';

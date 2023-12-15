@@ -58,12 +58,11 @@
             </ul>
             <a class="item link" href="/api/trending">Trending</a>
             <a class="item link" href="/api/tvshows">TV Shows</a>
-            <a class="item link" href="/api/anime">Anime</a>
         </div>
         <% if (user) { %>
             <div class="navbar-last item">
                 <div class="dropdown">
-                    <button class="btn"><img src="/img/icons/ghost.png" class="icon" />
+                    <button class="btn"><img src="/img/icons/ghost.gif" class="icon" />
                         <%= user.name %>
                     </button>
                     <div class="dropdown-content">
@@ -72,17 +71,17 @@
                             <a href="#" class="link">Statistics</a>
                             <a href="/api/upload/movieUpload" class="link">Movie Management</a>
                             <a href="#" class="link">Stream Management</a>
-                        <% } %>
-                        <a href="/api/auth/logout">Log Out</a>
+                            <% } %>
+                                <a href="/api/auth/logout">Log Out</a>
                     </div>
                 </div>
             </div>
             <% } else { %>
-                <div class="navbar-last"> 
-                    <a class="item link"  id="login">Log In</a>
+                <div class="navbar-last">
+                    <a class="item link" id="login">Log In</a>
                     <button class="btn" id="signup">Sign Up</button>
                 </div>
-            <% } %>
+                <% } %>
 
     </nav>
 
@@ -101,7 +100,7 @@
                         type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
                 <div class="info">Welcome to Home Cinema, here you can explore all latest movies, animes, tv shows and
-                    can watch it which are actually free on internet. No pirated content here!!!...</div>
+                    can watch it here. Some of these are managed on server and some are of 3rd party sources <i class="fa-solid fa-face-smile"></i></div>
             </div>
 
         </div>
@@ -113,13 +112,28 @@
                 <a id="close"><i class="fa-solid fa-xmark"></i></a>
             </div>
             <form class="login-main-form" name="login-main-form">
-                <label for="email">Email:</label></th>
-                <input type="email" name="email">
-                <div class="err email-err"></div>
-                <label for="password">Password:</label>
-                <input type="password" name="password">
-                <div class="err pass-err"></div>
-                </td>
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="email">Email:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="email" name="email">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err email-err"></div>
+                </div>
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="password">Password:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="password" name="password">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err pass-err"></div>
+                </div>
                 <div style="text-align: center; margin:5% 0 0">
                     <button class="btn-rev" type="submit">Login</button>
                 </div>
@@ -133,19 +147,52 @@
                 <a id="close-signup"><i class="fa-solid fa-xmark"></i></a>
             </div>
             <form class="signup-main-form" name="signup-main-form">
-                <label for="">First Name</label>
-                <input type="text" name="first">
-                <label for="">Last Name</label>
-                <input type="text" name="last">
-                <label for="email">Email:</label></th>
-                <input type="email" name="email">
-                <div class="err email-err"></div>
-                <label for="password">Password:</label>
-                <input type="password" name="password">
-                <div class="err pass-err"></div>
-                </td>
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="">First Name</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" name="first">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err username-err"></div>
+                </div>
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="">Last Name</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" name="last">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err username-err"></div>
+                </div>
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="email">Email:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="email" name="email">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err email-err"></div>
+                </div>
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="password">Password:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="password" name="password">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err pass-err"></div>
+                </div>
                 <div style="text-align: center; margin:5% 0 0">
-                    <button class="btn-rev" type="submit">Login</button>
+                    <button class="btn-rev" type="submit">Register</button>
                 </div>
             </form>
         </div>

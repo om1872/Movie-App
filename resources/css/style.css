@@ -15,6 +15,7 @@ body {
 main{
     padding-top: 80px;
     flex:1;
+    transition: all 0.7s;
 }
 section {
     
@@ -64,6 +65,7 @@ footer {
     background: #3A4D39;
     padding: 1rem;
     border-bottom: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.7);
     flex-wrap: wrap;
     z-index: 999;
 }
@@ -100,6 +102,52 @@ ul.item{
 
 .item li{
     list-style: none;
+}
+
+/* side navbar */
+.side-nav{
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.7);
+    display: flex;
+    max-width: 10vw;
+    flex-direction: column;
+    background-color: #4F6F52;
+    position: fixed;
+    top:90px;
+    height: 100%;
+}
+.side-item{
+    /* background: #4F6F52; */
+    padding:1.5rem;
+    text-align: center;
+    color:#ECE3CE;
+    display: flex;
+    /* border-bottom: 1px solid #3A4D39; */
+}
+.side-item.selected{
+    background: #D6C7AE;
+    color:#3A4D39;
+}
+.side-full{
+    display: none;
+    margin-left:8%;
+}
+.side-item:hover{
+    cursor: pointer;
+    color:#B0A695;
+}
+.side-item.selected:hover{
+    color:#4F6F52;
+}
+.left{
+    display: none;
+}
+.trending{
+    margin-left: 7vw; 
+}
+.trending.hidden{
+    position: absolute;
+    z-index: -999;
+    opacity: 0;
 }
 
 /* navbar user dropdown */
@@ -365,6 +413,32 @@ ul.item{
     display: none;
 }
 
+/* add bucket */
+.movie{
+    position: relative;
+}
+.bucket-add{
+    position: absolute;
+    top:1.5%;
+    right: 2.5%;
+    font-size: large;
+    color:#B0A695;
+    transition: all 1;
+}
+.bucket-add:hover{
+    transform: scale(1.2);
+    color: #776B5D;
+}
+.bucket-add i{
+    text-shadow:inset 0 0 25px rgba(0, 0, 0, 0.7);
+}
+.three-dots{
+    border: none;
+    border-bottom:7px dotted;
+    max-width: 15%;
+    margin:7% auto;
+}
+
 @media only screen and (max-width:600px) {
     .mobile-ham{
         display: flex;
@@ -397,5 +471,37 @@ ul.item{
     }
     .dropdown-genre{
         transform: translateX(70px) translateY(-30px);
+    }
+    .side-nav{
+        flex-direction: row;
+        bottom:0;
+        top:auto;
+        min-width: 100vw;
+        justify-content: space-evenly;
+        height: max-content;
+        z-index: 1000000;
+    }
+    .side-item{
+        flex:1;
+        display: flex;
+        justify-content: center;
+    }
+    .open-side{
+        display: none;
+    }
+    .side-full{
+        display: flex;
+    }
+    .left{
+        display: none;
+    }
+    .right{
+        display: none;
+    }
+    main{
+        padding-top: 100px;
+    }
+    .trending{
+        margin-left: 4% !important;
     }
 }

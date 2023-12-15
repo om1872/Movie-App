@@ -20,6 +20,7 @@
 
     <!-- data-table css -->
     <link rel="stylesheet" href="/css/jquery.datatable.min.css">
+    <link rel="stylesheet" href="/css/login.css">
 </head>
 
 <body>
@@ -69,11 +70,10 @@
                     </div>
                 </li>
             </ul>
-            <a class="item link">Trending</a>
-            <a class="item link">TV Shows</a>
-            <a class="item link">Anime</a>
+            <a class="item link" href="/api/trending">Trending</a>
+            <a class="item link" href="/api/tvShows">TV Shows</a>
         </div>
-        <div class="navbar-search-item">
+        <div class="navbar-item navbar-search-item">
             <form class="search" action="/api/search">
                 <input class="search-item" type="text" name="query" id="" placeholder="Search Here..."><input
                     class="search-item fa-solid" type="submit" value="&#xf002">
@@ -95,12 +95,7 @@
                         </div>
                     </div>
                 </div>
-                <% } else { %>
-                    <div class="navbar-last"> 
-                        <a class="item link"  id="login">Log In</a>
-                        <button class="btn" id="signup">Sign Up</button>
-                    </div>
-                <% } %>
+            <% } %>
         </div>
         <div class="navbar-item-mobile" id="ham">
             <div class="navbar-item-m">
@@ -134,15 +129,14 @@
                         </div>
                     </li>
                 </ul>
-                <a class="item link">Trending</a>
-                <a class="item link">TV Shows</a>
-                <a class="item link">Anime</a>
+                <a class="item link" href="/api/trending">Trending</a>
+                <a class="item link" href="/api/tvShows">TV Shows</a>
             </div>
         </div>
     </nav>
 
     <main>
-        <h1 style="padding:0 10% 0">Manage Movie</h1>
+        <h1 style="padding:0 10% 0; font-size: 1.6rem; text-shadow: 0 0 10px rgba(0,0,0,0.9);">Manage Movie</h1>
         <div class="upload-section">
             <div class="col-8">
                 <div class="col-child">
@@ -158,6 +152,7 @@
             </div>
         </div>
     </main>
+
     <!-- Footer -->
     <footer>
         <div class="social-links">
@@ -168,7 +163,7 @@
         </div>
         <p>©XYZ Company | All Rights Reserved.</p>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="/js/jquery-3.7.1.min.js"></script>
     <script src="/js/movie-upload.js"></script>
     <script src="/js/navbar.js"></script>
     <script src="/js/jquery.datatable.min.js"></script>

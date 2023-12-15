@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/dashboard.css">
     <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="/css/login.css">
 </head>
 
 <body>
@@ -29,7 +30,7 @@
         <div class="item" id="mobile-search-icon"><i class="fa-solid fa-magnifying-glass fa-flip-horizontal"></i></div> 
         <div class="navbar-item-m" id="mobile-search">
             <form class="search" action="/api/search">
-                <input class="search-item" type="text" name="query" id="" placeholder="Search Here..."><input
+                <input class="search-item" type="text" name="query"  placeholder="Search Here..."><input
                     class="search-item fa-solid" type="submit" value="&#xf002">
             </form>
         </div>
@@ -58,13 +59,12 @@
                     </div>
                 </li>
             </ul>   
-            <a class="item link">Trending</a>
-            <a class="item link">TV Shows</a>
-            <a class="item link">Anime</a>
+            <a class="item link" href="/api/trending">Trending</a>
+            <a class="item link" href="/api/tvShows">TV Shows</a>=
         </div>
-        <div class="navbar-search-item">
+        <div class="navbar-item navbar-search-item">
             <form class="search" action="/api/search">
-                <input class="search-item" type="text" name="query" id="" placeholder="Search Here..."><input
+                <input class="search-item" type="text" name="query" placeholder="Search Here..."><input
                     class="search-item fa-solid" type="submit" value="&#xf002">
             </form>
             <% if (user) { %>
@@ -85,7 +85,7 @@
                     </div>
                 </div>
                 <% } else { %>
-                    <div class="navbar-last"> 
+                    <div class="item"> 
                         <a class="item link"  id="login">Log In</a>
                         <button class="btn" id="signup">Sign Up</button>
                     </div>
@@ -114,9 +114,8 @@
                         </div>
                     </li>
                 </ul>   
-                <a class="item link">Trending</a>
-                <a class="item link">TV Shows</a>
-                <a class="item link">Anime</a>
+                <a class="item link" href="/api/trending">Trending</a>
+                <a class="item link" href="/api/tvShows">TV Shows</a>
             </div>
         </div>
     </nav>
@@ -160,19 +159,112 @@
         <!-- pagination -->
         <div class="pages">
             <% if (results.page===1) { %>
-                <button class="btn disabled" disabled id="prev"><i class="fa-solid fa-arrow-left"></i> Prev</button>
+                <a class="btn disabled" disabled id="prev"><i class="fa-solid fa-arrow-left"></i> Prev</a>
             <% } else { %>
-                <button class="btn" id="prev"><i class="fa-solid fa-arrow-left"></i> Prev</button>
+                <a class="btn" id="prev" href="/api/genre/tv/<%= genre.id  %>/<%= results.page - 1 %>?name=<%= genre.name %>"><i class="fa-solid fa-arrow-left"></i> Prev</a>
             <% } %>
             <a class="page-info"><%= results.page %> / <%= results.total_pages %></a>
             <% if (results.page===results.total_pages) { %>
-                <button class="btn disabled" disabled id="next"><i class="fa-solid fa-arrow-right"></i> Next</button>
+                <a class="btn disabled" disabled id="next"><i class="fa-solid fa-arrow-right"></i> Next</a>
             <% } else { %>
-                <button class="btn" id="next"><i class="fa-solid fa-arrow-right"></i> Next</button>
+                <a class="btn" id="next" href="/api/genre/tv/<%= genre.id  %>/<%= results.page + 1 %>?name=<%= genre.name %>"><i class="fa-solid fa-arrow-right"></i> Next</a>
             <% } %>
         </div>
     </main>
 
+    <div class="login-form"  style="width:fit-content;">
+        <div class="login-main">
+            <div class="login-main-head">
+                <h1 style="color:#3A4D39;text-shadow: none;text-align: center;">Login</h1>
+                <a id="close"><i class="fa-solid fa-xmark"></i></a>
+            </div>
+            <form class="login-main-form" name="login-main-form">
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="email">Email:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="email" name="email">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err email-err"></div>
+                </div>
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="password">Password:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="password" name="password">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err pass-err"></div>
+                </div>
+                <div style="text-align: center; margin:5% 0 0">
+                    <button class="btn-rev" type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="signup-form"  style="width:fit-content;">
+        <div class="signup-main">
+            <div class="signup-main-head">
+                <h1 style="color:#3A4D39;text-shadow: none; text-align: center;">Register Here</h1>
+                <a id="close-signup"><i class="fa-solid fa-xmark"></i></a>
+            </div>
+            <form class="signup-main-form" name="signup-main-form">
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="">First Name</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" name="first">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err username-err"></div>
+                </div>
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="">Last Name</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" name="last">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err username-err"></div>
+                </div>
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="email">Email:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="email" name="email">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err email-err"></div>
+                </div>
+                <div class="row-form">
+                    <div class="col-25">
+                        <label for="password">Password:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="password" name="password">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="err pass-err"></div>
+                </div>
+                <div style="text-align: center; margin:5% 0 0">
+                    <button class="btn-rev" type="submit">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="shadow"></div>
     <!-- Footer -->
     <footer>
         <div class="social-links">
@@ -184,33 +276,10 @@
         <p>©XYZ Company | All Rights Reserved.</p>
     </footer>
 
-    <!-- exporting ejs model values for external js files -->
 
-    <!-- search query -->
-    <span id="genre" hidden>
-        <%= JSON.stringify(genre) %>
-    </span>
-
-    <!-- genres -->
-    <% if (tvGenre) { %>
-    <span id="tv-genre" hidden>
-        <%= JSON.stringify(tvGenre) %>
-    </span>
-    <% } %>
-    <% if (movieGenre) { %>
-        <span id="movie-genre" hidden><%= JSON.stringify(movieGenre) %></span>
-    <% } %>
-    <!-- pages -->
-    <span id="page-num" hidden>
-        <%= JSON.stringify(results.page) %>
-    </span>
-    <span id="lastpage" hidden>
-        <%= JSON.stringify(results.total_pages) %>
-    </span>
-
-    <!-- external js files
-    <script src="/js/pagination.js"></script> -->
+    <!-- external js files -->
     <script src="/js/navbar.js"></script>
+    <script src="/js/auth.js"></script>
 </body>
 
 </html>

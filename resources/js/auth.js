@@ -3,6 +3,10 @@ const passErr = document.querySelector('.pass-err');
 const emailErr = document.querySelector('.email-err');
 const signUpForm = document.forms['signup-main-form'];
 
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 async function sendLogin(e) {
     e.preventDefault();
     const email = loginForm['email'].value
@@ -33,7 +37,7 @@ async function sendSignup(e) {
     e.preventDefault();
     const email = signUpForm['email'].value
     const password = signUpForm['password'].value;
-    const username = signUpForm['first'].value + ' ' + signUpForm['last'];
+    const username = capitalizeFirstLetter(signUpForm['first'].value) + ' ' + capitalizeFirstLetter(signUpForm['last'].value);
     passErr.textContent = '';
     emailErr.textContent = '';
     const res = await fetch('/api/auth/register', {
