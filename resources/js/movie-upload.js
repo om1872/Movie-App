@@ -1,14 +1,14 @@
 const searchM = document.querySelector('.search-upload');
 const searchResult = document.querySelector('.search-row');
 
-function formatBytes(bytes,decimals) {
-    if(bytes == 0) return '0 Bytes';
+function formatBytes(bytes, decimals) {
+    if (bytes == 0) return '0 Bytes';
     var k = 1024,
         dm = decimals || 2,
         sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
         i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
- }
+}
 
 function validateForm(fileName) {
     const last = fileName.lastIndexOf('.');
@@ -18,10 +18,10 @@ function validateForm(fileName) {
         return false;
 }
 
-async function uploadVid(ele,tmdbId) {
+async function uploadVid(ele, tmdbId) {
     const form = document.forms['movie-upload'];
     const statusDiv = document.querySelector('.status');
-    statusDiv.style.display='flex';
+    statusDiv.style.display = 'flex';
     const url = `/api/upload/movie/${tmdbId}`;
     const data = new FormData(form);
     data.set('size', data.get('video').size);
@@ -38,7 +38,7 @@ async function uploadVid(ele,tmdbId) {
             .then(data => {
                 ele.disabled = false;
                 ele.classList.remove('disabled');
-                form.innerHTML=`File Uploaded Succesfully`;
+                form.innerHTML = `File Uploaded Succesfully`;
                 return data;
             }).catch(err => {
                 console.log('Error: ' + err);
@@ -46,8 +46,8 @@ async function uploadVid(ele,tmdbId) {
                 ele.classList.remove('disabled');
                 statusDiv.innerHTML = `Error in uploading, plz check id once!`;
             });
-    }else{
-        statusDiv.innerHTML=`File is not of type mp4 or mkv...`;
+    } else {
+        statusDiv.innerHTML = `File is not of type mp4 or mkv...`;
         return;
     }
 }
@@ -137,6 +137,8 @@ async function displayManageSection(data) {
         </div>
         <div class="status form-item" style='display:flex;'></div>
         </div>
+        <div class="form-item" style='display:flex;'><a class='item' href='/api/movie/${id}'>Visit Movie</a></div>
+        </div>
     </form></div>`;
     } else if (fileInfo.status === 1) {
         info = `<div class='file-status'>
@@ -165,6 +167,10 @@ async function displayManageSection(data) {
         <tr>
           <th>Encoding:</th>
           <td> ${fileInfo.fileInfo.metadata.encoding}</td>
+          hr
+        </tr>
+        <tr>
+          <td><br><a class='btn-rev' href='/api/movie/${id}'>Visit Movie</a></td>
         </tr>
       </table>
       </div>`;

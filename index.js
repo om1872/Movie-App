@@ -15,8 +15,9 @@ const searchController=require('./controller/searchController');
 const uploadController=require('./controller/uploadController');
 const trendingController=require('./controller/trendingController');
 const tvshowsController=require('./controller/tvshowsController');
-const animeController=require('./controller/animeController');
+const genreController=require('./controller/genreController');
 const videoRenderController=require('./controller/videorenderController');
+const bucketController=require('./controller/bucketController');
 
 
 const app = express();
@@ -48,8 +49,9 @@ app.use('/api',dashboardRoutes);
 app.use('/api/auth',loginRoute);
 app.use('/api/search',searchController);
 app.use('/api/upload',requiredAuth,uploadController);
+app.use('/api/bucket',requiredAuth,bucketController);
 app.use('/api/tvshows',tvshowsController);
-app.use('/api/anime',animeController);
+app.use('/api/genre',genreController);
 app.use('/api/trending',trendingController);
 app.use('/api/render',videoRenderController);
 

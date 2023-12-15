@@ -29,7 +29,7 @@ const checkUser = async (req, res, next) => {
                 next();
             } else {
                 const user = await User.findById(decodedToken.id);
-                res.locals.user = { name: user.username, id: user._id.toString(), password: user.email, admin: user.admin };
+                res.locals.user = { name: user.username, id: user._id.toString(), email:user.email, admin: user.admin };
                 next();
             }
         });
