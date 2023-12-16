@@ -201,6 +201,24 @@ ul.item{
     background: transparent;
 }
 
+/* nav bar mobile .dropdown */
+.dropdown-mob{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: space-between;
+    padding-top:5px;
+}
+.dropdown-mob a{
+    color: #739072;
+    padding: 5px;
+    border-bottom: 1px solid #3A4D39;
+}
+.dropdown-mob a:hover{
+    color: #3A4D39;
+}
+
+
 
 /* navbar item dropdown  */
 .genre-link{
