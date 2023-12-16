@@ -38,10 +38,11 @@ async function loadBukcets() {
 function checkAdd() {
     shadow.classList.add('show');
     bucket.classList.add('show');
-    if (user != "") {
+    console.log(user);
+    if (user != "" && user!=null && user!=undefined) {
         selectedId = this.id;
     } else {
-        bucketBody.innerHTML = `<p>Please Login or Sign Up to use this feature</p>`
+        bucketBody.innerHTML = `<p style="margin:auto 10%;">Please Login or Sign Up to use this feature</p>`
     }
 }
 

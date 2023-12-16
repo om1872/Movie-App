@@ -5,14 +5,21 @@ const div = document.querySelector('#ham');
 const mobSearchIcon = document.querySelector('#mobile-search-icon');
 const search = document.querySelector('#mobile-search');
 const mobgenre = document.querySelector('#ham .genre-link');
+
 const mobdropdown = document.querySelector('#ham .dropdown-genre');
 const navDropdown = document.querySelector('.dropdown');
 const navDropdownBtn = document.querySelector('.dropdown .btn');
 const navDropContent = document.querySelector('.dropdown-content');
+
 const login = document.querySelector('#login');
 const close = document.querySelector('#close');
-const singup = document.querySelector('#signup');
-const closeSignup = document.querySelector('#close-signup')
+const signup = document.querySelector('#signup');
+const closeSignup = document.querySelector('#close-signup');
+
+const navMob = document.querySelector('.login-btn-mob');
+const closeNavMob = document.querySelector('#close-navbar-mob');
+const mobLogin = document.querySelector('#mob-login');
+const mobSignup = document.querySelector('#mob-signup');
 
 
 function show() {
@@ -76,6 +83,8 @@ function dropdownOf() {
 }
 
 function showLogin() {
+    // if (document.querySelector('.shadow').classList.contains('show'))
+    //     document.querySelector('.shadow').classList.remove('show');
     document.querySelector('.login-form').classList.add('show');
     document.querySelector('.shadow').classList.add('show');
 }
@@ -85,11 +94,21 @@ function offLogin() {
 }
 
 function showSignup() {
+    // if (document.querySelector('.shadow').classList.contains('show'))
+    //     document.querySelector('.shadow').classList.remove('show');
     document.querySelector('.signup-form').classList.add('show');
     document.querySelector('.shadow').classList.add('show');
 }
 function offSignup() {
     document.querySelector('.signup-form').classList.remove('show');
+    document.querySelector('.shadow').classList.remove('show');
+}
+function openMobileNavbarOptions() {
+    document.querySelector('.navbar-mob-options').classList.add('show');
+    document.querySelector('.shadow').classList.add('show');
+}
+function closeMobileNavbarOptions() {
+    document.querySelector('.navbar-mob-options').classList.remove('show');
     document.querySelector('.shadow').classList.remove('show');
 }
 
@@ -113,3 +132,16 @@ if (signup != null || signup != undefined) {
 }
 if (closeSignup != null || closeSignup != undefined)
     closeSignup.addEventListener('click', offSignup);
+
+if (navMob != null || navMob != undefined)
+    navMob.addEventListener('click', openMobileNavbarOptions);
+
+if (closeNavMob != null || closeNavMob != undefined)
+    closeNavMob.addEventListener('click', closeMobileNavbarOptions);
+
+if (mobLogin != null || mobLogin != undefined)
+    mobLogin.addEventListener('click', showLogin);
+
+if (mobSignup != null || mobSignup != undefined)
+    mobSignup.addEventListener('click', showSignup);
+
