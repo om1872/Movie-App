@@ -21,6 +21,7 @@ function validateForm(fileName) {
 async function uploadVid(ele, tmdbId) {
     const form = document.forms['movie-upload'];
     const statusDiv = document.querySelector('.status');
+
     statusDiv.style.display = 'flex';
     const url = `/api/upload/movie/${tmdbId}`;
     const data = new FormData(form);
@@ -28,7 +29,9 @@ async function uploadVid(ele, tmdbId) {
     const fileName = data.get('video').name;
     if (validateForm(fileName)) {
         ele.disabled = true;
+        form['reset'].disabled = true;
         ele.classList.add('disabled');
+        form['reset'].classList.add('disabled');
         statusDiv.textContent = `Uploading`;
         const response = await fetch(url, {
             method: "POST",
@@ -37,15 +40,30 @@ async function uploadVid(ele, tmdbId) {
         }).then(async (res) => { return await res.json(); })
             .then(data => {
                 ele.disabled = false;
+                form['reset'].disabled = false;
                 ele.classList.remove('disabled');
+                form['reset'].classList.remove('disabled');
                 form.innerHTML = `File Uploaded Succesfully`;
                 return data;
             }).catch(err => {
                 console.log('Error: ' + err);
                 ele.disabled = false;
+                form['reset'].disabled = false;
                 ele.classList.remove('disabled');
+                form['reset'].classList.remove('disabled');
                 statusDiv.innerHTML = `Error in uploading, plz check id once!`;
             });
+        if(response.err===0){
+            const data={
+                dataset:{
+                    id:cid,
+                    name:cname,
+                    poster:cposter,
+                    release:crelease
+                }
+            }
+            displayManageSection(data);
+        }
     } else {
         statusDiv.innerHTML = `File is not of type mp4 or mkv...`;
         return;
@@ -114,66 +132,22 @@ async function getSearchResult(e) {
         });
 
 }
-
+let cid,cname,cposter,crelease;
 async function displayManageSection(data) {
     const { id, name, poster, release } = data.dataset;
+    cid=id;
+    cname=name;
+    cposter=poster;
+    crelease=release;
     const url = `/api/upload/checkMovieAvailability/${id}`;
     const fileInfo = await fetch(url)
         .then(res => { return res.json() })
         .catch(err => { console.log('Error: ' + err) });
     let info = '';
-    console.log(fileInfo);
     if (fileInfo.status === 0) {
-        info = `<div class='file-status'>
-        <span><strong>File Status: </strong>No File Present at moment on server :(</span> 
-        <form class="upload-form" enctype="multipart/form-data" name="movie-upload" id="movie-upload" onsubmit="event.preventDefault()">
-        <h5>Upload Here <i class="fa-solid fa-arrow-right"></i></h5>
-        <div style='margin:0 0 0 3%; flex:1;'>
-        <div class=form-item>
-            <input type="file" name="video" accept=".mp4,.mkv" required />
-            <input type="text" name="size" hidden/>
-            <button class="btn-rev" type="submit" onclick="uploadVid(this,${id})"  id="upload">Upload</button>
-            <button class="btn-rev" type="reset" onclick="removeStatus();" id="reset" >Reset</button>
-        </div>
-        <div class="status form-item" style='display:flex;'></div>
-        </div>
-        <div class="form-item" style='display:flex;'><a class='item' href='/api/movie/${id}'>Visit Movie</a></div>
-        </div>
-    </form></div>`;
+        info = fileStatusZero(id);
     } else if (fileInfo.status === 1) {
-        info = `<div class='file-status'>
-        <h3>Database Status</h3>
-        <table style="width:100%;">
-        <tr>
-          <th>Status:</th>
-          <td> Available</td>
-        </tr>
-        <tr>
-          <th>Name:</th>
-          <td>${fileInfo.fileInfo.filename}</td>
-        </tr>
-        <tr>
-          <th>Size:</th>
-          <td> ${formatBytes(fileInfo.fileInfo.length)}</td>
-        </tr>
-        <tr>
-          <th>Uploaded On:</th>
-          <td> ${new Date(fileInfo.fileInfo.uploadDate).toISOString().split('T')[0]}</td>
-        </tr>
-        <tr>
-          <th>Type:</th>
-          <td> ${fileInfo.fileInfo.metadata.mimeType}</td>
-        </tr>
-        <tr>
-          <th>Encoding:</th>
-          <td> ${fileInfo.fileInfo.metadata.encoding}</td>
-          hr
-        </tr>
-        <tr>
-          <td><br><a class='btn-rev' href='/api/movie/${id}'>Visit Movie</a></td>
-        </tr>
-      </table>
-      </div>`;
+        info = fileStatusOne(fileInfo, id);
     } else {
         info = `<span><strong> Failed to fetch file details, Plz Contact :( </strong></span>`;
     }
@@ -194,3 +168,60 @@ async function displayManageSection(data) {
 
 /* */
 searchM.addEventListener('submit', getSearchResult);
+
+
+
+function fileStatusOne(fileInfo, id) {
+    return `<div class='file-status'>
+        <h3>Database Status</h3>
+        <table style="width:100%; table-layout:fixed">
+        <tr>
+          <th style="width:25%;">Status:</th>
+          <td class='text-overflow-hidden'> Available</td>
+        </tr>
+        <tr>
+          <th style="width:25%;">Name:</th>
+          <td class='text-overflow-hidden'>${fileInfo.fileInfo.filename}</td>
+        </tr>
+        <tr>
+          <th style="width:25%;">Size:</th>
+          <td class='text-overflow-hidden'> ${formatBytes(fileInfo.fileInfo.length)}</td>
+        </tr>
+        <tr>
+          <th style="width:25%;">Uploaded On:</th>
+          <td class='text-overflow-hidden'> ${new Date(fileInfo.fileInfo.uploadDate).toISOString().split('T')[0]}</td>
+        </tr>
+        <tr>
+          <th style="width:25%;">Type:</th>
+          <td class='text-overflow-hidden'> ${fileInfo.fileInfo.metadata.mimeType}</td>
+        </tr>
+        <tr>
+          <th style="width:25%;">Encoding:</th>
+          <td class='text-overflow-hidden'> ${fileInfo.fileInfo.metadata.encoding}</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;"><br><a class='btn-rev' href='/api/movie/${id}'>Visit Movie</a></td>
+          <td><br><a class='btn-rev' onclick="openDeletePrompt(this);">Delete Movie</a></td>
+        </tr>
+      </table>
+      </div>`;
+}
+
+function fileStatusZero(id) {
+    return `<div class='file-status'>
+        <span><strong>File Status: </strong>No File Present at moment on server :(</span> 
+        <form class="upload-form" enctype="multipart/form-data" name="movie-upload" id="movie-upload" onsubmit="event.preventDefault()">
+        <h5>Upload Here <i class="fa-solid fa-arrow-right"></i></h5>
+        <div style='margin:0 0 0 3%; flex:1;'>
+        <div class=form-item>
+            <input type="file" name="video" accept=".mp4,.mkv" required />
+            <input type="text" name="size" hidden/>
+            <button class="btn-rev" type="submit" onclick="uploadVid(this,${id})"  id="upload">Upload</button>
+            <button class="btn-rev" type="reset" onclick="removeStatus();" id="reset" >Reset</button>
+        </div>
+        <div class="status form-item" style='display:flex;'></div>
+        </div>
+        <div class="form-item" style='display:flex;'><a class='item' href='/api/movie/${id}'>Visit Movie</a></div>
+        </div>
+    </form></div>`
+}

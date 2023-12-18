@@ -43,11 +43,11 @@ route.get('/getBucketByUser', async (req, res) => {
         try {
             const payload = decode(token);
             const userId = payload.id;
-            const bucket = await Bucket.find({"userId":userId}).sort({'_id': -1});
-            res.status(200).send({data:bucket,error:0});
+            const bucket = await Bucket.find({ "userId": userId }).sort({ '_id': -1 });
+            res.status(200).send({ data: bucket, error: 0 });
         } catch (err) {
             console.log('Error: ' + err);
-            res.status(401).send({ 'error_obj':"No Buckets" , error: 1 });
+            res.status(401).send({ 'error_obj': "No Buckets", error: 1 });
         }
     } else {
         res.status(302).send({ msg: "Require Login", error: 1 });
@@ -68,9 +68,7 @@ route.get('/getBucketById', async (req, res) => {
                 const bucket = await Bucket.findById(bucketId);
                 // const {tvGenre,movieGenre}=await genre();
 
-                res.render('myBucket', {
-                    data, tvGenre, movieGenre, bucket
-                })
+                res.status(200).send({ obj: { data, bucket }, error: 0 });
             } catch (err) {
                 console.log('Error: ' + err);
                 // const errors = createBucketErrors(err);
@@ -84,9 +82,8 @@ route.get('/getBucketById', async (req, res) => {
 
 //add movies/tv in bucket
 route.post('/addItem', async (req, res) => {
-    const { tmdbId, bucketId } = req.body;
+    const { tmdbId, bucketId, movieName, moviePoster, type } = req.body;
     const token = req.cookies.jwt;
-    console.log(req.body)
     if (!bucketId.match(/^[0-9a-fA-F]{24}$/)) {
         res.status(404).send({ "error_obj": { "bucketId": "BucketId Not Valid" }, error: 1 });
     } else {
@@ -96,7 +93,7 @@ route.post('/addItem', async (req, res) => {
                 const userId = payload.id;
                 const bucket = await Bucket.findOne({ "_id": bucketId, "userId": userId });
                 if (bucket) {
-                    const item = await BucketItem.create({ bucketId, userId, tmdbId, unique: tmdbId + bucketId });
+                    const item = await BucketItem.create({ bucketId, userId, tmdbId, movieName, moviePoster, type, unique: tmdbId + bucketId });
                     bucket.itemCount++;
                     await bucket.save();
                     res.status(200).send({ itemId: item._id, msg: "Added", error: 0 });
@@ -116,7 +113,7 @@ route.post('/addItem', async (req, res) => {
 
 //remove item from bucket
 route.delete('/removeItem', async (req, res) => {
-    const { itemId, bucketId } = req.query;
+    const { itemId, bucketId } = req.body;
     const token = req.cookies.jwt;
     if (!bucketId.match(/^[0-9a-fA-F]{24}$/)) {
         res.status(404).send({ "error_obj": { "bucketId": "BucketId Not Valid" }, error: 1 });
@@ -161,10 +158,10 @@ route.post('/createBucket', async (req, res) => {
         } catch (err) {
             console.log('Error: ' + err);
             const errors = createBucketErrors(err);
-            res.status(401).send({ 'errror_obj': errors, error: 1 });
+            res.status(401).send({ 'error_obj': errors, error: 1 });
         }
     } else {
-        res.status(302).send({ msg: "Require Login", error: 1 });
+        res.status(302).send({ 'error_obj': "Require Login", error: 1 });
     }
 })
 

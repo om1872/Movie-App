@@ -14,7 +14,7 @@ route.get('/', async (req, res) => {
     const movie=await fetchData(movieURL);
     const tv=await fetchData(tvURL);
     const {tvGenre,movieGenre} = await genre();
-    console.log(movie,tv)
+    
     res.render('trending',{
         movie,tv,tvGenre,movieGenre
     });

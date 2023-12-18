@@ -1,0 +1,137 @@
+<div class="login-form" style="width:fit-content;">
+    <div class="login-main">
+        <div class="login-main-head">
+            <h1 style="color:#3A4D39;text-shadow: none;text-align: center;">Login</h1>
+            <a id="close"><i class="fa-solid fa-xmark"></i></a>
+        </div>
+        <form class="login-main-form" name="login-main-form">
+            <div class="row-form">
+                <div class="col-25">
+                    <label for="email">Email:</label>
+                </div>
+                <div class="col-75">
+                    <input type="email" name="email">
+                </div>
+            </div>
+            <div class="row-form">
+                <div class="err email-err"></div>
+            </div>
+            <div class="row-form">
+                <div class="col-25">
+                    <label for="password">Password:</label>
+                </div>
+                <div class="col-75">
+                    <input type="password" name="password">
+                </div>
+            </div>
+            <div class="row-form">
+                <div class="err pass-err"></div>
+            </div>
+            <div style="text-align: center; margin:5% 0 0">
+                <button class="btn-rev" type="submit">Login</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="signup-form" style="width:fit-content;">
+    <div class="signup-main">
+        <div class="signup-main-head">
+            <h1 style="color:#3A4D39;text-shadow: none; text-align: center;">Register Here</h1>
+            <a id="close-signup"><i class="fa-solid fa-xmark"></i></a>
+        </div>
+        <form class="signup-main-form" name="signup-main-form">
+            <div class="row-form">
+                <div class="col-25">
+                    <label for="">First Name</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" name="first">
+                </div>
+            </div>
+            <div class="row-form">
+                <div class="err username-err"></div>
+            </div>
+            <div class="row-form">
+                <div class="col-25">
+                    <label for="">Last Name</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" name="last">
+                </div>
+            </div>
+            <div class="row-form">
+                <div class="err username-err"></div>
+            </div>
+            <div class="row-form">
+                <div class="col-25">
+                    <label for="email">Email:</label>
+                </div>
+                <div class="col-75">
+                    <input type="email" name="email">
+                </div>
+            </div>
+            <div class="row-form">
+                <div class="err email-err"></div>
+            </div>
+            <div class="row-form">
+                <div class="col-25">
+                    <label for="password">Password:</label>
+                </div>
+                <div class="col-75">
+                    <input type="password" name="password">
+                </div>
+            </div>
+            <div class="row-form">
+                <div class="err pass-err"></div>
+            </div>
+            <div style="text-align: center; margin:5% 0 0">
+                <button class="btn-rev" type="submit">Register</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- mobile options -->
+<div class="navbar-mob-options" style="width:fit-content;">
+    <div class="navbar-mob-main">
+        <div class="navbar-mob-main-head">
+            <h1 style="color:#3A4D39;text-shadow: none;text-align: center;"><i class="fa-solid fa-house"></i>
+            </h1>
+            <a id="close-navbar-mob"><i class="fa-solid fa-xmark"></i></a>
+        </div>
+        <div>
+            <% if (user) { %>
+                <div style="text-align: center;"><img src="/img/icons/ghost.png" class="icon" alt="<%= user.name %>"/>
+                    <%= user.name %>
+                </div>
+                <div class="dropdown-mob">
+                    <a href="/api/bucket/myBucket">My Bucket</a>
+                    <% if (user.admin) { %>
+                        <a href="#" class="link">Statistics</a>
+                        <a href="/api/upload/movieUpload" class="link">Movie Management</a>
+                        <a href="#" class="link">Stream Management</a>
+                        <% } %>
+                            <a href="/api/auth/logout">Log Out</a>
+                </div>
+                <% } else { %>
+                    <div class="item">
+                        <a class="item link" style="color: #3A4D39;" id="mob-login">Log In</a>
+                        <button class="btn-rev" id="mob-signup">Sign Up</button>
+                    </div>
+                    <% } %>
+        </div>
+    </div>
+</div>
+<div class="shadow"></div>
+
+
+<!-- Footer -->
+<footer>
+    <div class="social-links">
+        <a class="link"><i class="fa-regular fa-envelope fa-lg"></i></a>
+        <a class="link"><i class="fa-brands fa-instagram fa-lg"></i></a>
+        <a class="link"><i class="fa-brands fa-twitter fa-lg"></i></a>
+        <a class="link"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+    </div>
+    <p>©XYZ Company | All Rights Reserved.</p>
+</footer>
