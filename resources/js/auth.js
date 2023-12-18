@@ -61,10 +61,10 @@ async function sendSignup(e) {
 
 loginForm.addEventListener('submit', sendLogin);
 signUpForm.addEventListener('submit', sendSignup);
-document.forms.forEach(form => form.addEventListener('keyup keypress'), (e) => {
-    var keyCode = e.keyCode || e.which;
-    if (keyCode === 13) {
-        e.preventDefault();
-        return false;
-    }
-})
+// document.forms.getALL().forEach(form => form.addEventListener('keyup keypress'), (e) => {
+//     var keyCode = e.keyCode || e.which;
+//     if (keyCode === 13) {
+//         e.preventDefault();
+//         return false;
+//     }
+// })

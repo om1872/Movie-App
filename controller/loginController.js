@@ -30,6 +30,7 @@ route.post('/register', async (req, res) => {
         const token = createToken(newUser._id);
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
         res.status(201).send({ id: newUser._id, msg: 'Registered Successfully', error: 0 });
+        console.log('created User: {id: '+ newUser._id+' name: '+newUser.username+' email: '+newUser.email+'}');
 
     } catch (err) {
         const errors = handleErrors(err);
@@ -49,6 +50,7 @@ route.post('/login', async (req, res) => {
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
         res.status(200).json({ user: user._id, msg: 'Login Successfully', error: 0 });
         console.log('Logined Successfully');
+        console.log('Logged User: {id: '+ user._id+' name: '+user.username+' email: '+user.email+'}');
     } catch (err) {
         const errors = handleErrors(err);
         console.log(errors);
