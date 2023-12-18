@@ -3,10 +3,9 @@ const genre = require('../utils/genre');
 const { fetchData } = require('../utils/helper');
 const { bucket } = require('../database/connect');
 const busboy = require('busboy');
-const { promiseImpl } = require('ejs');
 
 // const API_KEY = "2c295a3ddb6df8ba0220d8ff90ea21ab";
-const API_KEY=process.env.API_KEY;
+const API_KEY = process.env.API_KEY;
 
 const route = Router();
 
@@ -27,21 +26,21 @@ route.get('/movieUpload', async (req, res) => {
 
 route.get('/checkMovieAvailability/:id', async (req, res) => {
     const { id } = req.params;
-    try{
-    const cursor = await bucket.find({ "_id": id}).toArray();
-    if(cursor.length===0){
-        res.status(201).send({'status':0});
-    }else{
-        res.status(201).send({'status':1,'fileInfo':cursor[0]});
-    }
-    }catch(err){
-        console.log('Error: '+err);
-        res.status(401).send({'status':2});
+    try {
+        const cursor = await bucket.find({ "_id": id }).toArray();
+        if (cursor.length === 0) {
+            res.status(201).send({ 'status': 0 });
+        } else {
+            res.status(201).send({ 'status': 1, 'fileInfo': cursor[0] });
+        }
+    } catch (err) {
+        console.log('Error: ' + err);
+        res.status(401).send({ 'status': 2 });
     }
 })
 
 route.post('/movie/:tmdbId', async (req, res) => {
-    const {tmdbId}=req.params;
+    const { tmdbId } = req.params;
     try {
         const bb = busboy({ headers: req.headers });
         // bb.on('field',(name, val, info) => {
@@ -111,6 +110,17 @@ route.post('/getSearchResult/:query', async (req, res) => {
         const url = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1&api_key=${API_KEY}`;
         const data = await fetchData(url);
         res.status(201).send(data);
+    }
+});
+
+route.delete('/delFile', async (req, res) => {
+    const { tmdbId } = req.body;
+    try {
+        await bucket.delete(tmdbId);
+        res.status(200).send({ error: 0, msg: 'File Deleted Successfully' });
+    } catch (err) {
+        console.log('Error: ' + err.message);
+        res.status(401).send({error:1, msg:'File Failed to delte'});
     }
 });
 

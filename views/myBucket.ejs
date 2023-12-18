@@ -17,7 +17,7 @@
     <!-- Custom stylesheet -->
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/login.css">
-    <link rel="stylesheet" href="/css/bucket.css">
+    <link rel="stylesheet" href="/css/bucket.css">    
 </head>
 
 <body>
@@ -25,38 +25,109 @@
     <%- include('./navbar.ejs')  %>
 
     <!-- Bucket -->
-    <main>
-        <div class="flex-horizontal-between">
-            <h1>Add Bucket</h1>
-            <form method="POST" action="/api/bucket/createBucket">
-                <input type="text" name="bucketName" placeholder="Bucket Name...">
-                <button type="submit" class="btn"><i class="fa-solid fa-plus"></i> New Bucket</button>
-            </form>
-        </div>
+    <main>   
         <h1>My Buckets</h1>
+        <div class="flex-horizontal-between">
+            <button class="btn open-add"><i class="fa-solid fa-plus"></i> New Bucket</button>
+        </div>
         <div class="mybucket">
             <% bucket.forEach(bucket=> { %>
-                <div class="lazy-loading" id="<%= bucket._id %>" class="bucket">
+                <div class="lazy-loading bucket" id="<%= bucket._id %>">
                     <div class="bucket-head">
                         <h2>
                             <%= bucket.bucketName %>
                         </h2>
-                        <span>
-                            <%= bucket.itemCount %>
-                        </span>
+                        <div>
+                            <span style="line-height: 2;">
+                                Items: <%= bucket.itemCount %>
+                            </span>
+                            <a href="">view more...</a>
+                        </div>
                     </div>
-                    <div class="bucket-body"></div>
+                    <div class="bucket-body">
+
+                    </div>
                 </div>
                 <% }) %>
         </div>
-
     </main>
+
+
+    <div class="bucket-list" style="width:fit-content;">
+        <div class="login-main">
+            <div class="login-head">
+                <h4 style="color:#3A4D39;text-shadow: none; text-align: center;">Add Bucket</h4>
+                <a id="close-list"><i class="fa-solid fa-xmark"></i></a>
+            </div>
+            
+            <% if (user) { %>
+                <div class="list-footer">
+                    <div class="flex-horizontal-between">
+                        <form name="createBucket" id="createBucket">
+                            <input type="text" name="bucketName" id="bucketName" placeholder="Bucket Name...">
+                            <button type="submit" class="btn-rev"><i class="fa-solid fa-plus"></i> Add Bucket</button>
+                            <div class="err createBucket"></div>
+                        </form>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </div>
+
+    <div class="delete-prompt" style="width:fit-content;">
+        <div class="prompt-main">
+            <div class="prompt-head">
+                <h4>Are you sure you want to delete ?</h4>
+            </div>
+            <div class="prompt-body">
+                <button class="btn" style="background-color: #FF8080; color: white;" id="delete-item-btn" onclick="removeItemFromBucket(this);">Delete</button>
+                <button class="btn-rev" id="close-prompt">Cancel</button>
+            </div>
+        </div>
+    </div>
 
     <!-- footer and login forms -->
     <%- include('./footer.ejs') %>
 
     <script src="/js/navbar.js"></script>
+    <script src="/js/myBucket.js"></script>
     <script src="/js/auth.js"></script>
+    <script>
+        const newBucket=document.querySelector('.open-add');
+        const closeList=document.querySelector('#close-list');
+        const shadow=document.querySelector('.shadow');
+        const form=document.forms['createBucket'];
+        function openAddBucket(){
+            document.querySelector('.bucket-list').classList.add('show');
+            shadow.classList.add('show');
+        }
+        function closeAddBucket(){
+            document.querySelector('.bucket-list').classList.remove('show');
+            shadow.classList.remove('show');
+        }
+        async function createBucket(e){
+            e.preventDefault();
+
+            const URL=`/api/bucket/createBucket`;
+            const response=await fetch(URL,{
+                method:'POST',
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                credentials:"same-origin",
+                body: JSON.stringify({ 'bucketName': this.bucketName.value})
+            });
+            const data=await response.json();
+            if(data.error===0){
+                location.reload();
+            }else{
+                document.querySelector('.err.createBucket').innerHTML=JSON.stringify(data['error_obj'].bucketName);
+            }
+        }
+        newBucket.addEventListener('click',openAddBucket);
+        closeList.addEventListener('click',closeAddBucket);
+        form.addEventListener('submit',createBucket);
+    </script>
 </body>
 
 </html>
