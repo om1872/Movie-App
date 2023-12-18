@@ -4,9 +4,10 @@ const user = JSON.parse(document.querySelector('#userId').textContent);
 const bucket = document.querySelector('.bucket-list');
 const bucketBody = document.querySelector('.bucket-list .list-body');
 const closeBucket = document.querySelector('#close-list');
-const createBucket=document.forms['createBucket'];
+const createBucket = document.forms['createBucket'];
+const deletePrompt= document.querySelector('.delete-prompt');
 
-let selectedId = "";
+let selectedId = "",movieName="",moviePoster="",type="";
 
 function genHTML(data) {
     return data.map(bucket => {
@@ -38,9 +39,11 @@ async function loadBukcets() {
 function checkAdd() {
     shadow.classList.add('show');
     bucket.classList.add('show');
-    console.log(user);
-    if (user != "" && user!=null && user!=undefined) {
+    if (user != "" && user != null && user != undefined) {
         selectedId = this.id;
+        movieName=this.dataset.name;
+        moviePoster=this.dataset.poster;
+        type=this.dataset.type;
     } else {
         bucketBody.innerHTML = `<p style="margin:auto 10%;">Please Login or Sign Up to use this feature</p>`
     }
@@ -55,7 +58,7 @@ function addInBuckets(form) {
         const URL = `/api/bucket/addItem`;
         const formData = new FormData(form);
         formData.getAll('bucket').forEach(async (bucketId) => {
-            document.getElementById(`${bucketId}`).innerHTML='';
+            document.getElementById(`${bucketId}`).innerHTML = '';
             try {
                 const response = await fetch(URL, {
                     method: 'POST',
@@ -63,21 +66,20 @@ function addInBuckets(form) {
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ 'bucketId': bucketId, 'tmdbId': selectedId })
+                    body: JSON.stringify({ 'bucketId': bucketId, 'tmdbId': selectedId  , 'movieName': movieName,'moviePoster':moviePoster, 'type':type})
                 });
                 const data = await response.json();
-                console.log(data);
-                if(data.error==0){
-                    document.getElementById(`${bucketId}`).innerHTML=`Item added`;
-                }else{
-                    document.getElementById(`${bucketId}`).innerHTML=data['error_obj'].bucketName;
+                if (data.error == 0) {
+                    document.getElementById(`${bucketId}`).innerHTML = `Item added`;
+                } else {
+                    document.getElementById(`${bucketId}`).innerHTML = data['error_obj'].bucketName;
                 }
             } catch (err) {
-                console.log('Error: '+err);
-                document.getElementById(`${bucketId}`).innerHTML=`err`;
+                console.log('Error: ' + err);
+                document.getElementById(`${bucketId}`).innerHTML = `err`;
             }
         });
-        setTimeout(()=>{loadBukcets()},2000);
+        setTimeout(() => { loadBukcets() }, 2000);
     }
 }
 
@@ -86,25 +88,29 @@ function closeList() {
     bucket.classList.remove('show');
 }
 
-async function createBucketFn(e){
+async function createBucketFn(e) {
     e.preventDefault();
-    const URL='/api/bucket/createBucket';
+    const URL = '/api/bucket/createBucket';
 
-    const response=await fetch(URL,{
-        method:'POST',
-        credentials:'same-origin',
+    const response = await fetch(URL, {
+        method: 'POST',
+        credentials: 'same-origin',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ 'bucketName': this.bucketName.value})
+        body: JSON.stringify({ 'bucketName': this.bucketName.value })
     });
-    const data=await response.json();
+    const data = await response.json();
     console.log(data);
-    loadBukcets();
+    if (data.error == 0) {
+        loadBukcets();
+    }else{
+        document.querySelector('.err.createBucket').innerHTML=JSON.stringify(data['error_obj'].bucketName);
+    }
 }
 
 
 loadBukcets();
 addToBucket.forEach(add => add.addEventListener('click', checkAdd));
 closeBucket.addEventListener('click', closeList);
-createBucket.addEventListener('submit',createBucketFn);
+createBucket.addEventListener('submit', createBucketFn);

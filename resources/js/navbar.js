@@ -23,10 +23,8 @@ const mobSignup = document.querySelector('#mob-signup');
 
 
 function show() {
-    console.log('in show')
     genre.classList.add('trigger-enter');
     dropdown.classList.add('open');
-
 }
 
 let genClick = false;
@@ -123,10 +121,17 @@ if (login != null || login != undefined)
     login.addEventListener('click', showLogin);
 if (close != null || close != undefined)
     close.addEventListener('click', offLogin);
+
+    //dropdown
 if (navDropdown != null || navDropdown != undefined) {
-    navDropdown.addEventListener('mouseenter', dropdownOn);
     navDropdown.addEventListener('mouseleave', dropdownOf);
 }
+
+if (navDropdownBtn != null || navDropdownBtn != undefined) {
+    navDropdownBtn.addEventListener('mouseenter', dropdownOn);
+}
+
+
 if (signup != null || signup != undefined) {
     signup.addEventListener('click', showSignup);
 }

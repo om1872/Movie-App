@@ -17,7 +17,7 @@ body {
 }
 
 .login-form,
-.signup-form,.bucket-list,.navbar-mob-options {
+.signup-form,.bucket-list,.navbar-mob-options,.delete-prompt {
     position: fixed;
     top: 25vh;
     left:0;
@@ -65,9 +65,16 @@ body {
     z-index: 99999;
     opacity: 1;
 }
+.delete-prompt.show{
+    z-index: 99999;
+    opacity: 1;
+}
 .navbar-mob-options.show{
     z-index: 10000;
     opacity: 1;
+}
+.prompt-body{
+    text-align: center;
 }
 
 .err {
@@ -111,7 +118,7 @@ input[type="text"]#bucketName{
 }
 
 #close,
-#close-signup,#close-list,#close-navbar-mob {
+#close-signup,#close-list,#close-navbar-mob{
     position: absolute;
     top: 5%;
     right: 5%;
