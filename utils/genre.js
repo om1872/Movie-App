@@ -1,4 +1,4 @@
-const API_KEY = "2c295a3ddb6df8ba0220d8ff90ea21ab";
+const API_KEY = process.env.API_KEY;
 const movieGenreUrl = `https://api.themoviedb.org/3/genre/movie/list?&api_key=${API_KEY}`;
 const tvGenreUrl = `https://api.themoviedb.org/3/genre/tv/list?&api_key=${API_KEY}`;
 const TvGenreDB = require('../database/TvGenre');
@@ -7,6 +7,7 @@ const MovieGenreDB = require('../database/MovieGenre');
 
 let movieGenre = {}, tvGenre = {};
 async function load() {
+    console.log('Loading Genres...');
     try {
         const movie = await fetch(movieGenreUrl)
             .then(res => { return res.json() });
@@ -33,9 +34,12 @@ async function load() {
 
 //fetching movie genres
 async function gen() {
-    tvGenre.genres = await TvGenreDB.find();
-    movieGenre.genres = await MovieGenreDB.find();
-    return { tvGenre, movieGenre };
+    try {
+        tvGenre.genres = await TvGenreDB.find();
+        movieGenre.genres = await MovieGenreDB.find();
+        return { tvGenre, movieGenre };
+    } catch (err) {
+        console.log('Error: '+err.message);
+    }
 }
-load();
-module.exports = gen;
+module.exports = {gen,load};

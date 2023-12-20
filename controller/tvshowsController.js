@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const genre=require('../utils/genre');
+const genre=require('../utils/genre').gen;
 const { fetchData } = require('../utils/helper');
 
 const route = Router();

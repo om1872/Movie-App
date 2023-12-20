@@ -3,6 +3,7 @@ const cookieParser=require('cookie-parser');
 var path = require('path');
 //db
 const database = require('./database/connect');
+const genre=require('./utils/genre').load();
 
 //middlewares
 const {requiredAuth,checkUser}=require('./middleware/authMiddleware');
