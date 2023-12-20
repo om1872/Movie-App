@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const genre=require('../utils/genre');
+const genre=require('../utils/genre').gen;
 const route = Router();
 
 // const API_KEY = "2c295a3ddb6df8ba0220d8ff90ea21ab";
@@ -9,6 +9,7 @@ route.get('/', async (req, res) => {
     let url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc`;
 
     let data = [];
+    try{
     await fetch(url)
         .then(res => res.json())
         .then(json => {
@@ -43,6 +44,9 @@ route.get('/', async (req, res) => {
         images: data,
         tvGenre,movieGenre
     });
+    }catch(err){
+        console.log('Error: '+err.message);
+    }
 });
 
 
