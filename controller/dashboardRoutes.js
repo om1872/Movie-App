@@ -8,7 +8,7 @@ const Bucket = require('../database/Bucket');
 const BucketItem = require('../database/BucketItem');
 
 //utils
-const genre=require('../utils/genre');
+const genre=require('../utils/genre').gen;
 const { fetchData } = require('../utils/helper');
 
 const route = Router();
