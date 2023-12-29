@@ -9,7 +9,7 @@ const database = require('./database/connect');
 const {requiredAuth,checkUser}=require('./middleware/authMiddleware');
 
 //controllers
-const loginRoute=require('./controller/loginController')
+const loginRoute=require('./controller/loginController').route;
 const homeRoute=require('./controller/homeRoute'); 
 const dashboardRoutes=require('./controller/dashboardRoutes');
 const searchController=require('./controller/searchController');
