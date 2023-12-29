@@ -64,6 +64,4 @@ route.get('/logout', (req, res) => {
     res.redirect('/api/dashboard');
 });
 
-addAdmin();
-
-module.exports = route;
+module.exports = {route,addAdmin};
