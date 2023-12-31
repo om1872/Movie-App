@@ -157,14 +157,14 @@
 
 @media only screen and (max-width:358px) {
     .search-row{
-        justify-content: space-evenly;
+        justify-content:space-evenly;
     }
     
     .search-row .movie img{
-        width:140px;
-        height: 200px;
+        width:130px;
+        height: 180px;
     }
     .search-row .movie .movie-title{
-        width: 140px;
+        width: 130px;
     }
 }

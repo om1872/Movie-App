@@ -77,4 +77,10 @@ main{
     text-overflow: ellipsis;
 }
 
+@media only screen and (max-width:600px) {
+    .movie:hover{
+        transform: none;
+        box-shadow: none;
+    }
+}
 

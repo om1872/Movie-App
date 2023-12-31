@@ -167,6 +167,7 @@ ul.item{
     right:0;
     width: max-content;
     background: #ECE3CE;
+    border:3px solid #739072;
     z-index: -1;
     opacity:0;
     transition: all 0.7s;
