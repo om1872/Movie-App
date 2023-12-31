@@ -34,7 +34,7 @@
                 <div class="col-child">
                     <h1>Search based on tmdb id or movie name :</h1>
                     <form class="search-upload" action="#" name="search-form">
-                        <input class="search-upload-input" type="text" name="query" placeholder="Search Here...">
+                        <input class="search-upload-input" type="text" name="query" placeholder="Search Here..." value="<% if (tmdbId) { %><%= tmdbId %><% } %>">
                         <input class="btn fa-solid" type="submit" value="&#xf002">
                     </form>
                     <div class="search-row">
@@ -51,9 +51,10 @@
                 <h4>Are you sure you want to delete ?</h4>
             </div>
             <div class="prompt-body">
-                <button class="btn" style="background-color: #FF8080; color: white;" id="delete-item-btn" onclick="removeItemFromBucket(this);">Delete</button>
+                <button class="btn" style="background-color: #FF8080; color: white;" id="delete-item-btn" onclick="removeFile(this)">Delete</button>
                 <button class="btn-rev" id="close-prompt">Cancel</button>
             </div>
+            <div class="err delete" style="text-align: center; padding:10% auto;"></div>
         </div>
     </div>
 

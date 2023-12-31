@@ -77,6 +77,7 @@ function removeStatus() {
 
 function genHTML(data) {
     let row = '';
+    console.log(data);
     if (data.success === false) {
         return '<span>Requested Movie Not Found</span>';
     }
@@ -96,7 +97,7 @@ function genHTML(data) {
         <td><a class='link' data-id='${data.id}' data-name='${data.title}' data-poster='${data.poster_path}' data-release='${data.release_date}' onclick='displayManageSection(this)'>${data.id}</a></td>
         <td><a class='link' data-id='${data.id}' data-name='${data.title}'  data-poster='${data.poster_path}' data-release='${data.release_date}' onclick='displayManageSection(this)'>${data.title}</a></td>
         <td>${data.release_date}</td>
-        <td><button class='btn-rev' data-id='${data.id} data-name='${data.title}'  data-poster='${data.poster_path}' data-release='${data.release_date}' onclick='displayManageSection(this)'>Manage</button></td>
+        <td><button class='btn-rev' data-id='${data.id}' data-name='${data.title}'  data-poster='${data.poster_path}' data-release='${data.release_date}' onclick='displayManageSection(this)'>Manage</button></td>
       </tr>`
     }
     return `<table class='display' style="flex:1;min-width:100%;" id='myTable'>
@@ -139,6 +140,7 @@ async function displayManageSection(data) {
     cname=name;
     cposter=poster;
     crelease=release;
+    console.log(id,name,poster,release);
     const url = `/api/upload/checkMovieAvailability/${id}`;
     const fileInfo = await fetch(url)
         .then(res => { return res.json() })
@@ -157,14 +159,41 @@ async function displayManageSection(data) {
             </div>
             <div class="col">
                 <span><small>ID: <i>${id}</i></small></span>
-                <h2 class="movie-title">
-                    ${name}
-                </h2>
+                <h2 class="movie-title">${name}</h2>
                 <span><strong>Released On: </strong>${release}</span>${info}
             </div>
 </div>`;
 }
 
+
+async function removeFile(ele){
+    let tmdbId=null;
+    if(cid!=null){
+        tmdbId=cid;
+    }
+    const res=await fetch('/api/upload/delFile',{
+        method:'DELETE',
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({tmdbId})
+    }).then(res=> {return res.json()});
+
+    if(res.error==0){
+        const data={
+            dataset:{
+                id:cid,
+                name:cname,
+                poster:cposter,
+                release:crelease
+            }
+        }
+        displayManageSection(data);
+        closePrompt();
+    }else{
+        document.querySelector('.err.delete').innerHTML=res.msg;
+    }
+}
 
 /* */
 searchM.addEventListener('submit', getSearchResult);
