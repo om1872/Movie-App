@@ -1,6 +1,7 @@
 const express = require('express');
 const cookieParser=require('cookie-parser');
 var path = require('path');
+var favicon = require('serve-favicon');
 //db
 const database = require('./database/connect');
 
@@ -20,7 +21,6 @@ const genreController=require('./controller/genreController');
 const videoRenderController=require('./controller/videorenderController');
 const bucketController=require('./controller/bucketController');
 
-
 const app = express();
 
 const PORT =process.env.PORT || 3000;
@@ -30,6 +30,7 @@ const PORT =process.env.PORT || 3000;
 app.set('view engine','ejs');
 app.set('views',path.resolve('./views'));
 app.use(express.static(__dirname + '/resources'));
+app.use(favicon(path.join(__dirname,'/resources/img/icons','favicon.ico')));
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));

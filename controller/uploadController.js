@@ -19,8 +19,17 @@ function checkForId(id) {
 
 route.get('/movieUpload', async (req, res) => {
     const { tvGenre, movieGenre } = await genre();
+    let tmdbId=null;
     res.render("movieupload.ejs", {
-        tvGenre, movieGenre
+        tvGenre, movieGenre, tmdbId
+    });
+});
+
+route.get('/movieUpload/:id', async (req,res) => {
+    const tmdbId = req.params.id;
+    const { tvGenre, movieGenre } = await genre();
+    res.render("movieupload.ejs", {
+        tvGenre, movieGenre, tmdbId
     });
 });
 
@@ -114,10 +123,16 @@ route.post('/getSearchResult/:query', async (req, res) => {
 });
 
 route.delete('/delFile', async (req, res) => {
-    const { tmdbId } = req.body;
+    const { tmdbId }  = req.body;
+    console.log(req.body);
     try {
+        const cursor=await bucket.find({"_id":tmdbId}).toArray();
+        if(cursor.length==0){
+        res.status(404).send({ error: 1, msg: 'File Not Found' });
+        }else{
         await bucket.delete(tmdbId);
         res.status(200).send({ error: 0, msg: 'File Deleted Successfully' });
+        }
     } catch (err) {
         console.log('Error: ' + err.message);
         res.status(401).send({error:1, msg:'File Failed to delte'});

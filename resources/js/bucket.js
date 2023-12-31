@@ -79,7 +79,7 @@ function addInBuckets(form) {
                 document.getElementById(`${bucketId}`).innerHTML = `err`;
             }
         });
-        setTimeout(() => { loadBukcets() }, 2000);
+        setTimeout(() => { loadBukcets() }, 1000);
     }
 }
 

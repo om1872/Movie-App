@@ -12,10 +12,14 @@ function loadvideo(){
     const site=this.dataset.site;
     let html;
     if(site==='local'){
-        html=`<video src="${url}" style="width:100% !important; height:inherit;background:black" controls autoplay muted preload="metadata"></video>`
+        html=`<video src="${url}" data-setup='{}' style="width:100% !important; height:inherit; background:black;" id="my-video"
+        class="video-js"
+        controls
+        preload="auto" muted></video>`
     }else
         html=`<iframe src="${url}" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>`;
     movie.innerHTML=html;
+    videojs(document.querySelector('.video-js'));
 }
 
 function loadvideoP(param){

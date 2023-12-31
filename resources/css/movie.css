@@ -123,6 +123,9 @@ h2{
 }
 
 @media only screen and (max-width:600px){
+    main{
+        padding-top: 92px;;
+    }
     .object iframe{
         height: 200px !important;
         width: 100%;
