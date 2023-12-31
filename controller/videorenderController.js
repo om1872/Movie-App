@@ -13,7 +13,7 @@ route.get('/video/:id', async (req, res) => {
         const size = document.length;
         const type = document.metadata.mimeType;
         if (range) {
-            let CHUNK_SIZE = 1024 * 1024; // 1MB
+            let CHUNK_SIZE = 5* 1024 * 1024; // 1MB
             var parts = range.replace(/bytes=/, "").split("-");
             var partialstart = parts[0];
             var partialend = parts[1];
