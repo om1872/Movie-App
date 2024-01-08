@@ -23,13 +23,13 @@ Steps to run the project -
   6. Visit localhost:PORT to visit the landing home page and Enjoy.
 
 Environment Variables needed -
-API_KEY="2c295a3ddb6df8ba0220d8ff90ea21ab" //TMDB API_KEY
-PORT=3000
-JWT_SECRET='my secret site 123'
-EMAIL='xyz_admin@gmail.com'
-PASSWORD='adminworld@1872'
-NAME="ADMIN"
-# MONGO_URI="mongodb+srv://movieDatabase:dbPassword@cluster0.kjtbsqr.mongodb.net/?retryWrites=true&w=majority" //Optional if want to configure to altas (* free only 512 MB on atlas)
+  1.API_KEY="2c295a3ddb6df8ba0220d8ff90ea21ab" //TMDB API_KEY
+  2.PORT=3000
+  3.JWT_SECRET='my secret site 123'
+  4.EMAIL='xyz_admin@gmail.com'
+  5.PASSWORD='adminworld@1872'
+  6.NAME="ADMIN"
+  7.//Optional --> MONGO_URI="mongodb+srv://movieDatabase:dbPassword@cluster0.kjtbsqr.mongodb.net/?retryWrites=true&w=majority" //Optional if want to configure to altas (* free only 512 MB on atlas)
 
 Some Project Snaps -
   1. Home Page/Landing Page-
