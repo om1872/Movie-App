@@ -23,13 +23,13 @@ Steps to run the project -
   6. Visit localhost:PORT to visit the landing home page and Enjoy.
 
 Environment Variables needed -
-API_KEY="REDACTED_TMDB_KEY" //TMDB API_KEY
-PORT=3000
-JWT_SECRET='REDACTED_JWT'
-EMAIL='REDACTED_EMAIL'
-PASSWORD='REDACTED_PASSWORD'
-NAME="ADMIN"
-# MONGO_URI="REDACTED_MONGO_URI" //Optional if want to configure to altas (* free only 512 MB on atlas)
+  1.API_KEY="REDACTED_TMDB_KEY" //TMDB API_KEY
+  2.PORT=3000
+  3.JWT_SECRET='REDACTED_JWT'
+  4.EMAIL='REDACTED_EMAIL'
+  5.PASSWORD='REDACTED_PASSWORD'
+  6.NAME="ADMIN"
+  7.//Optional --> MONGO_URI="REDACTED_MONGO_URI" //Optional if want to configure to altas (* free only 512 MB on atlas)
 
 Some Project Snaps -
   1. Home Page/Landing Page-
