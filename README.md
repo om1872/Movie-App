@@ -90,18 +90,3 @@ npm start
   <strong>Movie page, mobile</strong><br>
   <img src="https://github.com/om1872/Movie-App/assets/109571034/3b640fd2-6274-491c-9e16-e40e83ff8bc7" alt="Movie page on a phone" width="280">
 </p>
-
-<p>
-  <strong>Movie info</strong><br>
-  <img src="https://github.com/om1872/Movie-App/assets/109571034/0834a17b-4b79-4d0f-bfb2-dc7d5f1cd551" alt="Movie information" width="720">
-</p>
-
-<p>
-  <strong>Buckets</strong><br>
-  <img src="https://github.com/om1872/Movie-App/assets/109571034/b81c6dae-d811-499b-98cd-4862dd66193e" alt="Buckets" width="720">
-</p>
-
-<p>
-  <strong>A bucket</strong><br>
-  <img src="https://github.com/om1872/Movie-App/assets/109571034/7c4c784d-8fa2-467e-8b14-421e3f3937b4" alt="A single bucket" width="720">
-</p>
