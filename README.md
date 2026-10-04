@@ -88,8 +88,3 @@ npm start
   <strong>Movie page</strong><br>
   <img src="https://github.com/om1872/Movie-App/assets/109571034/43be4794-9807-42b0-ba03-65bf529d73d6" alt="Movie page" width="720">
 </p>
-
-<p>
-  <strong>Movie page, mobile</strong><br>
-  <img src="https://github.com/om1872/Movie-App/assets/109571034/3b640fd2-6274-491c-9e16-e40e83ff8bc7" alt="Movie page on a phone" width="280">
-</p>
