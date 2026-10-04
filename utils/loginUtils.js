@@ -1,5 +1,8 @@
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+    throw new Error('JWT_SECRET is required. Set it in the environment before starting the app.');
+}
 
 //handle errors
 const handleErrors = (err) => {
@@ -31,7 +34,7 @@ const handleErrors = (err) => {
 //create a json web token
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (id) => {
-    return jwt.sign({ id }, JWT_SECRET || 'REDACTED_JWT', {
+    return jwt.sign({ id }, JWT_SECRET, {
         expiresIn: maxAge
     });
 }

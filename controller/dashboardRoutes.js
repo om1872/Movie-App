@@ -13,7 +13,6 @@ const { fetchData } = require('../utils/helper');
 
 const route = Router();
 
-// const API_KEY = "REDACTED_TMDB_KEY";
 const API_KEY=process.env.API_KEY;
 const discoverMovie=`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`;
 const poster=`http://image.tmdb.org/t/p/w500`;

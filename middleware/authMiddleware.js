@@ -1,6 +1,9 @@
 const jwt = require('jsonwebtoken');
 const User = require('../database/User');
-const JWT_SECRET = process.env.JWT_SECRET || 'REDACTED_JWT';
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+    throw new Error('JWT_SECRET is required. Set it in the environment before starting the app.');
+}
 const {ObjectId}=require('mongoose').Types;
 
 

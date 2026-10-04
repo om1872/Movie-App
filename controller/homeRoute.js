@@ -2,7 +2,6 @@ const { Router } = require('express');
 const genre=require('../utils/genre').gen;
 const route = Router();
 
-// const API_KEY = "REDACTED_TMDB_KEY";
 const API_KEY=process.env.API_KEY;
 
 route.get('/', async (req, res) => {

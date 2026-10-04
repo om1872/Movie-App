@@ -4,10 +4,7 @@ const genre=require('../utils/genre');
 const addAdmin=require('../controller/loginController').addAdmin;
 console.log(addAdmin)
 
-// const dbName='movieDatabase';
-// const password='REDACTED_DB_PASSWORD';  // @ --> %40
-// const mongoURI=`mongodb://0.0.0.0:27017/movieDB`;
-const mongoURI= process.env.MONGO_URI || 'mongodb://0.0.0.0:27017/movieDB';
+const mongoURI = process.env.MONGO_URI || 'mongodb://0.0.0.0:27017/movieDB';
 
 const conn=mongoose.connect(mongoURI).then(()=>{
     console.log('Connected to DB');

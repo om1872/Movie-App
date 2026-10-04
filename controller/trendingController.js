@@ -4,7 +4,6 @@ const { fetchData } = require('../utils/helper');
 
 const route = Router();
 
-// const API_KEY = "REDACTED_TMDB_KEY";
 const API_KEY = process.env.API_KEY;
 const movieURL=`https://api.themoviedb.org/3/trending/movie/week?language=en-US&api_key=${API_KEY}`;
 const tvURL=`https://api.themoviedb.org/3/trending/tv/week?language=en-US&api_key=${API_KEY}`;

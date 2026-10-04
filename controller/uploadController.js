@@ -4,7 +4,6 @@ const { fetchData } = require('../utils/helper');
 const { bucket } = require('../database/connect');
 const busboy = require('busboy');
 
-// const API_KEY = "REDACTED_TMDB_KEY";
 const API_KEY = process.env.API_KEY;
 
 const route = Router();

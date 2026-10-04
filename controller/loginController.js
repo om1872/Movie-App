@@ -1,12 +1,16 @@
 const { Router } = require('express');
 const { handleErrors, createToken, maxAge } = require('../utils/loginUtils');
 const User = require('../database/User');
-const admin_mail = process.env.EMAIL || 'REDACTED_EMAIL';
-const admin_name = process.env.NAME || 'Om Kumar';
-const admin_password = process.env.PASSWORD || 'REDACTED_PASSWORD';
+const admin_mail = process.env.EMAIL;
+const admin_name = process.env.NAME || 'Admin';
+const admin_password = process.env.PASSWORD;
 
 const route = Router();
 async function addAdmin() {
+    if (!admin_mail || !admin_password) {
+        console.log('Admin user not seeded. Set EMAIL and PASSWORD to create one.');
+        return;
+    }
     try {
         await User.create({ username: admin_name, email: admin_mail, password: admin_password, admin: true });
     } catch (err) {
