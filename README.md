@@ -47,15 +47,18 @@ npm start
   <img src="https://github.com/om1872/Movie-App/assets/109571034/437f24a5-2f38-4cd8-944b-8ab07c570468" alt="Home page" width="720">
 </p>
 
-<p>
-  <strong>Home, mobile</strong><br>
-  <img src="https://github.com/om1872/Movie-App/assets/109571034/a3abfef7-da34-464e-bd71-9eff9b09d96d" alt="Home page on a phone" width="280">
-</p>
-
-<p>
-  <strong>Dashboard, mobile</strong><br>
-  <img src="https://github.com/om1872/Movie-App/assets/109571034/e480e0a9-351c-45d4-a6fd-6e76702aaab3" alt="Dashboard on a phone" width="280">
-</p>
+<table>
+  <tr>
+    <td>
+      <strong>Home, mobile</strong><br>
+      <img src="https://github.com/om1872/Movie-App/assets/109571034/a3abfef7-da34-464e-bd71-9eff9b09d96d" alt="Home page on a phone" width="280">
+    </td>
+    <td>
+      <strong>Dashboard, mobile</strong><br>
+      <img src="https://github.com/om1872/Movie-App/assets/109571034/e480e0a9-351c-45d4-a6fd-6e76702aaab3" alt="Dashboard on a phone" width="280">
+    </td>
+  </tr>
+</table>
 
 <p>
   <strong>Dashboard</strong><br>
