@@ -1,84 +1,107 @@
-# Movie-App
+# Movie App
 
-A place where you can enjoy movies and get movie information which is linked with The Movie Database API.
+A movie catalog built with Node.js, Express, MongoDB, and EJS. It loads movie and TV information from The Movie Database (TMDB), and it can store and stream video files with GridFS.
 
-Tech Stack Utilized - Node .js, Express .js, MongoDB, HTML, CSS, Javascript, EJS
+## Features
 
-Major functionalities - 
-  1. Login with JWT Authentication.
-  2. Search with filters upon TMDB API.
-  3. Movie/ TVs information access via User Interface.
-  4. Movie Management like add video for movie on Local Server (on MongoDB)
-  5. Deletion of movie from database.
-  6. Streaming of Movie via Database using MongoDB Grid Fs streams
-  7. Add to Bucket - add your favourites movies in you custom name bucket.
-  8. Buckets include functionlities like add buckets , manage buckets, remove buckets.
+- Log in and register with JWT authentication
+- Search movies and TV shows through the TMDB API
+- View movie and TV details
+- Upload a video for a movie, store it in MongoDB, and stream it back
+- Delete a movie from the database
+- Save favorites into named buckets, then add, manage, and remove those buckets
 
-Steps to run the project -
-  1. Git clone it using the git hub url.
-  2. Use VS Code or any Code editor to load it.
-  3. Must Have installed Node .js and MongoDB installed installed on your machine.
-  4. On your environment run npm install to install all dependencies from package.json.
-  5. After that, hit npm start to run.
-  6. Visit localhost:PORT to visit the landing home page and Enjoy.
+## Tech stack
 
-Environment Variables needed -
-  1. API_KEY="" // TMDB API_KEY
-  2. PORT=3000
-  3. JWT_SECRET=''
-  4. EMAIL=''
-  5. PASSWORD=''
-  6. NAME=""
-  7. MONGO_URI="" //Optional if want to configure to atlas (* free only 512 MB on atlas)
+Node.js, Express, MongoDB, HTML, CSS, JavaScript, EJS
 
-Some Project Snaps -
-  1. Home Page/Landing Page-
-     ![image](https://github.com/om1872/Movie-App/assets/109571034/437f24a5-2f38-4cd8-944b-8ab07c570468)
-     
-     Mobile view-
-     ![image](https://github.com/om1872/Movie-App/assets/109571034/a3abfef7-da34-464e-bd71-9eff9b09d96d)
-     
-  2. Dashboard -
-     Mobile view-
-     ![image](https://github.com/om1872/Movie-App/assets/109571034/e480e0a9-351c-45d4-a6fd-6e76702aaab3)
-     
-     Desktop view-
-     ![image](https://github.com/om1872/Movie-App/assets/109571034/de14fd78-2fa0-4957-9d7a-d67cb0262bbd)
-     
-  3. Login Prompt -
-     ![image](https://github.com/om1872/Movie-App/assets/109571034/75c0088a-1d40-46b0-9109-4403139b6d33)
-     
-  4. Manage Movie Page-
-     ![image](https://github.com/om1872/Movie-App/assets/109571034/31be60d4-dee3-402b-8762-c72a8adbf3c0)
-     ![image](https://github.com/om1872/Movie-App/assets/109571034/625f2be5-1693-45f1-9e95-96797840b221)
-     
-     After Succesfull Upload-
-     ![image](https://github.com/om1872/Movie-App/assets/109571034/c4328c19-f609-4493-b09f-99977af3d3b5)
-     
-  5. Movie Page-
-     ![image](https://github.com/om1872/Movie-App/assets/109571034/43be4794-9807-42b0-ba03-65bf529d73d6)
-     
-     mobile view -
-     ![image](https://github.com/om1872/Movie-App/assets/109571034/3b640fd2-6274-491c-9e16-e40e83ff8bc7)
+## Run it
 
-     movie info -
-     ![image](https://github.com/om1872/Movie-App/assets/109571034/0834a17b-4b79-4d0f-bfb2-dc7d5f1cd551)
+1. Clone the repository and open it in an editor.
+2. Install [Node.js](https://nodejs.org/) and MongoDB.
+3. Install dependencies and start the app:
 
-  6. Bucket -
-     ![image](https://github.com/om1872/Movie-App/assets/109571034/b81c6dae-d811-499b-98cd-4862dd66193e)
+```bash
+npm install
+npm start
+```
 
-     my bucket page-
-     ![image](https://github.com/om1872/Movie-App/assets/109571034/7c4c784d-8fa2-467e-8b14-421e3f3937b4)
+4. Open [http://localhost:3000](http://localhost:3000).
 
+`npm start` loads a `.env` file. Create one in the project root with the variables below. Do not commit that file.
 
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `API_KEY` | Yes | TMDB API key |
+| `JWT_SECRET` | Yes | Secret used to sign login tokens. The app exits if this is missing. |
+| `EMAIL` | For admin seed | Admin email. The admin user is created only when both `EMAIL` and `PASSWORD` are set. |
+| `PASSWORD` | For admin seed | Admin password. |
+| `NAME` | No | Admin display name. Defaults to `Admin`. |
+| `PORT` | No | Defaults to `3000`. |
+| `MONGO_URI` | No | Defaults to a local database at `mongodb://0.0.0.0:27017/movieDB`. Set this to use MongoDB Atlas. |
 
+## Screenshots
 
+<p>
+  <strong>Home</strong><br>
+  <img src="https://github.com/om1872/Movie-App/assets/109571034/437f24a5-2f38-4cd8-944b-8ab07c570468" alt="Home page" width="720">
+</p>
 
+<p>
+  <strong>Home, mobile</strong><br>
+  <img src="https://github.com/om1872/Movie-App/assets/109571034/a3abfef7-da34-464e-bd71-9eff9b09d96d" alt="Home page on a phone" width="280">
+</p>
 
+<p>
+  <strong>Dashboard, mobile</strong><br>
+  <img src="https://github.com/om1872/Movie-App/assets/109571034/e480e0a9-351c-45d4-a6fd-6e76702aaab3" alt="Dashboard on a phone" width="280">
+</p>
 
-     
+<p>
+  <strong>Dashboard</strong><br>
+  <img src="https://github.com/om1872/Movie-App/assets/109571034/de14fd78-2fa0-4957-9d7a-d67cb0262bbd" alt="Dashboard" width="720">
+</p>
 
-     
+<p>
+  <strong>Login</strong><br>
+  <img src="https://github.com/om1872/Movie-App/assets/109571034/75c0088a-1d40-46b0-9109-4403139b6d33" alt="Login prompt" width="720">
+</p>
 
+<p>
+  <strong>Manage movies</strong><br>
+  <img src="https://github.com/om1872/Movie-App/assets/109571034/31be60d4-dee3-402b-8762-c72a8adbf3c0" alt="Manage movies page" width="720">
+</p>
 
+<p>
+  <img src="https://github.com/om1872/Movie-App/assets/109571034/625f2be5-1693-45f1-9e95-96797840b221" alt="Manage movies, second view" width="720">
+</p>
 
+<p>
+  <strong>After a successful upload</strong><br>
+  <img src="https://github.com/om1872/Movie-App/assets/109571034/c4328c19-f609-4493-b09f-99977af3d3b5" alt="Successful upload" width="720">
+</p>
+
+<p>
+  <strong>Movie page</strong><br>
+  <img src="https://github.com/om1872/Movie-App/assets/109571034/43be4794-9807-42b0-ba03-65bf529d73d6" alt="Movie page" width="720">
+</p>
+
+<p>
+  <strong>Movie page, mobile</strong><br>
+  <img src="https://github.com/om1872/Movie-App/assets/109571034/3b640fd2-6274-491c-9e16-e40e83ff8bc7" alt="Movie page on a phone" width="280">
+</p>
+
+<p>
+  <strong>Movie info</strong><br>
+  <img src="https://github.com/om1872/Movie-App/assets/109571034/0834a17b-4b79-4d0f-bfb2-dc7d5f1cd551" alt="Movie information" width="720">
+</p>
+
+<p>
+  <strong>Buckets</strong><br>
+  <img src="https://github.com/om1872/Movie-App/assets/109571034/b81c6dae-d811-499b-98cd-4862dd66193e" alt="Buckets" width="720">
+</p>
+
+<p>
+  <strong>A bucket</strong><br>
+  <img src="https://github.com/om1872/Movie-App/assets/109571034/7c4c784d-8fa2-467e-8b14-421e3f3937b4" alt="A single bucket" width="720">
+</p>
